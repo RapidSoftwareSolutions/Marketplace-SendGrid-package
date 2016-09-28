@@ -65,6 +65,7 @@ SendGrid is a cloud-based SMTP provider that allows you to send email without ha
 * [resendSenderVerification](#resendSenderVerification)
 * [getSenderIdentity](#getSenderIdentity)
 * [getCategoriesList](#getCategoriesList)
+* [sendMail](#sendMail)
 * [createTemplate](#createTemplate)
 * [getTemplates](#getTemplates)
 * [getTemplate](#getTemplate)
@@ -117,7 +118,28 @@ Create a marketing campaign.
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 986724,
+                            'title': 'March Newsletter',
+                            'subject': 'New Products for Spring!',
+                            'sender_id': 124451,
+                            'list_ids': [
+                              110,
+                              124
+                            ],
+                            'segment_ids': [
+                              110
+                            ],
+                            'categories': [
+                              'spring line'
+                            ],
+                            'suppression_group_id': 42,
+                            'custom_unsubscribe_url': '',
+                            'ip_pool': 'marketing',
+                            'html_content': '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>',
+                            'plain_content': 'Check out our spring line!',
+                            'status': 'Draft'
+                          }"
 		}
 	}
 }
@@ -125,7 +147,7 @@ Create a marketing campaign.
 
 <a name="getCampaigns"/>
 ## SendGrid.getCampaigns
-Method description
+Returns campaigns in reverse order they were created (newest first). Returns an empty array if no campaigns exist.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -142,7 +164,54 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"{ 'id': 986724, 'title': 'March Newsletter', 'subject': 'New Products for Spring!', 'sender_id': 124451, 'list_ids': [ 110, 124 ], 'segment_ids': [ 110 ], 'categories': [ 'spring line' ], 'suppression_group_id': 42, 'custom_unsubscribe_url': '', 'ip_pool': 'marketing', 'html_content': '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>', 'plain_content': 'Check out our spring line!', 'status': 'Draft' }"
+			"to":"{
+                            'result': [
+                              {
+                                'id': 986724,
+                                'title': 'March Newsletter',
+                                'subject': 'New Products for Spring!',
+                                'sender_id': 124451,
+                                'list_ids': [
+                                  110,
+                                  124
+                                ],
+                                'segment_ids': [
+                                  110
+                                ],
+                                'categories': [
+                                  'spring line'
+                                ],
+                                'suppression_group_id': 42,
+                                'custom_unsubscribe_url': '',
+                                'ip_pool': 'marketing',
+                                'html_content': '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>',
+                                'plain_content': 'Check out our spring line!',
+                                'status': 'Draft'
+                              },
+                              {
+                                'id': 986723,
+                                'title': 'February Newsletter',
+                                'subject': 'Final Winter Product Sale!',
+                                'sender_id': 124451,
+                                'list_ids': [
+                                  110,
+                                  124
+                                ],
+                                'segment_ids': [
+                                  110
+                                ],
+                                'categories': [
+                                  'winter line'
+                                ],
+                                'suppression_group_id': 42,
+                                'custom_unsubscribe_url': '',
+                                'ip_pool': 'marketing',
+                                'html_content': '<html><head><title></title></head><body><p>Last call for winter clothes!</p></body></html>',
+                                'plain_content': 'Last call for winter clothes!',
+                                'status': 'Sent'
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -150,7 +219,7 @@ Method description
 
 <a name="getCampaign"/>
 ## SendGrid.getCampaign
-Method description
+Get details about a specific campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -169,7 +238,28 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 986724,
+                            'title': 'March Newsletter',
+                            'subject': 'New Products for Spring!',
+                            'sender_id': 124451,
+                            'list_ids': [
+                              110,
+                              124
+                            ],
+                            'segment_ids': [
+                              110
+                            ],
+                            'categories': [
+                              'spring line'
+                            ],
+                            'suppression_group_id': 42,
+                            'custom_unsubscribe_url': '',
+                            'ip_pool': 'marketing',
+                            'html_content': '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>',
+                            'plain_content': 'Check out our spring line!',
+                            'status': 'Draft'
+                          }"
 		}
 	}
 }
@@ -177,7 +267,7 @@ Method description
 
 <a name="getSpamReportsList"/>
 ## SendGrid.getSpamReportsList
-Method description
+List all spam reports.
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -202,7 +292,18 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[
+                            {
+                              'created': 1443651141,
+                              'email': 'user1@example.com',
+                              'ip': '10.63.202.100'
+                            },
+                            {
+                              'created': 1443651154,
+                              'email': 'user2@example.com',
+                              'ip': '10.63.202.100'
+                            }
+                          ]"
 		}
 	}
 }
@@ -210,7 +311,7 @@ Method description
 
 <a name="deleteSpamReports"/>
 ## SendGrid.deleteSpamReports
-Method description
+You can delete all spam reports by setting "delete_all" to true in the request body.
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -231,7 +332,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -239,7 +340,7 @@ Method description
 
 <a name="getSpamReport"/>
 ## SendGrid.getSpamReport
-Method description
+Get a specific spam report.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -258,7 +359,13 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[
+                            {
+                              'created': 1454433146,
+                              'email': 'test1@example.com',
+                              'ip': 'xx.xx.xx.xx'
+                            }
+                          ]"
 		}
 	}
 }
@@ -266,7 +373,7 @@ Method description
 
 <a name="deleteSpamReport"/>
 ## SendGrid.deleteSpamReport
-Method description
+Delete a specific spam report.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -285,7 +392,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -293,7 +400,7 @@ Method description
 
 <a name="deleteCampaign"/>
 ## SendGrid.deleteCampaign
-Method description
+Delete a Campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -312,7 +419,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -320,7 +427,7 @@ Method description
 
 <a name="updateCampaign"/>
 ## SendGrid.updateCampaign
-Method description
+Update a campaign.
 
 | Field                 | Type  | Description
 |-----------------------|-------|----------
@@ -361,7 +468,28 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 986724,
+                            'title': 'May Newsletter',
+                            'subject': 'New Products for Summer!',
+                            'sender_id': 124451,
+                            'list_ids': [
+                              110,
+                              124
+                            ],
+                            'segment_ids': [
+                              110
+                            ],
+                            'categories': [
+                              'summer line'
+                            ],
+                            'suppression_group_id': 42,
+                            'custom_unsubscribe_url': '',
+                            'ip_pool': 'marketing',
+                            'html_content': '<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>',
+                            'plain_content': 'Check out our summer line!',
+                            'status': 'Draft'
+                          }"
 		}
 	}
 }
@@ -369,7 +497,7 @@ Method description
 
 <a name="sendCampaign"/>
 ## SendGrid.sendCampaign
-Method description
+Send a Campaign
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -388,7 +516,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 986724,
+                            'status': 'Scheduled'
+                          }"
 		}
 	}
 }
@@ -396,7 +527,7 @@ Method description
 
 <a name="scheduleCampaign"/>
 ## SendGrid.scheduleCampaign
-Method description
+Schedule a campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -417,7 +548,11 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 986724,
+                            'send_at': 1489771528,
+                            'status': 'Scheduled'
+                          }"
 		}
 	}
 }
@@ -425,7 +560,7 @@ Method description
 
 <a name="updateScheduledCampaign"/>
 ## SendGrid.updateScheduledCampaign
-Method description
+Changes the send_at time for the specified campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -446,7 +581,11 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 986724,
+                            'send_at': 1489451436,
+                            'status': 'Scheduled'
+                          }"
 		}
 	}
 }
@@ -454,7 +593,7 @@ Method description
 
 <a name="getScheduledTime"/>
 ## SendGrid.getScheduledTime
-Method description
+Get scheduled time of a campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -473,7 +612,9 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'send_at': 1489771528
+                          }"
 		}
 	}
 }
@@ -481,7 +622,7 @@ Method description
 
 <a name="unscheduleCampaign"/>
 ## SendGrid.unscheduleCampaign
-Method description
+Unschedule a scheduled campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -500,7 +641,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -508,7 +649,7 @@ Method description
 
 <a name="testCampaign"/>
 ## SendGrid.testCampaign
-Method description
+Send a test campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -529,7 +670,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -537,7 +678,7 @@ Method description
 
 <a name="createCustomField"/>
 ## SendGrid.createCustomField
-Method description
+Create a custom field.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -558,7 +699,11 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 1,
+                            'name': 'pet',
+                            'type': 'text'
+                          }"
 		}
 	}
 }
@@ -566,7 +711,7 @@ Method description
 
 <a name="getCustomFieldList"/>
 ## SendGrid.getCustomFieldList
-Method description
+Get a list of all custom fields
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -583,7 +728,25 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'custom_fields': [
+                              {
+                                'id': 1,
+                                'name': 'birthday',
+                                'type': 'date'
+                              },
+                              {
+                                'id': 2,
+                                'name': 'middle_name',
+                                'type': 'text'
+                              },
+                              {
+                                'id': 3,
+                                'name': 'favorite_number',
+                                'type': 'number'
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -591,7 +754,7 @@ Method description
 
 <a name="getCustomField"/>
 ## SendGrid.getCustomField
-Method description
+Get details about a specific custom field.
 
 | Field          | Type  | Description
 |----------------|-------|----------
@@ -610,7 +773,11 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 1,
+                            'name': 'pet',
+                            'type': 'text'
+                          }"
 		}
 	}
 }
@@ -618,7 +785,7 @@ Method description
 
 <a name="deleteCustomField"/>
 ## SendGrid.deleteCustomField
-Method description
+Delete a specific custom field by it's ID.
 
 | Field          | Type  | Description
 |----------------|-------|----------
@@ -637,7 +804,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -645,7 +812,7 @@ Method description
 
 <a name="getReservedFieldsList"/>
 ## SendGrid.getReservedFieldsList
-Method description
+List fields that are reserved and can't be used for custom field names.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -662,7 +829,46 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'reserved_fields': [
+                              {
+                                'name': 'first_name',
+                                'type': 'text'
+                              },
+                              {
+                                'name': 'last_name',
+                                'type': 'text'
+                              },
+                              {
+                                'name': 'email',
+                                'type': 'text'
+                              },
+                              {
+                                'name': 'created_at',
+                                'type': 'date'
+                              },
+                              {
+                                'name': 'updated_at',
+                                'type': 'date'
+                              },
+                              {
+                                'name': 'last_emailed',
+                                'type': 'date'
+                              },
+                              {
+                                'name': 'last_clicked',
+                                'type': 'date'
+                              },
+                              {
+                                'name': 'last_opened',
+                                'type': 'date'
+                              },
+                              {
+                                'name': 'my_custom_field',
+                                'type': 'text'
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -670,7 +876,7 @@ Method description
 
 <a name="createList"/>
 ## SendGrid.createList
-Method description
+Create a list.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -689,7 +895,11 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 1,
+                            'name': 'listname',
+                            'recipient_count': 0
+                          }"
 		}
 	}
 }
@@ -697,7 +907,7 @@ Method description
 
 <a name="getListsList"/>
 ## SendGrid.getListsList
-Method description
+Returns a list of the lists in your account. The method will returns an empty list if you GET and no lists exist on your account.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -714,7 +924,15 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'lists': [
+                              {
+                                'id': 1,
+                                'name': 'the jones',
+                                'recipient_count': 1
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -722,7 +940,7 @@ Method description
 
 <a name="deleteLists"/>
 ## SendGrid.deleteLists
-Method description
+Delete multiple lists.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -741,7 +959,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -749,7 +967,7 @@ Method description
 
 <a name="getList"/>
 ## SendGrid.getList
-Method description
+Get information about a specific list.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -768,7 +986,11 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 1,
+                            'name': 'listname',
+                            'recipient_count': 0
+                          }"
 		}
 	}
 }
@@ -776,7 +998,7 @@ Method description
 
 <a name="updateList"/>
 ## SendGrid.updateList
-Method description
+Update a list.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -797,7 +1019,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -805,7 +1027,7 @@ Method description
 
 <a name="deleteList"/>
 ## SendGrid.deleteList
-Method description
+Delete a list.
 
 | Field          | Type  | Description
 |----------------|-------|----------
@@ -826,7 +1048,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -834,7 +1056,7 @@ Method description
 
 <a name="getListRecipientsList"/>
 ## SendGrid.getListRecipientsList
-Method description
+Get a list of the recipients on a specific list.
 
 | Field    | Type  | Description
 |----------|-------|----------
@@ -857,7 +1079,21 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'recipients': [
+                              {
+                                'created_at': 1422395108,
+                                'email': 'e@example.com',
+                                'first_name': 'Ed',
+                                'id': 'YUBh',
+                                'last_clicked': null,
+                                'last_emailed': null,
+                                'last_name': null,
+                                'last_opened': null,
+                                'updated_at': 1422395108
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -865,7 +1101,7 @@ Method description
 
 <a name="addListRecipient"/>
 ## SendGrid.addListRecipient
-Method description
+Individual recipients may be added to a list one at a time with a limit of 1000 requests per second, where one recipient is added to the list per request.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -886,7 +1122,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -894,7 +1130,7 @@ Method description
 
 <a name="deleteListRecipient"/>
 ## SendGrid.deleteListRecipient
-Method description
+Delete a single recipient from a single list.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -915,7 +1151,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -923,7 +1159,8 @@ Method description
 
 <a name="addListRecipients"/>
 ## SendGrid.addListRecipients
-Method description
+Adds existing recipients to a list, passing in the recipient IDs to add. Recipient IDs should be passed exactly as they are returned from recipient endpoints.
+Note: The rate at which recipients may be added to a list is limited to 1 request per second. Recipients may be added in batches of 1000.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -944,7 +1181,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -952,7 +1189,8 @@ Method description
 
 <a name="addRecipient"/>
 ## SendGrid.addRecipient
-Method description
+Add a single recipient.
+The rate at which recipients may be uploaded is limited to 3 requests every 2 seconds. Recipients may be uploaded in batches of 1000 per request. This results in a maximum upload rate of 1500 recipients per second.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -977,7 +1215,20 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'error_count': 0,
+                            'error_indices': [
+
+                            ],
+                            'unmodified_indices': [
+
+                            ],
+                            'new_count': 1,
+                            'persisted_recipients': [
+                              'am9uZXNAZXhhbXBsZS5jb20='
+                            ],
+                            'updated_count': 0
+                          }"
 		}
 	}
 }
@@ -985,7 +1236,7 @@ Method description
 
 <a name="addRecipients"/>
 ## SendGrid.addRecipients
-Method description
+Add multiple recipients.
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -1004,7 +1255,29 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'error_count': 1,
+                            'error_indices': [
+                              2
+                            ],
+                            'unmodified_indices': [
+                              3
+                            ],
+                            'new_count': 2,
+                            'persisted_recipients': [
+                              'YUBh',
+                              'bWlsbGVyQG1pbGxlci50ZXN0'
+                            ],
+                            'updated_count': 0,
+                            'errors': [
+                              {
+                                'message': 'Invalid email.',
+                                'error_indices': [
+                                  2
+                                ]
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1012,7 +1285,7 @@ Method description
 
 <a name="updateRecipient"/>
 ## SendGrid.updateRecipient
-Method description
+Updates one or more recipients.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -1037,7 +1310,20 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'error_count': 0,
+                            'error_indices': [
+
+                            ],
+                            'unmodified_indices': [
+                              1
+                            ],
+                            'new_count': 0,
+                            'persisted_recipients': [
+                              'am9uZXNAZXhhbXBsZS5jb20='
+                            ],
+                            'updated_count': 1
+                          }"
 		}
 	}
 }
@@ -1045,7 +1331,7 @@ Method description
 
 <a name="deleteRecipient"/>
 ## SendGrid.deleteRecipient
-Method description
+Deletes one or more recipients.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -1064,7 +1350,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -1072,7 +1358,7 @@ Method description
 
 <a name="getRecipientList"/>
 ## SendGrid.getRecipientList
-Method description
+Get a list of recipients.
 
 | Field    | Type  | Description
 |----------|-------|----------
@@ -1093,7 +1379,29 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'recipients': [
+                              {
+                                'created_at': 1422313607,
+                                'email': 'jones@example.com',
+                                'first_name': null,
+                                'id': 'YUBh',
+                                'last_clicked': null,
+                                'last_emailed': null,
+                                'last_name': 'Jones',
+                                'last_opened': null,
+                                'updated_at': 1422313790,
+                                'custom_fields': [
+                                  {
+                                    'id': 23,
+                                    'name': 'pet',
+                                    'value': 'Indiana',
+                                    'type': 'text'
+                                  }
+                                ]
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1101,7 +1409,7 @@ Method description
 
 <a name="getRecipient"/>
 ## SendGrid.getRecipient
-Method description
+Get details about a specific recipient.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -1120,7 +1428,25 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'created_at': 1422313607,
+                            'email': 'jones@example.com',
+                            'first_name': null,
+                            'id': 'YUBh',
+                            'last_clicked': null,
+                            'last_emailed': null,
+                            'last_name': 'Jones',
+                            'last_opened': null,
+                            'updated_at': 1422313790,
+                            'custom_fields': [
+                              {
+                                'id': 23,
+                                'name': 'pet',
+                                'value': 'Indiana',
+                                'type': 'text'
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1128,7 +1454,7 @@ Method description
 
 <a name="getRecipientListSubscription"/>
 ## SendGrid.getRecipientListSubscription
-Method description
+Get the lists the recipient is on.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -1147,7 +1473,15 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'lists': [
+                              {
+                                'id': 1,
+                                'name': 'listname',
+                                'recipient_count': 1
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1155,7 +1489,7 @@ Method description
 
 <a name="getBillableRecipientsCount"/>
 ## SendGrid.getBillableRecipientsCount
-Method description
+Get a count of billable recipients.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -1172,7 +1506,9 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'recipient_count': 2
+                          }"
 		}
 	}
 }
@@ -1180,7 +1516,7 @@ Method description
 
 <a name="getRecipientsCount"/>
 ## SendGrid.getRecipientsCount
-Method description
+Get a count of recipients.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -1197,7 +1533,9 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'recipient_count': 2
+                          }"
 		}
 	}
 }
@@ -1205,7 +1543,14 @@ Method description
 
 <a name="conditionalSearch"/>
 ## SendGrid.conditionalSearch
-Method description
+Search using segment conditions. Body contains a JSON object with conditions, a list of conditions as described below, and an optional list_id, which is a valid list ID for a list to limit the search on.
+Valid operators for create and update depend on the type of the field you are searching for.
+Dates: "eq", "ne", "lt" (before), "gt" (after)
+Text: "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value)
+Numbers: "eq", "lt", "gt"
+Email Clicks and Opens: "eq" (opened), "ne" (not opened)
+Search conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either clicks.campaign_identifier or opens.campaign_identifier. The condition value should be a string containing the id of a completed campaign.
+Search conditions list may contain multiple conditions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -1226,7 +1571,29 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'recipients': [
+                              {
+                                'created_at': 1422313607,
+                                'email': 'jones@example.com',
+                                'first_name': null,
+                                'id': 'YUBh',
+                                'last_clicked': 12345,
+                                'last_emailed': null,
+                                'last_name': 'Miller',
+                                'last_opened': null,
+                                'updated_at': 1422313790,
+                                'custom_fields': [
+                                  {
+                                    'id': 23,
+                                    'name': 'pet',
+                                    'value': 'Fluffy',
+                                    'type': 'text'
+                                  }
+                                ]
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1234,7 +1601,7 @@ Method description
 
 <a name="getMatchingCriteria"/>
 ## SendGrid.getMatchingCriteria
-Method description
+Get a recipients' matching search criteria.
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -1255,7 +1622,29 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'recipients': [
+                              {
+                                'created_at': 1422313607,
+                                'email': 'jones@example.com',
+                                'first_name': null,
+                                'id': 'YUBh',
+                                'last_clicked': null,
+                                'last_emailed': null,
+                                'last_name': 'Jones',
+                                'last_opened': null,
+                                'updated_at': 1422313790,
+                                'custom_fields': [
+                                  {
+                                    'id': 23,
+                                    'name': 'pet',
+                                    'value': 'Indiana',
+                                    'type': 'text'
+                                  }
+                                ]
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1263,7 +1652,13 @@ Method description
 
 <a name="createSegment"/>
 ## SendGrid.createSegment
-Method description
+Create segment.
+Valid operators for create and update depend on the type of the field you are segmenting.
+Dates: "eq", "ne", "lt" (before), "gt" (after)
+Text: "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value)
+Numbers: "eq", "lt", "gt"
+Email Clicks and Opens: "eq" (opened), "ne" (not opened)
+Segment conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either clicks.campaign_identifier or opens.campaign_identifier. The condition value should be a string containing the id of a completed campaign.Segments may contain multiple condtions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -1286,7 +1681,32 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 1,
+                            'name': 'Last Name Miller',
+                            'list_id': 4,
+                            'conditions': [
+                              {
+                                'field': 'last_name',
+                                'value': 'Miller',
+                                'operator': 'eq',
+                                'and_or': ''
+                              },
+                              {
+                                'field': 'last_clicked',
+                                'value': '01/02/2015',
+                                'operator': 'gt',
+                                'and_or': 'and'
+                              },
+                              {
+                                'field': 'clicks.campaign_identifier',
+                                'value': '513',
+                                'operator': 'eq',
+                                'and_or': 'or'
+                              }
+                            ],
+                            'recipient_count': 0
+                          }"
 		}
 	}
 }
@@ -1294,7 +1714,7 @@ Method description
 
 <a name="getSegmentList"/>
 ## SendGrid.getSegmentList
-Method description
+Get a list of all segments.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -1311,7 +1731,24 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'segments': [
+                              {
+                                'id': 1,
+                                'name': 'Last Name Miller',
+                                'list_id': 4,
+                                'conditions': [
+                                  {
+                                    'field': 'last_name',
+                                    'value': 'Miller',
+                                    'operator': 'eq',
+                                    'and_or': ''
+                                  }
+                                ],
+                                'recipient_count': 1
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1319,7 +1756,7 @@ Method description
 
 <a name="getSegment"/>
 ## SendGrid.getSegment
-Method description
+Get details about a specific segment.
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -1338,7 +1775,20 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 1,
+                            'name': 'Last Name Miller',
+                            'list_id': 4,
+                            'conditions': [
+                              {
+                                'field': 'last_name',
+                                'value': 'Miller',
+                                'operator': 'eq',
+                                'and_or': ''
+                              }
+                            ],
+                            'recipient_count': 1
+                          }"
 		}
 	}
 }
@@ -1346,7 +1796,7 @@ Method description
 
 <a name="updateSegment"/>
 ## SendGrid.updateSegment
-Method description
+Update fields in a specific segment.
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -1371,7 +1821,20 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 5,
+                            'name': 'The Millers',
+                            'list_id': 5,
+                            'conditions': [
+                              {
+                                'field': 'last_name',
+                                'value': 'Miller',
+                                'operator': 'eq',
+                                'and_or': ''
+                              }
+                            ],
+                            'recipient_count': 1
+                          }"
 		}
 	}
 }
@@ -1379,7 +1842,7 @@ Method description
 
 <a name="deleteSegment"/>
 ## SendGrid.deleteSegment
-Method description
+Delete a segment.
 
 | Field          | Type  | Description
 |----------------|-------|----------
@@ -1400,7 +1863,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -1408,7 +1871,7 @@ Method description
 
 <a name="getSegmentRecipientsList"/>
 ## SendGrid.getSegmentRecipientsList
-Method description
+Get a list of recipients on a segment.
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -1431,7 +1894,29 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'recipients': [
+                              {
+                                'created_at': 1422313607,
+                                'email': 'jones@example.com',
+                                'first_name': null,
+                                'id': 'YUBh',
+                                'last_clicked': null,
+                                'last_emailed': null,
+                                'last_name': 'Jones',
+                                'last_opened': null,
+                                'updated_at': 1422313790,
+                                'custom_fields': [
+                                  {
+                                    'id': 23,
+                                    'name': 'pet',
+                                    'value': 'Indiana',
+                                    'type': 'text'
+                                  }
+                                ]
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1439,7 +1924,8 @@ Method description
 
 <a name="createSenderIdentity"/>
 ## SendGrid.createSenderIdentity
-Method description
+This endpoint allows you to create a sender identity.
+Sender Identities are required to be verified before use. If your domain has been white labeled it will auto verify on creation. Otherwise an email will be sent to the from.email.
 
 | Field    | Type  | Description
 |----------|-------|----------
@@ -1474,7 +1960,28 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 1,
+                            'nickname': 'My Sender ID',
+                            'from': {
+                              'email': 'from@example.com',
+                              'name': 'Example INC'
+                            },
+                            'reply_to': {
+                              'email': 'replyto@example.com',
+                              'name': 'Example INC'
+                            },
+                            'address': '123 Elm St.',
+                            'address_2': 'Apt. 456',
+                            'city': 'Denver',
+                            'state': 'Colorado',
+                            'zip': '80202',
+                            'country': 'United States',
+                            'verified': true,
+                            'updated_at': 1449872165,
+                            'created_at': 1449872165,
+                            'locked': false
+                          }"
 		}
 	}
 }
@@ -1482,7 +1989,7 @@ Method description
 
 <a name="getAllSenderIdentities"/>
 ## SendGrid.getAllSenderIdentities
-Method description
+This endpoint allows you to retrieve a list of all of your sender identities.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -1499,7 +2006,32 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'result': [
+                              {
+                                'id': 1,
+                                'nickname': 'My Sender ID',
+                                'from': {
+                                  'email': 'from@example.com',
+                                  'name': 'Example INC'
+                                },
+                                'reply_to': {
+                                  'email': 'replyto@example.com',
+                                  'name': 'Example INC'
+                                },
+                                'address': '123 Elm St.',
+                                'address_2': 'Apt. 456',
+                                'city': 'Denver',
+                                'state': 'Colorado',
+                                'zip': '80202',
+                                'country': 'United States',
+                                'verified': true,
+                                'updated_at': 1449872165,
+                                'created_at': 1449872165,
+                                'locked': false
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1507,7 +2039,7 @@ Method description
 
 <a name="updateSenderIdentity"/>
 ## SendGrid.updateSenderIdentity
-Method description
+Updates to from.email require re-verification. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the from.email.
 
 | Field    | Type  | Description
 |----------|-------|----------
@@ -1544,15 +2076,31 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'nickname': 'My Sender ID',
+                            'from': {
+                              'email': 'from@example.com',
+                              'name': 'Example INC'
+                            },
+                            'reply_to': {
+                              'email': 'replyto@example.com',
+                              'name': 'Example INC'
+                            },
+                            'address': '123 Elm St.',
+                            'address_2': 'Apt. 456',
+                            'city': 'Denver',
+                            'state': 'Colorado',
+                            'zip': '80202',
+                            'country': 'United States'
+                          }"
 		}
 	}
 }
 ```
 
-<a name="deleteSenderIdentities"/>
+<a name="deleteSenderIdentity"/>
 ## SendGrid.deleteSenderIdentities
-Method description
+This endpoint allows you to delete one of your sender identities.
 
 | Field    | Type  | Description
 |----------|-------|----------
@@ -1571,7 +2119,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -1579,7 +2127,7 @@ Method description
 
 <a name="resendSenderVerification"/>
 ## SendGrid.resendSenderVerification
-Method description
+This endpoint allows you to resend the sender identity verification email.
 
 | Field    | Type  | Description
 |----------|-------|----------
@@ -1598,7 +2146,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -1606,7 +2154,7 @@ Method description
 
 <a name="getSenderIdentity"/>
 ## SendGrid.getSenderIdentity
-Method description
+This endoint allows you to retrieve a specific sender identity.
 
 | Field    | Type  | Description
 |----------|-------|----------
@@ -1625,7 +2173,28 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 1,
+                            'nickname': 'My Sender ID',
+                            'from': {
+                              'email': 'from@example.com',
+                              'name': 'Example INC'
+                            },
+                            'reply_to': {
+                              'email': 'replyto@example.com',
+                              'name': 'Example INC'
+                            },
+                            'address': '123 Elm St.',
+                            'address_2': 'Apt. 456',
+                            'city': 'Denver',
+                            'state': 'Colorado',
+                            'zip': '80202',
+                            'country': 'United States',
+                            'verified': true,
+                            'updated_at': 1449872165,
+                            'created_at': 1449872165,
+                            'locked': false
+                          }"
 		}
 	}
 }
@@ -1633,7 +2202,7 @@ Method description
 
 <a name="getCategoriesList"/>
 ## SendGrid.getCategoriesList
-Method description
+Retrieve a list of your categories.
 
 | Field   | Type  | Description
 |---------|-------|----------
@@ -1641,6 +2210,44 @@ Method description
 | category| String| Optional: Performs a prefix search on this value.
 | limit   | String| Optional: Optional field to limit the number of results returned. Defaults to 50.
 | offset  | String| Optional: Optional beginning point in the list to retrieve from. Defaults to 0.
+
+#### Request example
+```json
+{	"api_key": "...",
+	"category": "...",
+	"limit": "...",
+	"offset": "..."
+}
+```
+#### Response example
+```json
+{
+	"callback":"success",
+	"contextWrites":{
+		"#":{
+			"to":"[
+                            {'category': 'cat1'},
+                            {'category': 'cat2'},
+                            {'category': 'cat3'},
+                            {'category': 'cat4'},
+                            {'category': 'cat5'}
+                          ]"
+		}
+	}
+}
+```
+```
+
+<a name="sendMail"/>
+## SendGrid.sendMail
+This endpoint allows you to send email.
+
+| Field   | Type  | Description
+|---------|-------|----------
+| api_key | String| The API key obtained from SendGrid.
+| category| String| 
+| limit   | String| 
+| offset  | String| 
 
 #### Request example
 ```json
@@ -1664,7 +2271,7 @@ Method description
 
 <a name="createTemplate"/>
 ## SendGrid.createTemplate
-Method description
+Create a template.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -1683,7 +2290,11 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': '733ba07f-ead1-41fc-933a-3976baa23716',
+                            'name': 'example_name',
+                            'versions': []
+                          }"
 		}
 	}
 }
@@ -1691,7 +2302,7 @@ Method description
 
 <a name="getTemplates"/>
 ## SendGrid.getTemplates
-Method description
+Retrieve all templates.
 
 | Field  | Type  | Description
 |--------|-------|----------
@@ -1708,7 +2319,23 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'templates': [
+                              {
+                                'id': 'e8ac01d5-a07a-4a71-b14c-4721136fe6aa',
+                                'name': 'example template name',
+                                'versions': [
+                                  {
+                                    'id': '5997fcf6-2b9f-484d-acd5-7e9a99f0dc1f',
+                                    'template_id': '9c59c1fb-931a-40fc-a658-50f871f3e41c',
+                                    'active': 1,
+                                    'name': 'example version name',
+                                    'updated_at': '2014-03-19 18:56:33'
+                                  }
+                                ]
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1716,7 +2343,7 @@ Method description
 
 <a name="getTemplate"/>
 ## SendGrid.getTemplate
-Method description
+Retrieve a single template.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1735,7 +2362,23 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': 'e8ac01d5-a07a-4a71-b14c-4721136fe6aa',
+                            'name': 'example template name',
+                            'versions': [
+                              {
+                                'id': 'de37d11b-082a-42c0-9884-c0c143015a47',
+                                'user_id': 1234,
+                                'template_id': 'd51480ba-ca3f-465c-bc3e-ceb71d73c38d',
+                                'active': 1,
+                                'name': 'example version',
+                                'html_content': '<%body%><strong>Click to Reset</strong>',
+                                'plain_content': 'Click to Reset<%body%>',
+                                'subject': '<%subject%>',
+                                'updated_at': '2014-05-22 20:05:21'
+                              }
+                            ]
+                          }"
 		}
 	}
 }
@@ -1743,7 +2386,7 @@ Method description
 
 <a name="editTemplate"/>
 ## SendGrid.editTemplate
-Method description
+Edit a template.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1764,7 +2407,11 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': '733ba07f-ead1-41fc-933a-3976baa23716',
+                            'name': 'new_example_name',
+                            'versions': []
+                          }"
 		}
 	}
 }
@@ -1772,7 +2419,7 @@ Method description
 
 <a name="deleteTemplate"/>
 ## SendGrid.deleteTemplate
-Method description
+Delete a template.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1791,7 +2438,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }
@@ -1799,7 +2446,7 @@ Method description
 
 <a name="createVersion"/>
 ## SendGrid.createVersion
-Method description
+Create a new version for a template.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -1828,7 +2475,16 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': '8aefe0ee-f12b-4575-b5b7-c97e21cb36f3',
+                            'template_id': 'ddb96bbc-9b92-425e-8979-99464621b543',
+                            'active': 1,
+                            'name': 'example_version_name',
+                            'html_content': '<%body%>',
+                            'plain_content': '<%body%>',
+                            'subject': '<%subject%>',
+                            'updated_at': '2014-03-19 18:56:33'
+                          }"
 		}
 	}
 }
@@ -1836,7 +2492,7 @@ Method description
 
 <a name="activateVersion"/>
 ## SendGrid.activateVersion
-Method description
+Activate a version.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1857,7 +2513,16 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': '8aefe0ee-f12b-4575-b5b7-c97e21cb36f3',
+                            'template_id': 'e3a61852-1acb-4b32-a1bc-b44b3814ab78',
+                            'active': 1,
+                            'name': 'example_version_name',
+                            'html_content': '<%body%>',
+                            'plain_content': '<%body%>',
+                            'subject': '<%subject%>',
+                            'updated_at': '2014-06-12 11:33:00'
+                          }"
 		}
 	}
 }
@@ -1865,7 +2530,7 @@ Method description
 
 <a name="getVersion"/>
 ## SendGrid.getVersion
-Method description
+Retrieve a specific version of a template.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1886,7 +2551,16 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': '5997fcf6-2b9f-484d-acd5-7e9a99f0dc1f',
+                            'template_id': 'd51480ca-ca3f-465c-bc3e-ceb71d73c38d'
+                            'active': 1
+                            'name': 'version 1 name',
+                            'html_content': '<%body%>',
+                            'plain_content': '<%body%>',
+                            'subject': '<%subject%>',
+                            'updated_at': '2014-03-19 18:56:33'
+                          }"
 		}
 	}
 }
@@ -1894,7 +2568,7 @@ Method description
 
 <a name="editVersion"/>
 ## SendGrid.editVersion
-Method description
+Edit a version.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -1925,7 +2599,16 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"{
+                            'id': '8aefe0ee-f12b-4575-b5b7-c97e21cb36f3',
+                            'template_id': 'ddb96bbc-9b92-425e-8979-99464621b543',
+                            'active': 1,
+                            'name': 'updated_example_name',
+                            'html_content': '<%body%>',
+                            'plain_content': '<%body%>',
+                            'subject': '<%subject%>',
+                            'updated_at': '2014-03-19 18:56:33'
+                          }"
 		}
 	}
 }
@@ -1933,7 +2616,7 @@ Method description
 
 <a name="deleteVersion"/>
 ## SendGrid.deleteVersion
-Method description
+Delete a version.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1954,7 +2637,7 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":"[empty]"
 		}
 	}
 }

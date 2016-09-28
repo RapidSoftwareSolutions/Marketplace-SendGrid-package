@@ -1309,6 +1309,696 @@
                     "info": "Success => channels: Array <string>"
                 }
             ]
+        },
+        {
+            "name":"updateSegment",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "segment_id",
+                    "type": "String",
+                    "info": "The ID of the segment."
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "The name of the segment."
+                },
+                {
+                    "name": "list_id",
+                    "type": "String",
+                    "info": "Optional: The ID of the list."
+                },
+                {
+                    "name": "conditions",
+                    "type": "String",
+                    "info": "The conditions of the segment. Value must be according with pattern 'field':value,'value':value,'operator':value."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"deleteSegment",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "segment_id",
+                    "type": "String",
+                    "info": "The ID of the segment."
+                },
+                {
+                    "name": "delete_contacts",
+                    "type": "String",
+                    "info": "Optional: true or false. True to delete all contacts matching the segment in addition to deleting the segment. Default: true."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"getSegmentRecipientsList",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "segment_id",
+                    "type": "String",
+                    "info": "The ID of the segment."
+                },
+                {
+                    "name": "page_size",
+                    "type": "String",
+                    "info": "Optional: Number of recipients to return at a time (must be a positive integer from 1 to 1000). Default: 100."
+                },
+                {
+                    "name": "page",
+                    "type": "String",
+                    "info": "Optional: Page index of recipients to return (must be a positive integer). Default: 1."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"createSenderIdentity",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "nickname",
+                    "type": "String",
+                    "info": "The nickname of the sender."
+                },
+                {
+                    "name": "from",
+                    "type": "String",
+                    "info": "Name and email to indicate 'from' field. Pattern to fill email:value,name:value."
+                },
+                {
+                    "name": "reply_to",
+                    "type": "String",
+                    "info": "Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value."
+                },
+                {
+                    "name": "address",
+                    "type": "String",
+                    "info": "The address of the sender."
+                },
+                {
+                    "name": "address_2",
+                    "type": "String",
+                    "info": "Optional: The second address of the sender."
+                },
+                {
+                    "name": "city",
+                    "type": "String",
+                    "info": "The city of the sender."
+                },
+                {
+                    "name": "state",
+                    "type": "String",
+                    "info": "Optional: The state of the sender."
+                },
+                {
+                    "name": "zip",
+                    "type": "String",
+                    "info": "Optional: The zip of the sender."
+                },
+                {
+                    "name": "country",
+                    "type": "String",
+                    "info": "The country of the sender."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"getAllSenderIdentities",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"updateSenderIdentity",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "sender_id",
+                    "type": "String",
+                    "info": "The ID of the sender."
+                },
+                {
+                    "name": "nickname",
+                    "type": "String",
+                    "info": "The nickname of the sender."
+                },
+                {
+                    "name": "from",
+                    "type": "String",
+                    "info": "Name and email to indicate 'from' field. Pattern to fill email:value,name:value."
+                },
+                {
+                    "name": "reply_to",
+                    "type": "String",
+                    "info": "Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value."
+                },
+                {
+                    "name": "address",
+                    "type": "String",
+                    "info": "The address of the sender."
+                },
+                {
+                    "name": "address_2",
+                    "type": "String",
+                    "info": "Optional: The second address of the sender."
+                },
+                {
+                    "name": "city",
+                    "type": "String",
+                    "info": "The city of the sender."
+                },
+                {
+                    "name": "state",
+                    "type": "String",
+                    "info": "Optional: The state of the sender."
+                },
+                {
+                    "name": "zip",
+                    "type": "String",
+                    "info": "Optional: The zip of the sender."
+                },
+                {
+                    "name": "country",
+                    "type": "String",
+                    "info": "The country of the sender."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"deleteSenderIdentity",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "sender_id",
+                    "type": "String",
+                    "info": "The ID of the sender."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"resendSenderVerification",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "sender_id",
+                    "type": "String",
+                    "info": "The ID of the sender."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"getSenderIdentity",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "sender_id",
+                    "type": "String",
+                    "info": "The ID of the sender."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"getCategoriesList",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "category",
+                    "type": "String",
+                    "info": "Optional: Performs a prefix search on this value."
+                },
+                {
+                    "name": "limit",
+                    "type": "String",
+                    "info": "Optional: Optional field to limit the number of results returned. Defaults to 50."
+                },
+                {
+                    "name": "offset",
+                    "type": "String",
+                    "info": "Optional: Optional beginning point in the list to retrieve from. Defaults to 0."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"createTemplate",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the new template. Max 100 characters."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"getTemplates",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"getTemplate",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "template_id",
+                    "type": "String",
+                    "info": "The ID of the template."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"editTemplate",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "template_id",
+                    "type": "String",
+                    "info": "The ID of the template."
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "The new name of the template."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"deleteTemplate",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "template_id",
+                    "type": "String",
+                    "info": "The ID of the template."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"createVersion",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "template_id",
+                    "type": "String",
+                    "info": "The ID of the template."
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the new version. Max 100 characters."
+                },
+                {
+                    "name": "subject",
+                    "type": "String",
+                    "info": "Subject of the new version. <%subject%> tag must be present."
+                },
+                {
+                    "name": "html_content",
+                    "type": "String",
+                    "info": "HTML content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for html content."
+                },
+                {
+                    "name": "plain_content",
+                    "type": "String",
+                    "info": "Text/plain content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for plain content."
+                },
+                {
+                    "name": "active",
+                    "type": "String",
+                    "info": "Optional: 0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"activateVersion",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "template_id",
+                    "type": "String",
+                    "info": "The ID of the template."
+                },
+                {
+                    "name": "version_id",
+                    "type": "String",
+                    "info": "The ID of the version."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"getVersion",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "template_id",
+                    "type": "String",
+                    "info": "The ID of the template."
+                },
+                {
+                    "name": "version_id",
+                    "type": "String",
+                    "info": "The ID of the version."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"editVersion",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "template_id",
+                    "type": "String",
+                    "info": "The ID of the template."
+                },
+                {
+                    "name": "version_id",
+                    "type": "String",
+                    "info": "The ID of the version."
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Optional: Name of the new version. Max 100 characters."
+                },
+                {
+                    "name": "subject",
+                    "type": "String",
+                    "info": "Optional: Subject of the new version. <%subject%> tag must be present."
+                },
+                {
+                    "name": "html_content",
+                    "type": "String",
+                    "info": "Optional: HTML content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for html content."
+                },
+                {
+                    "name": "plain_content",
+                    "type": "String",
+                    "info": "Optional: Text/plain content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for plain content."
+                },
+                {
+                    "name": "active",
+                    "type": "String",
+                    "info": "Optional: 0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"deleteVersion",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "template_id",
+                    "type": "String",
+                    "info": "The ID of the template."
+                },
+                {
+                    "name": "version_id",
+                    "type": "String",
+                    "info": "The ID of the version."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
         }
     ]
 }
