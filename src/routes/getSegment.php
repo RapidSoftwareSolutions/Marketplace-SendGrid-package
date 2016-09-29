@@ -27,6 +27,7 @@ $app->post('/api/SendGrid/getSegment', function ($request, $response, $args) {
     
     $apiKey = $post_data['args']['api_key'];
     $query_params['segment_id'] = $post_data['args']['segment_id'];
+    $segment_id = $post_data['args']['segment_id'];
         
     $sg = new \SendGrid($apiKey);
     
