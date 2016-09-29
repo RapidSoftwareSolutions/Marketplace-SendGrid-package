@@ -2237,7 +2237,6 @@ Retrieve a list of your categories.
 	}
 }
 ```
-```
 
 <a name="sendMail"/>
 ## SendGrid.sendMail
