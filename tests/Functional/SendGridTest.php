@@ -1,6 +1,6 @@
 <?php
 namespace Tests\Functional;
-error_reporting(1);
+
 class SendGridTest extends BaseTestCase
 {
     protected $api_key = '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';
@@ -184,7 +184,8 @@ class SendGridTest extends BaseTestCase
         $response = $this->runApp('POST', '/api/SendGrid/unscheduleCampaign', $post_data);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('success', json_decode($response->getBody())->callback);
+        $this->assertEquals('error', json_decode($response->getBody())->callback);
+        $this->assertContains('not found', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -198,7 +199,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Plain content and html content can\'t both be blank.', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('not found', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -211,8 +212,8 @@ class SendGridTest extends BaseTestCase
         $response = $this->runApp('POST', '/api/SendGrid/createCustomField', $post_data);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('success', json_decode($response->getBody())->callback);
-        $this->assertNotEmpty(json_decode($response->getBody())->contextWrites->to);
+        $this->assertEquals('error', json_decode($response->getBody())->callback);
+        $this->assertContains('Custom Field name must be unique', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -274,8 +275,8 @@ class SendGridTest extends BaseTestCase
         $response = $this->runApp('POST', '/api/SendGrid/createList', $post_data);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('success', json_decode($response->getBody())->callback);
-        $this->assertNotEmpty($response->getBody());
+        $this->assertEquals('error', json_decode($response->getBody())->callback);
+        $this->assertContains('Your list name must be unique against all other list and segment names', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -394,7 +395,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('no valid recipients were provided', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('List ID does not exist', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -437,15 +438,16 @@ class SendGridTest extends BaseTestCase
         
     }
     
-    public function testDeleteRecipient() {
+    public function testDeleteRecipients() {
         
         $post_data['args']['api_key'] = $this->api_key;
         $post_data['args']['recipient_id'] = "612100";
         
-        $response = $this->runApp('POST', '/api/SendGrid/deleteRecipient', $post_data);
+        $response = $this->runApp('POST', '/api/SendGrid/deleteRecipients', $post_data);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('success', json_decode($response->getBody())->callback);
+        $this->assertEquals('error', json_decode($response->getBody())->callback);
+        $this->assertContains('No recipient ids provided', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -470,7 +472,20 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Recipient not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('invalid ID', json_decode($response->getBody())->contextWrites->to);
+        
+    }
+    
+    public function testDeleteRecipient() {
+        
+        $post_data['args']['api_key'] = $this->api_key;
+        $post_data['args']['recipient_id'] = "612100";
+        
+        $response = $this->runApp('POST', '/api/SendGrid/deleteRecipient', $post_data);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('error', json_decode($response->getBody())->callback);
+        $this->assertContains('invalid ID', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -483,7 +498,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Recipient not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('recipient id is not valid', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -589,7 +604,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('No field passed', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -623,8 +638,8 @@ class SendGridTest extends BaseTestCase
         
         $post_data['args']['api_key'] = $this->api_key;
         $post_data['args']['nickname'] = 'abdula';
-        $post_data['args']['from'] = 'new_sender@site.com';
-        $post_data['args']['reply_to'] = 'new_sender@site.com';
+        $post_data['args']['from'] = 'email:new_sender@site.com,name:new_sender';
+        $post_data['args']['reply_to'] = 'email:new_sender@site.com,name:new_sender';
         $post_data['args']['address'] = 'address';
         $post_data['args']['city'] = 'city';
         $post_data['args']['country'] = 'country';
@@ -726,6 +741,7 @@ class SendGridTest extends BaseTestCase
         $post_data['args']['subject'] = 'Test';
         $post_data['args']['personalizations'] = '[{"bcc": [{"email": "sam.doe@example.com","name": "Sam Doe"}], "cc": [{"email": "jane.doe@example.com","name": "Jane Doe"}], "custom_args": {"New Argument 1": "New Value 1","activationAttempt": "1","customerAccountNumber": "123"},"headers": {"X-Accept-Language": "en","X-Mailer": "MyApp"},"send_at": 1409348513,"subject": "Hello, World!","substitutions": {"id": "substitutions","type": "object"},"to": [ {"email": "john.doe@example.com","name": "John Doe"}]}]';
         $post_data['args']['content'] = '[{"type": "text/html","value": "<html><p>Hello, world!</p><img src=cid: werwer111></img></html>"}]';
+        $post_data['args']['test'] = '1';
         
         $response = $this->runApp('POST', '/api/SendGrid/sendMail', $post_data);
 

@@ -1026,7 +1026,7 @@
             ]
         },
         {
-            "name":"deleteRecipient",
+            "name":"deleteRecipients",
             "args":[
                 {
                     "name": "api_key",
@@ -1092,6 +1092,31 @@
                     "name": "recipient_id",
                     "type": "String",
                     "info": "The ID of the recipient."
+                }
+            ],
+            "callbacks":[
+                {
+                    "name":"error",
+                    "info": "Error"
+                },
+                {
+                    "name":"success",
+                    "info": "Success => channels: Array <string>"
+                }
+            ]
+        },
+        {
+            "name":"deleteRecipient",
+            "args":[
+                {
+                    "name": "api_key",
+                    "type": "String",
+                    "info": "The API key obtained from SendGrid."
+                },
+                {
+                    "name": "recipient_id",
+                    "type": "String",
+                    "info": "The recipient ID."
                 }
             ],
             "callbacks":[

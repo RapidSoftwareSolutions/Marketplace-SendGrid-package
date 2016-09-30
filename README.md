@@ -44,9 +44,10 @@ SendGrid is a cloud-based SMTP provider that allows you to send email without ha
 * [addRecipient](#addRecipient)
 * [addRecipients](#addRecipients)
 * [updateRecipient](#updateRecipient)
-* [deleteRecipient](#deleteRecipient)
+* [deleteRecipients](#deleteRecipients)
 * [getRecipientList](#getRecipientList)
 * [getRecipient](#getRecipient)
+* [deleteRecipient](#deleteRecipient)
 * [getRecipientListSubscription](#getRecipientListSubscription)
 * [getBillableRecipientsCount](#getBillableRecipientsCount)
 * [getRecipientsCount](#getRecipientsCount)
@@ -1329,8 +1330,8 @@ Updates one or more recipients.
 }
 ```
 
-<a name="deleteRecipient"/>
-## SendGrid.deleteRecipient
+<a name="deleteRecipients"/>
+## SendGrid.deleteRecipients
 Deletes one or more recipients.
 
 | Field       | Type  | Description
@@ -1447,6 +1448,33 @@ Get details about a specific recipient.
                               }
                             ]
                           }"
+		}
+	}
+}
+```
+
+<a name="deleteRecipient"/>
+## SendGrid.deleteRecipient
+Deletes one or more recipients.
+
+| Field       | Type  | Description
+|-------------|-------|----------
+| api_key     | String| The API key obtained from SendGrid.
+| recipient_id| String| The recipient ID.
+
+#### Request example
+```json
+{	"api_key": "...",
+	"recipient_id": "..."
+}
+```
+#### Response example
+```json
+{
+	"callback":"success",
+	"contextWrites":{
+		"#":{
+			"to":"[empty]"
 		}
 	}
 }
@@ -2252,7 +2280,7 @@ This endpoint allows you to send email.
 | reply_to_name       | String| Optional: The name of the individual who will receive responses to the email.
 | subject       | String| The subject of your email. This may be overridden by personalizations[x].subject.
 | content       | JSON| An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters. If included, text/plain and text/html must be the first indices of the array in this order. If you choose to include the text/plain or text/html mime types, they must be the first indices of the content array in the order text/plain, text/html. Example: [{"type": "text/html","value": "<html><p>Hello, world!</p><img src=cid: werwer111></img></html>"}]
-| attachments       | JSON| Optional: An array of objects in which you can specify any attachments you want to include.
+| attachments       | JSON| Optional: An array of objects in which you can specify any attachments you want to include. Content - The Base64 encoded content of the attachment; type (optional) - The mime type of the content you are attaching. For example, application/pdf or image/jpeg; filename - The filename of the attachment; disposition (optional) - Defaults to "attachment". Can be either "attachment" or "inline"; content_id (optional) - A unique id that you specify for the attachment, ex: <img src="cid:ii_139db99fdb5c3704"></img>. Example: [{"content": "[BASE64 encoded content block here]","content_id": "ii_139db99fdb5c3704","disposition": "inline","filename": "file1.jpg","name": "file1","type": "jpg"}]
 | template_id       | String| Optional: The id of a template that you would like to use. If you use a template that contains content and a subject (either text or html), you do not need to specify those in the respective personalizations or message level parameters.
 | sections      | JSON| Optional: An object of key/value pairs that define large blocks of content that can be inserted into your emails using substitution tags. Example: {"section": {":sectionName1": "section 1 text", ":sectionName2": "section 2 text"}}
 | headers      | JSON| Optional: An object containing key/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be any of the following reserved headers: x-sg-id, x-sg-eid, received, dkim-signature, Content-Type, Content-Transfer-Encoding, To, From, Subject, Reply-To, CC, BCC.

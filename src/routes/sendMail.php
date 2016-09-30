@@ -2,16 +2,31 @@
 
 $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     $settings =  $this->settings;
-  
+
+    $data = '';
     $data = $request->getBody();
-    $toJson = $this->normalize;
-    $data = $toJson->normalizeJson($data); 
-    
-    $post_data = json_decode($data, true);
-    if(!isset($post_data['args'])) {
-        $data = $request->getParsedBody();
-        $post_data = $data;
+    if($data=='') {
+        $post_data = $request->getParsedBody();
+    } else {
+        $toJson = $this->normalize;
+        $data = $toJson->normalizeJson($data); 
+        $post_data = json_decode($data, true);
     }
+    
+    if($post_data['args']['test']==1) {
+        $post_data['args']['personalizations'] = json_decode($post_data['args']['personalizations']);
+        $post_data['args']['content'] = json_decode($post_data['args']['content']);
+        if(!empty($post_data['args']['attachments'])) {
+            $post_data['args']['attachments'] = json_decode($post_data['args']['attachments']);
+        }
+        if(!empty($post_data['args']['sections'])) {
+            $post_data['args']['sections'] = json_decode($post_data['args']['sections']);
+        }
+        if(!empty($post_data['args']['headers'])) {
+            $post_data['args']['headers'] = json_decode($post_data['args']['headers']);
+        }
+    }
+
     
     $error = [];
     if(empty($post_data['args']['api_key'])) {
@@ -55,7 +70,7 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     $request_body['subject'] = $post_data['args']['subject'];
     $request_body['content'] = $post_data['args']['content']; 
     if(!empty($post_data['args']['attachments'])) {
-        $request_body['attachments'] = $post_data['args']['attachments']; ///????????????
+        $request_body['attachments'] = $post_data['args']['attachments'];
     }
     if(!empty($post_data['args']['template_id'])) {
         $request_body['template_id'] = $post_data['args']['template_id'];
@@ -169,7 +184,6 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(!empty($post_data['args']['ganalytics_utm_campaign'])) {
         $request_body['tracking_settings']['ganalytics']['utm_campaign'] = $post_data['args']['ganalytics_utm_campaign'];
     }
-    //print_r($request_body); die;
     
            
     $sg = new \SendGrid($apiKey);

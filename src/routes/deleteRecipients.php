@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/SendGrid/deleteRecipient', function ($request, $response, $args) {
+$app->post('/api/SendGrid/deleteRecipients', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -25,11 +25,11 @@ $app->post('/api/SendGrid/deleteRecipient', function ($request, $response, $args
     }
     
     $apiKey = $post_data['args']['api_key'];
-    $recipient_id = $post_data['args']['recipient_id'];
+    $request_body = explode(',', $post_data['args']['recipient_id']);
         
     $sg = new \SendGrid($apiKey);
     
-    $resp = $sg->client->contactdb()->recipients()->_($recipient_id)->delete();
+    $resp = $sg->client->contactdb()->recipients()->delete($request_body);
     $body = $resp->body();
     
     if($resp->statusCode() == '204') {
