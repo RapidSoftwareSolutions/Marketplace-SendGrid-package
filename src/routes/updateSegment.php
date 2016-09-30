@@ -35,7 +35,7 @@ $app->post('/api/SendGrid/updateSegment', function ($request, $response, $args) 
     $query_params['segment_id'] = $post_data['args']['segment_id'];
     $segment_id = $post_data['args']['segment_id'];
     $request_body['name'] = $post_data['args']['name'];
-    if(!empty($post_data['args']['name'])) {
+    if(!empty($post_data['args']['list_id'])) {
         $request_body['list_id'] = $post_data['args']['list_id'];
     }
     $conditions = explode(',', $post_data['args']['conditions']);
@@ -50,7 +50,7 @@ $app->post('/api/SendGrid/updateSegment', function ($request, $response, $args) 
         
     $sg = new \SendGrid($apiKey);
     
-    $resp = $sg->client->contactdb()->segments()->_($segment_id)->patch(json_decode($request_body), json_decode($query_params));
+    $resp = $sg->client->contactdb()->segments()->_($segment_id)->patch(json_decode($request_body), $query_params);
     $body = $resp->body();
     
     if(!empty($body) && $resp->statusCode() == '200') {

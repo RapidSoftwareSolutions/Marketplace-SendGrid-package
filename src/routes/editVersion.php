@@ -31,6 +31,7 @@ $app->post('/api/SendGrid/editVersion', function ($request, $response, $args) {
     $apiKey = $post_data['args']['api_key'];
     $template_id = $post_data['args']['template_id'];
     $version_id = $post_data['args']['version_id'];
+    $request_body = [];
     if(!empty($post_data['args']['name'])) {
         $request_body['name'] = $post_data['args']['name'];
     }

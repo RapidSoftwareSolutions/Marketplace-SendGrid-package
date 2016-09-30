@@ -415,7 +415,7 @@ class SendGridTest extends BaseTestCase
     public function testAddRecipients() {
         
         $post_data['args']['api_key'] = $this->api_key;
-        $post_data['args']['recipients'] = "email:test@site.com;first_name:1Test;last_name:1Last name;custom_fields:age:30,test_field:qwqw";
+        $post_data['args']['recipients'] = "email=test@site.com;first_name=1Test;last_name=1Last name;custom_fields=test_field:qwqw";
         
         $response = $this->runApp('POST', '/api/SendGrid/addRecipients', $post_data);
 
@@ -556,9 +556,9 @@ class SendGridTest extends BaseTestCase
     public function testCreateSegment() {
         
         $post_data['args']['api_key'] = $this->api_key;
-        $post_data['args']['name'] = "new segment";
+        $post_data['args']['name'] = "test segment";
         $post_data['args']['list_id'] = "1";
-        $post_data['args']['conditions'] = "1";
+        $post_data['args']['conditions'] = "field:email,value:triongroup@gmail.com,operator:eq,and_or:and;field:last_name2,value:Miller2,operator:eq,and_or:and";
         
         $response = $this->runApp('POST', '/api/SendGrid/createSegment', $post_data);
 
@@ -597,14 +597,14 @@ class SendGridTest extends BaseTestCase
         
         $post_data['args']['api_key'] = $this->api_key;
         $post_data['args']['segment_id'] = '1';
-        $post_data['args']['name'] = "new segment";
-        $post_data['args']['conditions'] = "1";
+        $post_data['args']['name'] = "test segment";
+        $post_data['args']['conditions'] = "field:email,value:triongroup@gmail.com,operator:eq,and_or:and;field:last_name2,value:Miller2,operator:eq,and_or:and";
         
         $response = $this->runApp('POST', '/api/SendGrid/updateSegment', $post_data);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('No field passed', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to);
         
     }
     
