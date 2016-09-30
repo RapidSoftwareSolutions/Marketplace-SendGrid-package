@@ -1455,7 +1455,7 @@ Get details about a specific recipient.
 
 <a name="deleteRecipient"/>
 ## SendGrid.deleteRecipient
-Deletes one or more recipients.
+Delete one recipient.
 
 | Field       | Type  | Description
 |-------------|-------|----------
