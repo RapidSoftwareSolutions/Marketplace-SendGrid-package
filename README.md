@@ -84,7 +84,7 @@ Create a marketing campaign.
 
 | Field                 | Type  | Description
 |-----------------------|-------|----------
-| api_key               | String| The API key obtained from SendGrid.
+| api_key               | credentials| The API key obtained from SendGrid.
 | title                 | String| The title of your camapign.
 | subject               | String| The Email subject of your camapign.
 | sender_id             | String| The sender ID obtained from Sender Management.
@@ -152,7 +152,7 @@ Returns campaigns in reverse order they were created (newest first). Returns an 
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -224,7 +224,7 @@ Get details about a specific campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
 
 #### Request example
@@ -272,7 +272,7 @@ List all spam reports.
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | start_time| String| Optional: Refers start of the time range in unix timestamp when a spam report was created (inclusive).
 | end_time  | String| Optional: Refers end of the time range in unix timestamp when a spam report was created (inclusive).
 | limit     | String| Optional: Limit the number of results to be displayed per page.
@@ -316,7 +316,7 @@ You can delete all spam reports by setting "delete_all" to true in the request b
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | delete_all| String| Optional: delete all spam reports by setting to 'true'. Default 'false'.
 | emails    | String| Optional: delete some spam reports by specifying the comma-separated email addresses.
 
@@ -345,7 +345,7 @@ Get a specific spam report.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 | email  | String| Email address of spam report entry.
 
 #### Request example
@@ -378,7 +378,7 @@ Delete a specific spam report.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 | email  | String| Email address of spam report entry.
 
 #### Request example
@@ -405,7 +405,7 @@ Delete a Campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
 
 #### Request example
@@ -432,7 +432,7 @@ Update a campaign.
 
 | Field                 | Type  | Description
 |-----------------------|-------|----------
-| api_key               | String| The API key obtained from SendGrid.
+| api_key               | credentials| The API key obtained from SendGrid.
 | campaign_id           | String| The id of the campaign.
 | title                 | String| Optional: The title of your camapign.
 | subject               | String| Optional: The Email subject of your camapign.
@@ -502,7 +502,7 @@ Send a Campaign
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
 
 #### Request example
@@ -532,7 +532,7 @@ Schedule a campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
 | send_at    | String| The unix timestamp of the campaign schedule (in future).
 
@@ -565,7 +565,7 @@ Changes the send_at time for the specified campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
 | send_at    | String| The unix timestamp of the campaign schedule (in future).
 
@@ -598,7 +598,7 @@ Get scheduled time of a campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
 
 #### Request example
@@ -627,7 +627,7 @@ Unschedule a scheduled campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
 
 #### Request example
@@ -654,7 +654,7 @@ Send a test campaign.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
 | to         | String| The addresses to send. Multiple addresses must be comma-separated.
 
@@ -683,7 +683,7 @@ Create a custom field.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 | name   | String| The name of the field.
 | type   | String| The type of the field.
 
@@ -716,7 +716,7 @@ Get a list of all custom fields
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -759,7 +759,7 @@ Get details about a specific custom field.
 
 | Field          | Type  | Description
 |----------------|-------|----------
-| api_key        | String| The API key obtained from SendGrid.
+| api_key        | credentials| The API key obtained from SendGrid.
 | custom_field_id| String| The id of the custom field.
 
 #### Request example
@@ -790,7 +790,7 @@ Delete a specific custom field by it's ID.
 
 | Field          | Type  | Description
 |----------------|-------|----------
-| api_key        | String| The API key obtained from SendGrid.
+| api_key        | credentials| The API key obtained from SendGrid.
 | custom_field_id| String| The id of the custom field.
 
 #### Request example
@@ -817,7 +817,7 @@ List fields that are reserved and can't be used for custom field names.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -881,7 +881,7 @@ Create a list.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 | name   | String| The name of the list.
 
 #### Request example
@@ -912,7 +912,7 @@ Returns a list of the lists in your account. The method will returns an empty li
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -945,7 +945,7 @@ Delete multiple lists.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 | id     | String| The list ID to delete. Multiple list ID must be comma-separated
 
 #### Request example
@@ -972,7 +972,7 @@ Get information about a specific list.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 | list_id| String| The ID of the list.
 
 #### Request example
@@ -1003,7 +1003,7 @@ Update a list.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 | list_id| String| The ID of the list.
 | name   | String| The name of the list.
 
@@ -1032,7 +1032,7 @@ Delete a list.
 
 | Field          | Type  | Description
 |----------------|-------|----------
-| api_key        | String| The API key obtained from SendGrid.
+| api_key        | credentials| The API key obtained from SendGrid.
 | list_id        | String| The ID of the list.
 | delete_contacts| String| Optional: True or False. True to delete all contacts on the list in addition to deleting the list. Default: true.
 
@@ -1061,7 +1061,7 @@ Get a list of the recipients on a specific list.
 
 | Field    | Type  | Description
 |----------|-------|----------
-| api_key  | String| The API key obtained from SendGrid.
+| api_key  | credentials| The API key obtained from SendGrid.
 | list_id  | String| The ID of the list.
 | page     | String| Optional: Page index of first recipient to return (must be a positive integer). Default: 1.
 | page_size| String| Optional: Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.
@@ -1106,7 +1106,7 @@ Individual recipients may be added to a list one at a time with a limit of 1000 
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | list_id     | String| The ID of the list.
 | recipient_id| String| The ID of your existing recipient.
 
@@ -1135,7 +1135,7 @@ Delete a single recipient from a single list.
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | list_id     | String| The ID of the list.
 | recipient_id| String| The ID of your existing recipient.
 
@@ -1165,7 +1165,7 @@ Note: The rate at which recipients may be added to a list is limited to 1 reques
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | list_id     | String| The ID of the list.
 | recipient_id| String| The IDs of your existing comma-separated recipients.
 
@@ -1195,7 +1195,7 @@ The rate at which recipients may be uploaded is limited to 3 requests every 2 se
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | email       | String| The email of the recipient.
 | first_name  | String| Optional: The First Name of the recipient.
 | last_name   | String| Optional: The Last Name of the recipient.
@@ -1241,7 +1241,7 @@ Add multiple recipients.
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | recipients| String| separated values with | according with pattern 'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value|'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value etc. To indicate custom_fields use the pattern [custom_field_name]:[value], for example: age:30,occupation:developer etc.
 
 #### Request example
@@ -1290,7 +1290,7 @@ Updates one or more recipients.
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | email       | String| The email of the recipient.
 | first_name  | String| Optional: The First Name of the recipient.
 | last_name   | String| Optional: The Last Name of the recipient.
@@ -1336,7 +1336,7 @@ Deletes one or more recipients.
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | recipient_id| String| The comma-separated recipient IDs.
 
 #### Request example
@@ -1363,7 +1363,7 @@ Get a list of recipients.
 
 | Field    | Type  | Description
 |----------|-------|----------
-| api_key  | String| The API key obtained from SendGrid.
+| api_key  | credentials| The API key obtained from SendGrid.
 | page     | String| Optional: Page index of first recipients to return (must be a positive integer). Default: 1.
 | page_size| String| Optional: Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.
 
@@ -1414,7 +1414,7 @@ Get details about a specific recipient.
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | recipient_id| String| The ID of the recipient.
 
 #### Request example
@@ -1459,7 +1459,7 @@ Delete one recipient.
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | recipient_id| String| The recipient ID.
 
 #### Request example
@@ -1486,7 +1486,7 @@ Get the lists the recipient is on.
 
 | Field       | Type  | Description
 |-------------|-------|----------
-| api_key     | String| The API key obtained from SendGrid.
+| api_key     | credentials| The API key obtained from SendGrid.
 | recipient_id| String| The ID of the recipient.
 
 #### Request example
@@ -1521,7 +1521,7 @@ Get a count of billable recipients.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -1548,7 +1548,7 @@ Get a count of recipients.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -1582,7 +1582,7 @@ Search conditions list may contain multiple conditions, joined by an "and" or "o
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | list_id   | String| Optional: the valid list ID for a list to limit the search.
 | conditions| String| The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.
 
@@ -1633,7 +1633,7 @@ Get a recipients' matching search criteria.
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | field_name| String| The name of the field you're looking for.
 | value     | String| The value of the field you're looking for.
 
@@ -1690,7 +1690,7 @@ Segment conditions using "eq" or "ne" for email clicks and opens should provide 
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | name      | String| The name of the segment.
 | list_id   | String| The valid list ID.
 | conditions| String| The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.
@@ -1746,7 +1746,7 @@ Get a list of all segments.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -1788,7 +1788,7 @@ Get details about a specific segment.
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | segment_id| String| The ID of the segment.
 
 #### Request example
@@ -1828,7 +1828,7 @@ Update fields in a specific segment.
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | segment_id| String| The ID of the segment.
 | name      | String| The name of the segment.
 | list_id   | String| Optional: The ID of the list.
@@ -1874,7 +1874,7 @@ Delete a segment.
 
 | Field          | Type  | Description
 |----------------|-------|----------
-| api_key        | String| The API key obtained from SendGrid.
+| api_key        | credentials| The API key obtained from SendGrid.
 | segment_id     | String| The ID of the segment.
 | delete_contacts| String| Optional: true or false. True to delete all contacts matching the segment in addition to deleting the segment. Default: true.
 
@@ -1903,7 +1903,7 @@ Get a list of recipients on a segment.
 
 | Field     | Type  | Description
 |-----------|-------|----------
-| api_key   | String| The API key obtained from SendGrid.
+| api_key   | credentials| The API key obtained from SendGrid.
 | segment_id| String| The ID of the segment.
 | page_size | String| Optional: Number of recipients to return at a time (must be a positive integer from 1 to 1000). Default: 100.
 | page      | String| Optional: Page index of recipients to return (must be a positive integer). Default: 1.
@@ -1957,7 +1957,7 @@ Sender Identities are required to be verified before use. If your domain has bee
 
 | Field    | Type  | Description
 |----------|-------|----------
-| api_key  | String| The API key obtained from SendGrid.
+| api_key  | credentials| The API key obtained from SendGrid.
 | nickname | String| The nickname of the sender.
 | from     | String| Name and email to indicate 'from' field. Pattern to fill email:value,name:value.
 | reply_to | String| Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.
@@ -2021,7 +2021,7 @@ This endpoint allows you to retrieve a list of all of your sender identities.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -2071,7 +2071,7 @@ Updates to from.email require re-verification. If your domain has been whitelabe
 
 | Field    | Type  | Description
 |----------|-------|----------
-| api_key  | String| The API key obtained from SendGrid.
+| api_key  | credentials| The API key obtained from SendGrid.
 | sender_id| String| The ID of the sender.
 | nickname | String| The nickname of the sender.
 | from     | String| Name and email to indicate 'from' field. Pattern to fill email:value,name:value.
@@ -2132,7 +2132,7 @@ This endpoint allows you to delete one of your sender identities.
 
 | Field    | Type  | Description
 |----------|-------|----------
-| api_key  | String| The API key obtained from SendGrid.
+| api_key  | credentials| The API key obtained from SendGrid.
 | sender_id| String| The ID of the sender.
 
 #### Request example
@@ -2159,7 +2159,7 @@ This endpoint allows you to resend the sender identity verification email.
 
 | Field    | Type  | Description
 |----------|-------|----------
-| api_key  | String| The API key obtained from SendGrid.
+| api_key  | credentials| The API key obtained from SendGrid.
 | sender_id| String| The ID of the sender.
 
 #### Request example
@@ -2186,7 +2186,7 @@ This endoint allows you to retrieve a specific sender identity.
 
 | Field    | Type  | Description
 |----------|-------|----------
-| api_key  | String| The API key obtained from SendGrid.
+| api_key  | credentials| The API key obtained from SendGrid.
 | sender_id| String| The ID of the sender.
 
 #### Request example
@@ -2234,7 +2234,7 @@ Retrieve a list of your categories.
 
 | Field   | Type  | Description
 |---------|-------|----------
-| api_key | String| The API key obtained from SendGrid.
+| api_key | credentials| The API key obtained from SendGrid.
 | category| String| Optional: Performs a prefix search on this value.
 | limit   | String| Optional: Optional field to limit the number of results returned. Defaults to 50.
 | offset  | String| Optional: Optional beginning point in the list to retrieve from. Defaults to 0.
@@ -2272,7 +2272,7 @@ This endpoint allows you to send email.
 
 | Field           | Type  | Description
 |---------        |-------|----------
-| api_key         | String| The API key obtained from SendGrid.
+| api_key         | credentials| The API key obtained from SendGrid.
 | personalizations| JSON  | An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. Parameters in personalizations will override the parameters of the same name from the message level. Example: [{"bcc": [{"email": "sam.doe@example.com","name": "Sam Doe"}], "cc": [{"email": "jane.doe@example.com","name": "Jane Doe"}], "custom_args": {"New Argument 1": "New Value 1","activationAttempt": "1","customerAccountNumber": "123"},"headers": {"X-Accept-Language": "en","X-Mailer": "MyApp"},"send_at": 1409348513,"subject": "Hello, World!","substitutions": {"id": "substitutions","type": "object"},"to": [ {"email": "john.doe@example.com","name": "John Doe"}]}]
 | from_email      | String| The email address of the sender.
 | from_name       | String| Optional: The name of the sender.
@@ -2378,7 +2378,7 @@ Create a template.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 | name   | String| Name of the new template. Max 100 characters.
 
 #### Request example
@@ -2409,7 +2409,7 @@ Retrieve all templates.
 
 | Field  | Type  | Description
 |--------|-------|----------
-| api_key| String| The API key obtained from SendGrid.
+| api_key| credentials| The API key obtained from SendGrid.
 
 #### Request example
 ```json
@@ -2450,7 +2450,7 @@ Retrieve a single template.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | template_id| String| The ID of the template.
 
 #### Request example
@@ -2493,7 +2493,7 @@ Edit a template.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | template_id| String| The ID of the template.
 | name       | String| The new name of the template.
 
@@ -2526,7 +2526,7 @@ Delete a template.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | template_id| String| The ID of the template.
 
 #### Request example
@@ -2553,7 +2553,7 @@ Create a new version for a template.
 
 | Field        | Type  | Description
 |--------------|-------|----------
-| api_key      | String| The API key obtained from SendGrid.
+| api_key      | credentials| The API key obtained from SendGrid.
 | template_id  | String| The ID of the template.
 | name         | String| Name of the new version. Max 100 characters.
 | subject      | String| Subject of the new version. <%subject%> tag must be present.
@@ -2599,7 +2599,7 @@ Activate a version.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | template_id| String| The ID of the template.
 | version_id | String| The ID of the version.
 
@@ -2637,7 +2637,7 @@ Retrieve a specific version of a template.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | template_id| String| The ID of the template.
 | version_id | String| The ID of the version.
 
@@ -2675,7 +2675,7 @@ Edit a version.
 
 | Field        | Type  | Description
 |--------------|-------|----------
-| api_key      | String| The API key obtained from SendGrid.
+| api_key      | credentials| The API key obtained from SendGrid.
 | template_id  | String| The ID of the template.
 | version_id   | String| The ID of the version.
 | name         | String| Optional: Name of the new version. Max 100 characters.
@@ -2723,7 +2723,7 @@ Delete a version.
 
 | Field      | Type  | Description
 |------------|-------|----------
-| api_key    | String| The API key obtained from SendGrid.
+| api_key    | credentials| The API key obtained from SendGrid.
 | template_id| String| The ID of the template.
 | version_id | String| The ID of the version.
 

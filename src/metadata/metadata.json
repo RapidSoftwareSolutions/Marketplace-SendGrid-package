@@ -15,7 +15,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -90,7 +90,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -110,7 +110,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -135,7 +135,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -175,7 +175,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -205,7 +205,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -230,7 +230,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -255,7 +255,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -280,7 +280,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -360,7 +360,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -385,7 +385,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -415,7 +415,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -445,7 +445,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -470,7 +470,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -495,7 +495,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -525,7 +525,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -555,7 +555,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -575,7 +575,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -600,7 +600,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -625,7 +625,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -645,7 +645,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -670,7 +670,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -690,7 +690,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -715,7 +715,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -740,7 +740,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -770,7 +770,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -800,7 +800,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -835,7 +835,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -865,7 +865,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -895,7 +895,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -925,7 +925,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -965,7 +965,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -990,7 +990,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1030,7 +1030,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1055,7 +1055,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1085,7 +1085,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1110,7 +1110,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1135,7 +1135,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1160,7 +1160,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -1180,7 +1180,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -1200,7 +1200,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1230,7 +1230,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1260,7 +1260,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1295,7 +1295,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -1315,7 +1315,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1340,7 +1340,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1380,7 +1380,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1410,7 +1410,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1445,7 +1445,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1510,7 +1510,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -1530,7 +1530,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1600,7 +1600,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1625,7 +1625,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1650,7 +1650,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1675,7 +1675,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1710,7 +1710,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1940,7 +1940,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -1965,7 +1965,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 }
             ],
@@ -1985,7 +1985,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -2010,7 +2010,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -2040,7 +2040,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -2065,7 +2065,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -2115,7 +2115,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -2145,7 +2145,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -2175,7 +2175,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
@@ -2230,7 +2230,7 @@
             "args":[
                 {
                     "name": "api_key",
-                    "type": "String",
+                    "type": "credentials",
                     "info": "The API key obtained from SendGrid."
                 },
                 {
