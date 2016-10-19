@@ -12,8 +12,8 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         $data = $toJson->normalizeJson($data); 
         $post_data = json_decode($data, true);
     }
-    
-    if($post_data['args']['test']==1) {
+
+    if(isset($post_data['args']['test']) && $post_data['args']['test']==1) {
         $post_data['args']['personalizations'] = json_decode($post_data['args']['personalizations']);
         $post_data['args']['content'] = json_decode($post_data['args']['content']);
         if(!empty($post_data['args']['attachments'])) {
