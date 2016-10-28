@@ -45,7 +45,7 @@ $app->post('/api/SendGrid/getCampaigns', function ($request, $response, $args) {
     if(!empty($all_data) &&  $resp->statusCode() == '200') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = !is_string($all_data) ? $all_data : json_decode($all_data);
+        $result['contextWrites']['to'][] = !is_string($all_data) ? $all_data : json_decode($all_data);
 
     } else {
         $result['callback'] = 'error';
