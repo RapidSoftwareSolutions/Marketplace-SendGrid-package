@@ -35,11 +35,9 @@ $app->post('/api/SendGrid/getCampaigns', function ($request, $response, $args) {
     $body = json_decode($resp->body());
     $all_data['result'] = $body->result;
     
-    if(!isset($post_data['args']['one_page'])) {
-        $pagin = $this->pager;
-        $ret = $pagin->page($query['limit'], $query['limit'], $apiKey);
-        $all_data = array_merge($all_data['result'], $ret);
-    }
+    $pagin = $this->pager;
+    $ret = $pagin->page($query['limit'], $query['limit'], $apiKey);
+    $all_data = array_merge($all_data['result'], $ret);
 
     
     if(!empty($all_data) &&  $resp->statusCode() == '200') {
