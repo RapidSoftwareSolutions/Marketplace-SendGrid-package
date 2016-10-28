@@ -4,10 +4,14 @@ $app->post('/api/SendGrid/getCampaigns', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
-    $post_data = json_decode($data, true);
-    if(!isset($post_data['args'])) {
-        $data = $request->getParsedBody();
-        $post_data = $data;
+
+    if($data=='') {
+        $post_data = $request->getParsedBody();
+    } else {
+        $toJson = $this->toJson;
+        $data = $toJson->normalizeJson($data); 
+        $data = str_replace('\"', '"', $data);
+        $post_data = json_decode($data, true);
     }
     
     $error = [];
@@ -41,11 +45,11 @@ $app->post('/api/SendGrid/getCampaigns', function ($request, $response, $args) {
     if(!empty($all_data) &&  $resp->statusCode() == '200') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = json_encode($all_data);
+        $result['contextWrites']['to'] = !is_string($all_data) ? $all_data : json_decode($all_data);
 
     } else {
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = json_encode($body);
+        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
     }
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);

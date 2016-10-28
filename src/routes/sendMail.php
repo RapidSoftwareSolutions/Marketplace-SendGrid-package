@@ -3,13 +3,14 @@
 $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     $settings =  $this->settings;
 
-    $data = '';
     $data = $request->getBody();
+
     if($data=='') {
         $post_data = $request->getParsedBody();
     } else {
-        $toJson = $this->normalize;
+        $toJson = $this->toJson;
         $data = $toJson->normalizeJson($data); 
+        $data = str_replace('\"', '"', $data);
         $post_data = json_decode($data, true);
     }
 
@@ -194,11 +195,11 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if($resp->statusCode() == '202') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = json_encode($body);
+        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
 
     } else {
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = json_encode($body);
+        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
     }
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);

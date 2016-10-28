@@ -37,7 +37,7 @@ class SendGridTest extends BaseTestCase
     public function testGetCampaign() {
         
         $post_data['args']['api_key'] = $this->api_key;
-        $post_data['args']['campaign_id'] = '527713';
+        $post_data['args']['campaign_id'] = '615703';
         
         $response = $this->runApp('POST', '/api/SendGrid/getCampaign', $post_data);
 
@@ -79,7 +79,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertEquals('{"errors":[{"field":null,"message":"resource not found"}]}', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -92,7 +91,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertEquals('{"errors":[{"field":null,"message":"resource not found"}]}', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -105,7 +103,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertEquals('{"errors":[{"message":"not found"}]}', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -118,7 +115,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertEquals('"{\"errors\":[{\"message\":\"not found\"}]}"', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -131,7 +127,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertEquals('"{\"errors\":[{\"message\":\"not found\"}]}"', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -145,7 +140,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertEquals('"{\"errors\":[{\"message\":\"not found\"}]}"', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -159,7 +153,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertEquals('"{\"errors\":[{\"message\":\"not found\"}]}"', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -172,7 +165,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertEquals('"{\"errors\":[{\"message\":\"not found\"}]}"', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -185,7 +177,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('not found', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -199,7 +190,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('not found', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -213,7 +203,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Custom Field name must be unique', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Custom Field name must be unique', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -251,7 +241,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Custom field ID does not exist', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -276,7 +265,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Your list name must be unique against all other list and segment names', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -313,7 +301,6 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('List ID does not exist', json_decode($response->getBody())->contextWrites->to);
         
     }
     
@@ -340,7 +327,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('List not found:', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('List not found:', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -353,7 +340,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('List ID does not exist', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('List ID does not exist', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -367,7 +354,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('no valid recipients were provided', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('no valid recipients were provided', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -381,7 +368,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('no valid recipients were provided', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('no valid recipients were provided', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -395,7 +382,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('List ID does not exist', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('List ID does not exist', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -447,7 +434,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('No recipient ids provided', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('No recipient ids provided', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -472,7 +459,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('invalid ID', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('invalid ID', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -485,7 +472,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('invalid ID', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('invalid ID', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -498,7 +485,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('recipient id is not valid', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('recipient id is not valid', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -564,7 +551,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('list id does not exist', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('list id does not exist', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -589,7 +576,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -604,7 +591,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -617,7 +604,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -630,7 +617,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Segment not found', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -648,7 +635,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('You already have a sender identity with the same nickname', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('You already have a sender identity with the same nickname', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -679,7 +666,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('resource not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('resource not found', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -692,7 +679,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('resource not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('resource not found', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -705,7 +692,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('resource not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('resource not found', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -718,7 +705,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('resource not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('resource not found', json_decode($response->getBody())->contextWrites->to->errors[0]->message);
         
     }
     
@@ -730,6 +717,7 @@ class SendGridTest extends BaseTestCase
         $response = $this->runApp('POST', '/api/SendGrid/getCategoriesList', $post_data);
 
         $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('error', json_decode($response->getBody())->callback);
         $this->assertNotEmpty(json_decode($response->getBody())->contextWrites->to);
         
     }
@@ -744,7 +732,6 @@ class SendGridTest extends BaseTestCase
         $post_data['args']['test'] = '1';
         
         $response = $this->runApp('POST', '/api/SendGrid/sendMail', $post_data);
-
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('success', json_decode($response->getBody())->callback);
         
@@ -759,7 +746,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('key exists', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('key exists', json_decode($response->getBody())->contextWrites->to->error);
         
     }
     
@@ -784,7 +771,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Resource not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Resource not found', json_decode($response->getBody())->contextWrites->to->error);
         
     }
     
@@ -810,7 +797,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Resource not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Resource not found', json_decode($response->getBody())->contextWrites->to->error);
         
     }
     
@@ -827,7 +814,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('could not find template', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('could not find template', json_decode($response->getBody())->contextWrites->to->error);
         
     }
     
@@ -854,7 +841,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Resource not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Resource not found', json_decode($response->getBody())->contextWrites->to->error);
         
     }
     
@@ -868,7 +855,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('JSON is malformed', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('JSON is malformed', json_decode($response->getBody())->contextWrites->to->error);
         
     }
     
@@ -882,7 +869,7 @@ class SendGridTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('error', json_decode($response->getBody())->callback);
-        $this->assertContains('Resource not found', json_decode($response->getBody())->contextWrites->to);
+        $this->assertContains('Resource not found', json_decode($response->getBody())->contextWrites->to->error);
         
     }
     

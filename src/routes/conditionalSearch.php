@@ -4,10 +4,14 @@ $app->post('/api/SendGrid/conditionalSearch', function ($request, $response, $ar
     $settings =  $this->settings;
    
     $data = $request->getBody();
-    $post_data = json_decode($data, true);
-    if(!isset($post_data['args'])) {
-        $data = $request->getParsedBody();
-        $post_data = $data;
+
+    if($data=='') {
+        $post_data = $request->getParsedBody();
+    } else {
+        $toJson = $this->toJson;
+        $data = $toJson->normalizeJson($data); 
+        $data = str_replace('\"', '"', $data);
+        $post_data = json_decode($data, true);
     }
     
     $error = [];
@@ -65,16 +69,28 @@ $app->post('/api/SendGrid/conditionalSearch', function ($request, $response, $ar
         if(!empty($responseBody) && $code == '200') {
 
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = json_encode($responseBody);
+            $result['contextWrites']['to'] = !is_string($responseBody) ? $responseBody : json_decode($responseBody);
 
         } else {
             $result['callback'] = 'error';
-            $result['contextWrites']['to'] = json_encode($responseBody);
+            $result['contextWrites']['to'] = !is_string($responseBody) ? $responseBody : json_decode($responseBody);
         }
         
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
 
         $responseBody = $exception->getResponse()->getBody();
+        $result['callback'] = 'error';
+        $result['contextWrites']['to'] = json_decode($responseBody);
+
+    } catch (GuzzleHttp\Exception\ServerException $exception) {
+
+        $responseBody = $exception->getResponse()->getBody(true);
+        $result['callback'] = 'error';
+        $result['contextWrites']['to'] = json_decode($responseBody);
+
+    } catch (GuzzleHttp\Exception\BadResponseException $exception) {
+
+        $responseBody = $exception->getResponse()->getBody(true);
         $result['callback'] = 'error';
         $result['contextWrites']['to'] = json_decode($responseBody);
 
