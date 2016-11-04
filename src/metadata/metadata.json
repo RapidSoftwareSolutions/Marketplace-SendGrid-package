@@ -1874,11 +1874,6 @@
                     "info": "Optional: true or false. Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag."
                 },
                 {
-                    "name": "tracking_settings_subscription_tracking_enable",
-                    "type": "String",
-                    "info": "Optional: true or false. Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag."
-                },
-                {
                     "name": "tracking_settings_subscription_tracking_text",
                     "type": "String",
                     "info": "Optional: Text to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>."
