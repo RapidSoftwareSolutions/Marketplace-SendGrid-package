@@ -43,7 +43,7 @@ $app->post('/api/SendGrid/deleteSpamReports', function ($request, $response, $ar
     if($resp->statusCode() == '204') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
+        $result['contextWrites']['to'] = "deleted";
 
     } else {
         $result['callback'] = 'error';

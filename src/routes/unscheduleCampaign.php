@@ -40,7 +40,7 @@ $app->post('/api/SendGrid/unscheduleCampaign', function ($request, $response, $a
     if($resp->statusCode() == '204') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
+        $result['contextWrites']['to'] = "unscheduled";
 
     } else {
         $result['callback'] = 'error';

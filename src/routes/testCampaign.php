@@ -44,7 +44,7 @@ $app->post('/api/SendGrid/testCampaign', function ($request, $response, $args) {
     if($resp->statusCode() == '204') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
+        $result['contextWrites']['to'] = "success";
 
     } else {
         $result['callback'] = 'error';

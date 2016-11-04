@@ -48,8 +48,7 @@ $app->post('/api/SendGrid/deleteSegment', function ($request, $response, $args) 
     if($resp->statusCode() == '204') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
-
+        $result['contextWrites']['to'] = "deleted";
     } else {
         $result['callback'] = 'error';
         $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);

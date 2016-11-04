@@ -40,7 +40,7 @@ $app->post('/api/SendGrid/resendSenderVerification', function ($request, $respon
     if($resp->statusCode() == '204') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
+        $result['contextWrites']['to'] = "resended";
 
     } else {
         $result['callback'] = 'error';

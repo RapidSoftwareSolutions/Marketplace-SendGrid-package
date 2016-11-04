@@ -48,7 +48,7 @@ $app->post('/api/SendGrid/deleteList', function ($request, $response, $args) {
     if($resp->statusCode() == '202') {
 
         $result['callback'] = 'success';
-        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
+        $result['contextWrites']['to'] = "deleted";
 
     } else {
         $result['callback'] = 'error';
