@@ -13,6 +13,17 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         $data = str_replace('\"', '"', $data);
         $post_data = json_decode($data, true);
     }
+    
+    if(json_last_error() != 0) {
+        $error[] = json_last_error_msg() . '. Incorrect input JSON. Please, check fields with JSON input.';
+    }
+    
+    if(!empty($error)) {
+        $result['callback'] = 'error';
+        $result['contextWrites']['to']['status_code'] = 'JSON_VALIDATION';
+        $result['contextWrites']['to']['status_msg'] = implode(',', $error);
+        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
+    }
 
     if(isset($post_data['args']['test']) && $post_data['args']['test']==1) {
         $post_data['args']['personalizations'] = json_decode($post_data['args']['personalizations']);
@@ -31,24 +42,26 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     
     $error = [];
     if(empty($post_data['args']['api_key'])) {
-        $error[] = 'api_key cannot be empty';
+        $error[] = 'api_key';
     }
     if(empty($post_data['args']['personalizations'])) {
-        $error[] = 'personalizations cannot be empty';
+        $error[] = 'personalizations';
     }
     if(empty($post_data['args']['from_email'])) {
-        $error[] = 'from_email cannot be empty';
+        $error[] = 'from_email';
     }
     if(empty($post_data['args']['subject'])) {
-        $error[] = 'subject cannot be empty';
+        $error[] = 'subject';
     }
     if(empty($post_data['args']['content'])) {
-        $error[] = 'content cannot be empty';
+        $error[] = 'content';
     }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = implode(',', $error);
+        $result['contextWrites']['to']['status_code'] = "REQUIRED_FIELDS";
+        $result['contextWrites']['to']['status_msg'] = "Please, check and fill in required fields.";
+        $result['contextWrites']['to']['fields'] = $error;
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
     }
     
@@ -189,17 +202,27 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
            
     $sg = new \SendGrid($apiKey);
     
-    $resp = $sg->client->mail()->send()->post($request_body);
-    $body = $resp->body();
-    
-    if($resp->statusCode() == '202') {
+    try {
+        $resp = $sg->client->mail()->send()->post($request_body);
+        $body = $resp->body();
 
-        $result['callback'] = 'success';
-        $result['contextWrites']['to'] = "send";
+        if($resp->statusCode() == '202') {
 
-    } else {
+            $result['callback'] = 'success';
+            $result['contextWrites']['to'] = "send";
+
+        } else {
+                $result['callback'] = 'error';
+                $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+                $result['contextWrites']['to']['status_msg'] = !is_string($body) ? $body : json_decode($body);
+        }
+    } catch (Exception $exception) {
+
+        $responseBody = $exception->getMessage();
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
+        $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+        $result['contextWrites']['to']['status_msg'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
+
     }
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
