@@ -1,5 +1,5 @@
 # SendGrid Package
-SendGrid is a cloud-based SMTP provider that allows you to send email without having to maintain email servers.
+Manage email campaigns, subscribers and design templates.
 * Domain: sendgrid.com
 * Credentials: api_key
 
