@@ -555,7 +555,7 @@ Updates to from.email require re-verification. If your domain has been whitelabe
 | country  | String| The country of the sender.
 
 
-## SendGrid.deleteSenderIdentities
+## SendGrid.deleteSenderIdentity
 This endpoint allows you to delete one of your sender identities.
 
 | Field    | Type  | Description
