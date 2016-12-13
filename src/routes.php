@@ -55,6 +55,7 @@ $routes = [
     'resendSenderVerification',
     'getSenderIdentity',
     'getCategoriesList',
+    'sendPlainMail',
     'sendMail',
     'createTemplate',
     'getTemplates',

@@ -593,6 +593,19 @@ Retrieve a list of your categories.
 | offset  | String| Optional: Optional beginning point in the list to retrieve from. Defaults to 0.
 
 
+## SendGrid.sendPlainMail
+This endpoint allows you to send email.
+
+| Field           | Type  | Description
+|---------        |-------|----------
+| api_key         | credentials| The API key obtained from SendGrid.
+| fromEmail       | String| The email address of the sender.
+| fromName        | String| Optional: The name of the sender.
+| toEmail         | String| The email address of the recipient.
+| toName          | String| Optional: The name of the recipient.
+| subject         | String| The subject of your email.
+| content         | String| The actual content of your email.
+
 ## SendGrid.sendMail
 This endpoint allows you to send email.
 

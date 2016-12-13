@@ -1705,6 +1705,52 @@
                     "info": "Success"
                 }]
         }, {
+            "name": "sendPlainMail",
+            "description": "This endpoint allows you to send email with plain text.",
+            "args": [{
+                    "name": "api_key",
+                    "type": "credentials",
+                    "info": "The API key obtained from SendGrid.",
+                    "required": true
+                }, {
+                    "name": "fromEmail",
+                    "type": "String",
+                    "info": "The email address of the sender.",
+                    "required": true
+                }, {
+                    "name": "fromName",
+                    "type": "String",
+                    "info": "The name of the sender.",
+                    "required": false
+                }, {
+                    "name": "toEmail",
+                    "type": "String",
+                    "info": "The email address of the recipient.",
+                    "required": true
+                }, {
+                    "name": "toName",
+                    "type": "String",
+                    "info": "The name of the recipient.",
+                    "required": false
+                }, {
+                    "name": "subject",
+                    "type": "String",
+                    "info": "The subject of your email.",
+                    "required": true
+                }, {
+                    "name": "content",
+                    "type": "String",
+                    "info": "The actual content of your email.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
             "name": "createTemplate",
             "description": "Create a template.",
             "args": [{

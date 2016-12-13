@@ -737,6 +737,20 @@ class SendGridTest extends BaseTestCase
         
     }
     
+    public function testSendPlainMail() {
+        
+        $post_data['args']['api_key'] = $this->api_key;
+        $post_data['args']['fromEmail'] = 'test@site.com';
+        $post_data['args']['subject'] = 'Test';
+        $post_data['args']['toEmail'] = 'john.doe@example.com';
+        $post_data['args']['content'] = 'Hello, world!';
+        
+        $response = $this->runApp('POST', '/api/SendGrid/sendMail', $post_data);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('success', json_decode($response->getBody())->callback);
+        
+    }
+    
     public function testCreateTemplate() {
         
         $post_data['args']['api_key'] = $this->api_key;
