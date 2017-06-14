@@ -451,7 +451,7 @@
       ]
     },
     {
-        "name": "scheduleCampaign",
+      "name": "scheduleCampaign",
       "description": "Schedule a campaign.",
       "args": [
         {
@@ -1523,14 +1523,23 @@
             {
               "name": "operator",
               "type": "Select",
-              "options": ["eq", "ne", "lt", "gt", "contains"],
+              "options": [
+                "eq",
+                "ne",
+                "lt",
+                "gt",
+                "contains"
+              ],
               "info": "Allowed values: eq, ne, lt, gt, contains",
               "required": true
             },
             {
               "name": "and_or",
               "type": "Select",
-              "options": ["and", "or"],
+              "options": [
+                "and",
+                "or"
+              ],
               "info": "Allowed values: and, or",
               "required": false
             }
@@ -1647,14 +1656,23 @@
             {
               "name": "operator",
               "type": "Select",
-              "options": ["eq", "ne", "lt", "gt", "contains"],
+              "options": [
+                "eq",
+                "ne",
+                "lt",
+                "gt",
+                "contains"
+              ],
               "info": "Allowed values: eq, ne, lt, gt, contains",
               "required": true
             },
             {
               "name": "and_or",
               "type": "Select",
-              "options": ["and", "or"],
+              "options": [
+                "and",
+                "or"
+              ],
               "info": "Allowed values: and, or",
               "required": false
             }
@@ -2154,7 +2172,7 @@
           "type": "List",
           "info": "Each category name may not exceed 255 characters. You cannot have more than 10 categories per request.",
           "required": false,
-          "structure":{
+          "structure": {
             "name": "category",
             "type": "String",
             "info": "Category",
@@ -2588,7 +2606,10 @@
         {
           "name": "active",
           "type": "Select",
-          "options": ["0", "1"],
+          "options": [
+            "0",
+            "1"
+          ],
           "info": "0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
           "required": false
         }
@@ -2721,7 +2742,10 @@
         {
           "name": "active",
           "type": "Select",
-          "options": ["0", "1"],
+          "options": [
+            "0",
+            "1"
+          ],
           "info": "0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
           "required": false
         }

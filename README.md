@@ -13,6 +13,15 @@ Manage email campaigns, subscribers and design templates.
 4. Please store API key somewhere safe because as soon as you navigate away from page, service will not be able to retrieve or restore this generated token.
 
 
+## Custom datatypes: 
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]``` 
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+
 ## SendGrid.createCampaign
 Create a marketing campaign.
 
