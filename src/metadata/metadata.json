@@ -1,2034 +1,2637 @@
 {
-    "package": "SendGrid",
-    "tagline": "Manage email campaigns, subscribers and design templates.",
-    "description": "SendGrid is a cloud-based SMTP provider that allows you to send email without having to maintain email servers.",
-    "image": "http:\/\/logo.clearbit.com\/sendgrid.com",
-    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-SendGrid-package",
-    "keywords": ["API", "analytics", "design", "email", "emails", "marketing", "smb"],
-    "accounts": {
-        "domain": "sendgrid.com",
-        "credentials": ["api_key"]
+  "package": "SendGrid",
+  "tagline": "Manage email campaigns, subscribers and design templates.",
+  "description": "SendGrid is a cloud-based SMTP provider that allows you to send email without having to maintain email servers.",
+  "image": "http:\/\/logo.clearbit.com\/sendgrid.com",
+  "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-SendGrid-package",
+  "keywords": [
+    "API",
+    "analytics",
+    "design",
+    "email",
+    "emails",
+    "marketing",
+    "smb"
+  ],
+  "accounts": {
+    "domain": "sendgrid.com",
+    "credentials": [
+      "api_key"
+    ]
+  },
+  "blocks": [
+    {
+      "name": "createCampaign",
+      "description": "Create a marketing campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "info": "The title of your camapign.",
+          "required": true
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "The Email subject of your camapign.",
+          "required": true
+        },
+        {
+          "name": "sender_id",
+          "type": "String",
+          "info": "The sender ID obtained from Sender Management.",
+          "required": true
+        },
+        {
+          "name": "list_ids",
+          "type": "String",
+          "info": "The list IDs, which will receive your email. You can indicate more than one list with comma-separated.",
+          "required": false
+        },
+        {
+          "name": "segment_ids",
+          "type": "String",
+          "info": "The segment IDs, which will receive your email. You can indicate more than one segment with comma-separated.",
+          "required": false
+        },
+        {
+          "name": "categories",
+          "type": "String",
+          "info": "This is a category that you can set for your emails. You can create up to 10 different categories with comma-separated.",
+          "required": false
+        },
+        {
+          "name": "suppression_group_id",
+          "type": "String",
+          "info": "The suppression group ID.",
+          "required": false
+        },
+        {
+          "name": "custom_unsubscribe_url",
+          "type": "String",
+          "info": "The custom unsubscribe URL.",
+          "required": false
+        },
+        {
+          "name": "ip_pool",
+          "type": "String",
+          "info": "The name of pool IP.",
+          "required": false
+        },
+        {
+          "name": "html_content",
+          "type": "String",
+          "info": "The HTML content of campaign.",
+          "required": false
+        },
+        {
+          "name": "plain_content",
+          "type": "String",
+          "info": "The plain text of campaign.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
     },
-    "blocks": [{
-            "name": "createCampaign",
-            "description": "Create a marketing campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "title",
-                    "type": "String",
-                    "info": "The title of your camapign.",
-                    "required": true
-                }, {
-                    "name": "subject",
-                    "type": "String",
-                    "info": "The Email subject of your camapign.",
-                    "required": true
-                }, {
-                    "name": "sender_id",
-                    "type": "String",
-                    "info": "The sender ID obtained from Sender Management.",
-                    "required": true
-                }, {
-                    "name": "list_ids",
-                    "type": "String",
-                    "info": "The list IDs, which will receive your email. You can indicate more than one list with comma-separated.",
-                    "required": false
-                }, {
-                    "name": "segment_ids",
-                    "type": "String",
-                    "info": "The segment IDs, which will receive your email. You can indicate more than one segment with comma-separated.",
-                    "required": false
-                }, {
-                    "name": "categories",
-                    "type": "String",
-                    "info": "This is a category that you can set for your emails. You can create up to 10 different categories with comma-separated.",
-                    "required": false
-                }, {
-                    "name": "suppression_group_id",
-                    "type": "String",
-                    "info": "The suppression group ID.",
-                    "required": false
-                }, {
-                    "name": "custom_unsubscribe_url",
-                    "type": "String",
-                    "info": "The custom unsubscribe URL.",
-                    "required": false
-                }, {
-                    "name": "ip_pool",
-                    "type": "String",
-                    "info": "The name of pool IP.",
-                    "required": false
-                }, {
-                    "name": "html_content",
-                    "type": "String",
-                    "info": "The HTML content of campaign.",
-                    "required": false
-                }, {
-                    "name": "plain_content",
-                    "type": "String",
-                    "info": "The plain text of campaign.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getCampaigns",
-            "description": "Returns campaigns in reverse order they were created (newest first). Returns an empty array if no campaigns exist.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getCampaign",
-            "description": "Get details about a specific campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getSpamReportsList",
-            "description": "List all spam reports.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "start_time",
-                    "type": "String",
-                    "info": "Refers start of the time range in unix timestamp when a spam report was created (inclusive).",
-                    "required": false
-                }, {
-                    "name": "end_time",
-                    "type": "String",
-                    "info": "Refers end of the time range in unix timestamp when a spam report was created (inclusive).",
-                    "required": false
-                }, {
-                    "name": "limit",
-                    "type": "String",
-                    "info": "Limit the number of results to be displayed per page.",
-                    "required": false
-                }, {
-                    "name": "offset",
-                    "type": "String",
-                    "info": "Paging offset. The point in the list to begin displaying results.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteSpamReports",
-            "description": "You can delete all spam reports by setting \"delete_all\" to true in the request body.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "delete_all",
-                    "type": "String",
-                    "info": "delete all spam reports by setting to 'true'. Default 'false'.",
-                    "required": false
-                }, {
-                    "name": "emails",
-                    "type": "String",
-                    "info": "delete some spam reports by specifying the comma-separated email addresses.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getSpamReport",
-            "description": "Get a specific spam report.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "email",
-                    "type": "String",
-                    "info": "Email address of spam report entry.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteSpamReport",
-            "description": "Delete a specific spam report.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "email",
-                    "type": "String",
-                    "info": "Email address of spam report entry.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteCampaign",
-            "description": "Delete a Campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "updateCampaign",
-            "description": "Update a campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }, {
-                    "name": "title",
-                    "type": "String",
-                    "info": "The title of your camapign.",
-                    "required": false
-                }, {
-                    "name": "subject",
-                    "type": "String",
-                    "info": "The Email subject of your camapign.",
-                    "required": false
-                }, {
-                    "name": "sender_id",
-                    "type": "String",
-                    "info": "The sender ID obtained from Sender Management.",
-                    "required": false
-                }, {
-                    "name": "list_ids",
-                    "type": "String",
-                    "info": "The list IDs, which will receive your email. You can indicate more than one list with comma-separated.",
-                    "required": false
-                }, {
-                    "name": "segment_ids",
-                    "type": "String",
-                    "info": "The segment IDs, which will receive your email. You can indicate more than one segment with comma-separated.",
-                    "required": false
-                }, {
-                    "name": "categories",
-                    "type": "String",
-                    "info": "This is a category that you can set for your emails. You can create up to 10 different categories with comma-separated.",
-                    "required": false
-                }, {
-                    "name": "suppression_group_id",
-                    "type": "String",
-                    "info": "The suppression group ID.",
-                    "required": false
-                }, {
-                    "name": "custom_unsubscribe_url",
-                    "type": "String",
-                    "info": "The custom unsubscribe URL.",
-                    "required": false
-                }, {
-                    "name": "ip_pool",
-                    "type": "String",
-                    "info": "The name of pool IP.",
-                    "required": false
-                }, {
-                    "name": "html_content",
-                    "type": "String",
-                    "info": "The HTML content of campaign.",
-                    "required": false
-                }, {
-                    "name": "plain_content",
-                    "type": "String",
-                    "info": "The plain text of campaign.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "sendCampaign",
-            "description": "Send a Campaign",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "scheduleCampaign",
-            "description": "Schedule a campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }, {
-                    "name": "send_at",
-                    "type": "String",
-                    "info": "The unix timestamp of the campaign schedule (in future).",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "updateScheduledCampaign",
-            "description": "Changes the send_at time for the specified campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }, {
-                    "name": "send_at",
-                    "type": "String",
-                    "info": "The unix timestamp of the campaign schedule (in future).",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getScheduledTime",
-            "description": "Get scheduled time of a campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "unscheduleCampaign",
-            "description": "Unschedule a scheduled campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "testCampaign",
-            "description": "Send a test campaign.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "campaign_id",
-                    "type": "String",
-                    "info": "The id of the campaign.",
-                    "required": true
-                }, {
-                    "name": "to",
-                    "type": "String",
-                    "info": "The addresses to send. Multiple addresses must be comma-separated.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "createCustomField",
-            "description": "Create a custom field.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "The name of the field.",
-                    "required": true
-                }, {
-                    "name": "type",
-                    "type": "String",
-                    "info": "The type of the field.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getCustomFieldList",
-            "description": "Get a list of all custom fields",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getCustomField",
-            "description": "Get details about a specific custom field.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "custom_field_id",
-                    "type": "String",
-                    "info": "The id of the custom field.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteCustomField",
-            "description": "Delete a specific custom field by it's ID.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "custom_field_id",
-                    "type": "String",
-                    "info": "The id of the custom field.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getReservedFieldsList",
-            "description": "List fields that are reserved and can't be used for custom field names.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "createList",
-            "description": "Create a list.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "The name of the list.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getListsList",
-            "description": "Returns a list of the lists in your account. The method will returns an empty list if you GET and no lists exist on your account.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteLists",
-            "description": "Delete multiple lists.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "id",
-                    "type": "String",
-                    "info": "The list ID to delete. Multiple list ID must be comma-separated",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getList",
-            "description": "Get information about a specific list.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The ID of the list.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "updateList",
-            "description": "Update a list.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The ID of the list.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "The name of the list.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteList",
-            "description": "Delete a list.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The ID of the list.",
-                    "required": true
-                }, {
-                    "name": "delete_contacts",
-                    "type": "String",
-                    "info": "True or False. True to delete all contacts on the list in addition to deleting the list. Default: true.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getListRecipientsList",
-            "description": "Get a list of the recipients on a specific list.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The ID of the list.",
-                    "required": true
-                }, {
-                    "name": "page",
-                    "type": "String",
-                    "info": "Page index of first recipient to return (must be a positive integer). Default: 1.",
-                    "required": false
-                }, {
-                    "name": "page_size",
-                    "type": "String",
-                    "info": "Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "addListRecipient",
-            "description": "Individual recipients may be added to a list one at a time with a limit of 1000 requests per second, where one recipient is added to the list per request.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The ID of the list.",
-                    "required": true
-                }, {
-                    "name": "recipient_id",
-                    "type": "String",
-                    "info": "The ID of your existing recipient.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteListRecipient",
-            "description": "Delete a single recipient from a single list.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The ID of the list.",
-                    "required": true
-                }, {
-                    "name": "recipient_id",
-                    "type": "String",
-                    "info": "The ID of your existing recipient.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "addListRecipients",
-            "description": "Adds existing recipients to a list, passing in the recipient IDs to add. Recipient IDs should be passed exactly as they are returned from recipient endpoints. Note: The rate at which recipients may be added to a list is limited to 1 request per second. Recipients may be added in batches of 1000.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The ID of the list.",
-                    "required": true
-                }, {
-                    "name": "recipient_id",
-                    "type": "String",
-                    "info": "The IDs of your existing comma-separated recipients.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "addRecipient",
-            "description": "Add a single recipient. The rate at which recipients may be uploaded is limited to 3 requests every 2 seconds. Recipients may be uploaded in batches of 1000 per request. This results in a maximum upload rate of 1500 recipients per second.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "email",
-                    "type": "String",
-                    "info": "The email of the recipient.",
-                    "required": true
-                }, {
-                    "name": "first_name",
-                    "type": "String",
-                    "info": "The First Name of the recipient.",
-                    "required": false
-                }, {
-                    "name": "last_name",
-                    "type": "String",
-                    "info": "The Last Name of the recipient.",
-                    "required": false
-                }, {
-                    "name": "custom_field",
-                    "type": "String",
-                    "info": "The created custom fields with comma-separated. To indicate custom field and its value use the pattern [custom_field_name]:[value]. For example: age:30,occupation:developer etc. ",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "addRecipients",
-            "description": "Add multiple recipients.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "recipients",
-                    "type": "String",
-                    "info": "separated values with '|' according with pattern 'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value|'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value etc. To indicate custom_fields use the pattern [custom_field_name]:[value], for example: age:30,occupation:developer etc.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "updateRecipient",
-            "description": "Updates one or more recipients.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "email",
-                    "type": "String",
-                    "info": "The email of the recipient.",
-                    "required": true
-                }, {
-                    "name": "first_name",
-                    "type": "String",
-                    "info": "The First Name of the recipient.",
-                    "required": false
-                }, {
-                    "name": "last_name",
-                    "type": "String",
-                    "info": "The Last Name of the recipient.",
-                    "required": false
-                }, {
-                    "name": "custom_field",
-                    "type": "String",
-                    "info": "The created custom fields with comma-separated. To indicate custom field and its value use the pattern [custom_field_name]:[value]. For example: age:30,occupation:developer etc. ",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteRecipients",
-            "description": "Deletes one or more recipients.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "recipient_id",
-                    "type": "String",
-                    "info": "The comma-separated recipient IDs.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getRecipientList",
-            "description": "Get a list of recipients.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "page",
-                    "type": "String",
-                    "info": "Page index of first recipients to return (must be a positive integer). Default: 1.",
-                    "required": false
-                }, {
-                    "name": "page_size",
-                    "type": "String",
-                    "info": "Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getRecipient",
-            "description": "Get details about a specific recipient.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "recipient_id",
-                    "type": "String",
-                    "info": "The ID of the recipient.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteRecipient",
-            "description": "Delete one recipient.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "recipient_id",
-                    "type": "String",
-                    "info": "The recipient ID.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getRecipientListSubscription",
-            "description": "Get the lists the recipient is on.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "recipient_id",
-                    "type": "String",
-                    "info": "The ID of the recipient.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getBillableRecipientsCount",
-            "description": "Get a count of billable recipients.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getRecipientsCount",
-            "description": "Get a count of recipients.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "conditionalSearch",
-            "description": "Search using segment conditions.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "the valid list ID for a list to limit the search.",
-                    "required": false
-                }, {
-                    "name": "conditions",
-                    "type": "String",
-                    "info": "The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getMatchingCriteria",
-            "description": "Get a recipients' matching search criteria.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "field_name",
-                    "type": "String",
-                    "info": "The name of the field you're looking for.",
-                    "required": true
-                }, {
-                    "name": "value",
-                    "type": "String",
-                    "info": "The value of the field you're looking for.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "createSegment",
-            "description": "Create segment.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "The name of the segment.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The valid list ID.",
-                    "required": true
-                }, {
-                    "name": "conditions",
-                    "type": "String",
-                    "info": "The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getSegmentList",
-            "description": "Get a list of all segments.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getSegment",
-            "description": "Get details about a specific segment.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "segment_id",
-                    "type": "String",
-                    "info": "The ID of the segment.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "updateSegment",
-            "description": "Update fields in a specific segment.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "segment_id",
-                    "type": "String",
-                    "info": "The ID of the segment.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "The name of the segment.",
-                    "required": true
-                }, {
-                    "name": "list_id",
-                    "type": "String",
-                    "info": "The ID of the list.",
-                    "required": false
-                }, {
-                    "name": "conditions",
-                    "type": "String",
-                    "info": "The conditions of the segment. Value must be according with pattern 'field':value,'value':value,'operator':value.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteSegment",
-            "description": "Delete a segment.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "segment_id",
-                    "type": "String",
-                    "info": "The ID of the segment.",
-                    "required": true
-                }, {
-                    "name": "delete_contacts",
-                    "type": "String",
-                    "info": "true or false. True to delete all contacts matching the segment in addition to deleting the segment. Default: true.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getSegmentRecipientsList",
-            "description": "Get a list of recipients on a segment.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "segment_id",
-                    "type": "String",
-                    "info": "The ID of the segment.",
-                    "required": true
-                }, {
-                    "name": "page_size",
-                    "type": "String",
-                    "info": "Number of recipients to return at a time (must be a positive integer from 1 to 1000). Default: 100.",
-                    "required": false
-                }, {
-                    "name": "page",
-                    "type": "String",
-                    "info": "Page index of recipients to return (must be a positive integer). Default: 1.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "createSenderIdentity",
-            "description": "This endpoint allows you to create a sender identity.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "nickname",
-                    "type": "String",
-                    "info": "The nickname of the sender.",
-                    "required": true
-                }, {
-                    "name": "from",
-                    "type": "String",
-                    "info": "Name and email to indicate 'from' field. Pattern to fill email:value,name:value.",
-                    "required": true
-                }, {
-                    "name": "reply_to",
-                    "type": "String",
-                    "info": "Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.",
-                    "required": true
-                }, {
-                    "name": "address",
-                    "type": "String",
-                    "info": "The address of the sender.",
-                    "required": true
-                }, {
-                    "name": "address_2",
-                    "type": "String",
-                    "info": "The second address of the sender.",
-                    "required": false
-                }, {
-                    "name": "city",
-                    "type": "String",
-                    "info": "The city of the sender."
-                }, {
-                    "name": "country",
-                    "type": "String",
-                    "info": "The country of the sender.",
-                    "required": true
-                }, {
-                    "name": "state",
-                    "type": "String",
-                    "info": "The state of the sender.",
-                    "required": false
-                }, {
-                    "name": "zip",
-                    "type": "String",
-                    "info": "The zip of the sender.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getAllSenderIdentities",
-            "description": "This endpoint allows you to retrieve a list of all of your sender identities.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "updateSenderIdentity",
-            "description": "Updates to from.email require re-verification. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the from.email.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "sender_id",
-                    "type": "String",
-                    "info": "The ID of the sender.",
-                    "required": true
-                }, {
-                    "name": "nickname",
-                    "type": "String",
-                    "info": "The nickname of the sender.",
-                    "required": true
-                }, {
-                    "name": "from",
-                    "type": "String",
-                    "info": "Name and email to indicate 'from' field. Pattern to fill email:value,name:value.",
-                    "required": true
-                }, {
-                    "name": "reply_to",
-                    "type": "String",
-                    "info": "Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.",
-                    "required": true
-                }, {
-                    "name": "address",
-                    "type": "String",
-                    "info": "The address of the sender.",
-                    "required": true
-                }, {
-                    "name": "address_2",
-                    "type": "String",
-                    "info": "The second address of the sender.",
-                    "required": false
-                }, {
-                    "name": "city",
-                    "type": "String",
-                    "info": "The city of the sender.",
-                    "required": true
-                }, {
-                    "name": "state",
-                    "type": "String",
-                    "info": "The state of the sender.",
-                    "required": false
-                }, {
-                    "name": "zip",
-                    "type": "String",
-                    "info": "The zip of the sender.",
-                    "required": false
-                }, {
-                    "name": "country",
-                    "type": "String",
-                    "info": "The country of the sender.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteSenderIdentity",
-            "description": "This endpoint allows you to delete one of your sender identities.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "sender_id",
-                    "type": "String",
-                    "info": "The ID of the sender.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "resendSenderVerification",
-            "description": "This endpoint allows you to resend the sender identity verification email.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "sender_id",
-                    "type": "String",
-                    "info": "The ID of the sender.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getSenderIdentity",
-            "description": "This endoint allows you to retrieve a specific sender identity.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "sender_id",
-                    "type": "String",
-                    "info": "The ID of the sender.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getCategoriesList",
-            "description": "Retrieve a list of your categories.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "category",
-                    "type": "String",
-                    "info": "Performs a prefix search on this value.",
-                    "required": false
-                }, {
-                    "name": "limit",
-                    "type": "String",
-                    "info": "Optional field to limit the number of results returned. Defaults to 50.",
-                    "required": false
-                }, {
-                    "name": "offset",
-                    "type": "String",
-                    "info": "Optional beginning point in the list to retrieve from. Defaults to 0.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "sendMail",
-            "description": "This endpoint allows you to send email.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "personalizations",
-                    "type": "JSON",
-                    "info": "An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. Parameters in personalizations will override the parameters of the same name from the message level. Example: [{\"bcc\": [{\"email\": \"sam.doe@example.com\",\"name\": \"Sam Doe\"}], \"cc\": [{\"email\": \"jane.doe@example.com\",\"name\": \"Jane Doe\"}], \"custom_args\": {\"New Argument 1\": \"New Value 1\",\"activationAttempt\": \"1\",\"customerAccountNumber\": \"123\"},\"headers\": {\"X-Accept-Language\": \"en\",\"X-Mailer\": \"MyApp\"},\"send_at\": 1409348513,\"subject\": \"Hello, World!\",\"substitutions\": {\"id\": \"substitutions\",\"type\": \"object\"},\"to\": [ {\"email\": \"john.doe@example.com\",\"name\": \"John Doe\"}]}]",
-                    "required": true
-                }, {
-                    "name": "from_email",
-                    "type": "String",
-                    "info": "The email address of the sender.",
-                    "required": true
-                }, {
-                    "name": "from_name",
-                    "type": "String",
-                    "info": "The name of the sender.",
-                    "required": false
-                }, {
-                    "name": "reply_to_email",
-                    "type": "String",
-                    "info": "The email address to which responses will be sent.",
-                    "required": false
-                }, {
-                    "name": "reply_to_name",
-                    "type": "String",
-                    "info": "The name of the individual who will receive responses to the email.",
-                    "required": false
-                }, {
-                    "name": "subject",
-                    "type": "String",
-                    "info": "The subject of your email. This may be overridden by personalizations[x].subject.",
-                    "required": true
-                }, {
-                    "name": "content",
-                    "type": "JSON",
-                    "info": "An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters. If included, text\/plain and text\/html must be the first indices of the array in this order. If you choose to include the text\/plain or text\/html mime types, they must be the first indices of the content array in the order text\/plain, text\/html. Example: [{\"type\": \"text\/html\",\"value\": \"Hello, world!<\/p><\/img><\/html>\"}]",
-                    "required": true
-                }, {
-                    "name": "attachments",
-                    "type": "JSON",
-                    "info": "An array of objects in which you can specify any attachments you want to include.",
-                    "required": false
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The id of a template that you would like to use. If you use a template that contains content and a subject (either text or html), you do not need to specify those in the respective personalizations or message level parameters.",
-                    "required": false
-                }, {
-                    "name": "sections",
-                    "type": "JSON",
-                    "info": "An object of key\/value pairs that define large blocks of content that can be inserted into your emails using substitution tags. Example: {\"section\": {\":sectionName1\": \"section 1 text\", \":sectionName2\": \"section 2 text\"}}",
-                    "required": false
-                }, {
-                    "name": "headers",
-                    "type": "JSON",
-                    "info": "An object containing key\/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be any of the following reserved headers: x-sg-id, x-sg-eid, received, dkim-signature, Content-Type, Content-Transfer-Encoding, To, From, Subject, Reply-To, CC, BCC.",
-                    "required": false
-                }, {
-                    "name": "categories",
-                    "type": "String",
-                    "info": "Category names for this message with comma-separate. Each category name may not exceed 255 characters. You cannot have more than 10 categories per request.",
-                    "required": false
-                }, {
-                    "name": "custom_args",
-                    "type": "String",
-                    "info": "Values according the pattern KEY:VALUE,KEY:VALUE etc., that are specific to the entire send that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This parameter is overridden by any conflicting personalizations[x].custom_args if that parameter has been defined.",
-                    "required": false
-                }, {
-                    "name": "send_at",
-                    "type": "String",
-                    "info": "A unix timestamp allowing you to specify when you want your email to be sent from SendGrid. This is not necessary if you want the email to be sent at the time of your API request.",
-                    "required": false
-                }, {
-                    "name": "batch_id",
-                    "type": "String",
-                    "info": "This ID represents a batch of emails (AKA multiple sends of the same email) to be associated to each other for scheduling. Including a batch_id in your request allows you to include this email in that batch, and also enables you to cancel or pause the delivery of that entire batch.",
-                    "required": false
-                }, {
-                    "name": "asm",
-                    "type": "String",
-                    "info": "An object allowing you to specify how to handle unsubscribes. Use pattern group_id:value;groups_to_display:value1,value2,... etc.",
-                    "required": false
-                }, {
-                    "name": "ip_pool_name",
-                    "type": "String",
-                    "info": "The IP Pool that you would like to send this email from. Min 2, Max 64.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_bcc_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_bcc_email",
-                    "type": "String",
-                    "info": "The email address that you would like to receive the BCC.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_bypass_list_management_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled. Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. Ex: outage emails, or forgot password emails.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_footer_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled. The default footer that you would like appended to the bottom of every email.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_footer_text",
-                    "type": "String",
-                    "info": "The plain text content of your footer.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_footer_html",
-                    "type": "String",
-                    "info": "The HTML content of your footer.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_sandbox_mode_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled. This allows you to send a test email to ensure that your request body is valid and formatted correctly.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_spam_check_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled. This allows you to test the content of your email for spam.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_spam_check_threshold",
-                    "type": "String",
-                    "info": "The threshold used to determine if your content qualifies as spam on a scale from 1 to 10, with 10 being most strict, or most likely to be considered as spam.",
-                    "required": false
-                }, {
-                    "name": "mail_settings_spam_check_post_to_url",
-                    "type": "String",
-                    "info": "An Inbound Parse URL that you would like a copy of your email along with the spam report to be sent to. The post_to_url parameter must start with http or https.",
-                    "required": false
-                }, {
-                    "name": "tracking_settings_click_tracking_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled. Allows you to track whether a recipient clicked a link in your email.",
-                    "required": false
-                }, {
-                    "name": "tracking_settings_click_tracking_enable_text",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting should be included in the text\/plain portion of your email.",
-                    "required": false
-                }, {
-                    "name": "tracking_settings_open_tracking_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled. Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.",
-                    "required": false
-                }, {
-                    "name": "tracking_settings_open_tracking_substitution_tag",
-                    "type": "String",
-                    "info": "Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel.",
-                    "required": false
-                }, {
-                    "name": "tracking_settings_subscription_tracking_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.",
-                    "required": false
-                }, {
-                    "name": "tracking_settings_subscription_tracking_text",
-                    "type": "String",
-                    "info": "Text to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>.",
-                    "required": false
-                }, {
-                    "name": "tracking_settings_subscription_tracking_html",
-                    "type": "String",
-                    "info": "HTML to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>.",
-                    "required": false
-                }, {
-                    "name": "tracking_settings_subscription_tracking_substitution_tag",
-                    "type": "String",
-                    "info": "A tag that will be replaced with the unsubscribe URL. for example: [unsubscribe_url]. If this parameter is used, it will override both the textand html parameters. The URL of the link will be placed at the substitution tag\u2019s location, with no additional formatting.",
-                    "required": false
-                }, {
-                    "name": "ganalytics_enable",
-                    "type": "String",
-                    "info": "true or false. Indicates if this setting is enabled. Allows you to enable tracking provided by Google Analytics.",
-                    "required": false
-                }, {
-                    "name": "ganalytics_utm_source",
-                    "type": "String",
-                    "info": "Name of the referrer source. (e.g. Google, SomeDomain.com, or Marketing Email).",
-                    "required": false
-                }, {
-                    "name": "ganalytics_utm_medium",
-                    "type": "String",
-                    "info": "Name of the marketing medium. (e.g. Email).",
-                    "required": false
-                }, {
-                    "name": "ganalytics_utm_term",
-                    "type": "String",
-                    "info": "Used to identify any paid keywords.",
-                    "required": false
-                }, {
-                    "name": "ganalytics_utm_content",
-                    "type": "String",
-                    "info": "Used to differentiate your campaign from advertisements.",
-                    "required": false
-                }, {
-                    "name": "ganalytics_utm_campaign",
-                    "type": "String",
-                    "info": "The name of the campaign.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "sendPlainMail",
-            "description": "This endpoint allows you to send email with plain text.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "fromEmail",
-                    "type": "String",
-                    "info": "The email address of the sender.",
-                    "required": true
-                }, {
-                    "name": "fromName",
-                    "type": "String",
-                    "info": "The name of the sender.",
-                    "required": false
-                }, {
-                    "name": "toEmail",
-                    "type": "String",
-                    "info": "The email address of the recipient.",
-                    "required": true
-                }, {
-                    "name": "toName",
-                    "type": "String",
-                    "info": "The name of the recipient.",
-                    "required": false
-                }, {
-                    "name": "subject",
-                    "type": "String",
-                    "info": "The subject of your email.",
-                    "required": true
-                }, {
-                    "name": "content",
-                    "type": "String",
-                    "info": "The actual content of your email.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "createTemplate",
-            "description": "Create a template.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "Name of the new template. Max 100 characters.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getTemplates",
-            "description": "Retrieve all templates.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getTemplate",
-            "description": "Retrieve a single template.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The ID of the template.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "editTemplate",
-            "description": "Edit a template.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The ID of the template.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "The new name of the template.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteTemplate",
-            "description": "Delete a template.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The ID of the template.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "createVersion",
-            "description": "Create a new version for a template.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The ID of the template.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "Name of the new version. Max 100 characters.",
-                    "required": true
-                }, {
-                    "name": "subject",
-                    "type": "String",
-                    "info": "Subject of the new version. <%subject%> tag must be present.",
-                    "required": true
-                }, {
-                    "name": "html_content",
-                    "type": "String",
-                    "info": "HTML content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for html content.",
-                    "required": true
-                }, {
-                    "name": "plain_content",
-                    "type": "String",
-                    "info": "Text\/plain content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for plain content.",
-                    "required": true
-                }, {
-                    "name": "active",
-                    "type": "String",
-                    "info": "0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "activateVersion",
-            "description": "Activate a version.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The ID of the template.",
-                    "required": true
-                }, {
-                    "name": "version_id",
-                    "type": "String",
-                    "info": "The ID of the version.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getVersion",
-            "description": "Retrieve a specific version of a template.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The ID of the template.",
-                    "required": true
-                }, {
-                    "name": "version_id",
-                    "type": "String",
-                    "info": "The ID of the version.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "editVersion",
-            "description": "Edit a version.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The ID of the template.",
-                    "required": true
-                }, {
-                    "name": "version_id",
-                    "type": "String",
-                    "info": "The ID of the version.",
-                    "required": true
-                }, {
-                    "name": "name",
-                    "type": "String",
-                    "info": "Name of the new version. Max 100 characters.",
-                    "required": false
-                }, {
-                    "name": "subject",
-                    "type": "String",
-                    "info": "Subject of the new version. <%subject%> tag must be present.",
-                    "required": false
-                }, {
-                    "name": "html_content",
-                    "type": "String",
-                    "info": "HTML content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for html content.",
-                    "required": false
-                }, {
-                    "name": "plain_content",
-                    "type": "String",
-                    "info": "Text\/plain content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for plain content.",
-                    "required": false
-                }, {
-                    "name": "active",
-                    "type": "String",
-                    "info": "0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "deleteVersion",
-            "description": "Delete a version.",
-            "args": [{
-                    "name": "api_key",
-                    "type": "credentials",
-                    "info": "The API key obtained from SendGrid.",
-                    "required": true
-                }, {
-                    "name": "template_id",
-                    "type": "String",
-                    "info": "The ID of the template.",
-                    "required": true
-                }, {
-                    "name": "version_id",
-                    "type": "String",
-                    "info": "The ID of the version.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }]
+    {
+      "name": "getCampaigns",
+      "description": "Returns campaigns in reverse order they were created (newest first). Returns an empty array if no campaigns exist.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getCampaign",
+      "description": "Get details about a specific campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getSpamReportsList",
+      "description": "List all spam reports.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "start_time",
+          "type": "String",
+          "info": "Refers start of the time range in unix timestamp when a spam report was created (inclusive).",
+          "required": false
+        },
+        {
+          "name": "end_time",
+          "type": "String",
+          "info": "Refers end of the time range in unix timestamp when a spam report was created (inclusive).",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "String",
+          "info": "Limit the number of results to be displayed per page.",
+          "required": false
+        },
+        {
+          "name": "offset",
+          "type": "String",
+          "info": "Paging offset. The point in the list to begin displaying results.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteSpamReports",
+      "description": "You can delete all spam reports by setting \"delete_all\" to true in the request body.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "delete_all",
+          "type": "String",
+          "info": "delete all spam reports by setting to 'true'. Default 'false'.",
+          "required": false
+        },
+        {
+          "name": "emails",
+          "type": "String",
+          "info": "delete some spam reports by specifying the comma-separated email addresses.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getSpamReport",
+      "description": "Get a specific spam report.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "info": "Email address of spam report entry.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteSpamReport",
+      "description": "Delete a specific spam report.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "info": "Email address of spam report entry.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteCampaign",
+      "description": "Delete a Campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "updateCampaign",
+      "description": "Update a campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "info": "The title of your camapign.",
+          "required": false
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "The Email subject of your camapign.",
+          "required": false
+        },
+        {
+          "name": "sender_id",
+          "type": "String",
+          "info": "The sender ID obtained from Sender Management.",
+          "required": false
+        },
+        {
+          "name": "list_ids",
+          "type": "String",
+          "info": "The list IDs, which will receive your email. You can indicate more than one list with comma-separated.",
+          "required": false
+        },
+        {
+          "name": "segment_ids",
+          "type": "String",
+          "info": "The segment IDs, which will receive your email. You can indicate more than one segment with comma-separated.",
+          "required": false
+        },
+        {
+          "name": "categories",
+          "type": "String",
+          "info": "This is a category that you can set for your emails. You can create up to 10 different categories with comma-separated.",
+          "required": false
+        },
+        {
+          "name": "suppression_group_id",
+          "type": "String",
+          "info": "The suppression group ID.",
+          "required": false
+        },
+        {
+          "name": "custom_unsubscribe_url",
+          "type": "String",
+          "info": "The custom unsubscribe URL.",
+          "required": false
+        },
+        {
+          "name": "ip_pool",
+          "type": "String",
+          "info": "The name of pool IP.",
+          "required": false
+        },
+        {
+          "name": "html_content",
+          "type": "String",
+          "info": "The HTML content of campaign.",
+          "required": false
+        },
+        {
+          "name": "plain_content",
+          "type": "String",
+          "info": "The plain text of campaign.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "sendCampaign",
+      "description": "Send a Campaign",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "scheduleCampaign",
+      "description": "Schedule a campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        },
+        {
+          "name": "send_at",
+          "type": "String",
+          "info": "The unix timestamp of the campaign schedule (in future).",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "updateScheduledCampaign",
+      "description": "Changes the send_at time for the specified campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        },
+        {
+          "name": "send_at",
+          "type": "String",
+          "info": "The unix timestamp of the campaign schedule (in future).",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getScheduledTime",
+      "description": "Get scheduled time of a campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "unscheduleCampaign",
+      "description": "Unschedule a scheduled campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "testCampaign",
+      "description": "Send a test campaign.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "String",
+          "info": "The id of the campaign.",
+          "required": true
+        },
+        {
+          "name": "to",
+          "type": "String",
+          "info": "The addresses to send. Multiple addresses must be comma-separated.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createCustomField",
+      "description": "Create a custom field.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "The name of the field.",
+          "required": true
+        },
+        {
+          "name": "type",
+          "type": "String",
+          "info": "The type of the field.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getCustomFieldList",
+      "description": "Get a list of all custom fields",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getCustomField",
+      "description": "Get details about a specific custom field.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "custom_field_id",
+          "type": "String",
+          "info": "The id of the custom field.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteCustomField",
+      "description": "Delete a specific custom field by it's ID.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "custom_field_id",
+          "type": "String",
+          "info": "The id of the custom field.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getReservedFieldsList",
+      "description": "List fields that are reserved and can't be used for custom field names.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createList",
+      "description": "Create a list.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "The name of the list.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getListsList",
+      "description": "Returns a list of the lists in your account. The method will returns an empty list if you GET and no lists exist on your account.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteLists",
+      "description": "Delete multiple lists.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "id",
+          "type": "String",
+          "info": "The list ID to delete. Multiple list ID must be comma-separated",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getList",
+      "description": "Get information about a specific list.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The ID of the list.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "updateList",
+      "description": "Update a list.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The ID of the list.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "The name of the list.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteList",
+      "description": "Delete a list.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The ID of the list.",
+          "required": true
+        },
+        {
+          "name": "delete_contacts",
+          "type": "String",
+          "info": "True or False. True to delete all contacts on the list in addition to deleting the list. Default: true.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getListRecipientsList",
+      "description": "Get a list of the recipients on a specific list.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The ID of the list.",
+          "required": true
+        },
+        {
+          "name": "page",
+          "type": "String",
+          "info": "Page index of first recipient to return (must be a positive integer). Default: 1.",
+          "required": false
+        },
+        {
+          "name": "page_size",
+          "type": "String",
+          "info": "Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "addListRecipient",
+      "description": "Individual recipients may be added to a list one at a time with a limit of 1000 requests per second, where one recipient is added to the list per request.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The ID of the list.",
+          "required": true
+        },
+        {
+          "name": "recipient_id",
+          "type": "String",
+          "info": "The ID of your existing recipient.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteListRecipient",
+      "description": "Delete a single recipient from a single list.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The ID of the list.",
+          "required": true
+        },
+        {
+          "name": "recipient_id",
+          "type": "String",
+          "info": "The ID of your existing recipient.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "addListRecipients",
+      "description": "Adds existing recipients to a list, passing in the recipient IDs to add. Recipient IDs should be passed exactly as they are returned from recipient endpoints. Note: The rate at which recipients may be added to a list is limited to 1 request per second. Recipients may be added in batches of 1000.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The ID of the list.",
+          "required": true
+        },
+        {
+          "name": "recipient_id",
+          "type": "String",
+          "info": "The IDs of your existing comma-separated recipients.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "addRecipient",
+      "description": "Add a single recipient. The rate at which recipients may be uploaded is limited to 3 requests every 2 seconds. Recipients may be uploaded in batches of 1000 per request. This results in a maximum upload rate of 1500 recipients per second.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "info": "The email of the recipient.",
+          "required": true
+        },
+        {
+          "name": "first_name",
+          "type": "String",
+          "info": "The First Name of the recipient.",
+          "required": false
+        },
+        {
+          "name": "last_name",
+          "type": "String",
+          "info": "The Last Name of the recipient.",
+          "required": false
+        },
+        {
+          "name": "custom_field",
+          "type": "String",
+          "info": "The created custom fields with comma-separated. To indicate custom field and its value use the pattern [custom_field_name]:[value]. For example: age:30,occupation:developer etc. ",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "addRecipients",
+      "description": "Add multiple recipients.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "recipients",
+          "type": "String",
+          "info": "separated values with '|' according with pattern 'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value|'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value etc. To indicate custom_fields use the pattern [custom_field_name]:[value], for example: age:30,occupation:developer etc.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "updateRecipient",
+      "description": "Updates one or more recipients.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "info": "The email of the recipient.",
+          "required": true
+        },
+        {
+          "name": "first_name",
+          "type": "String",
+          "info": "The First Name of the recipient.",
+          "required": false
+        },
+        {
+          "name": "last_name",
+          "type": "String",
+          "info": "The Last Name of the recipient.",
+          "required": false
+        },
+        {
+          "name": "custom_field",
+          "type": "String",
+          "info": "The created custom fields with comma-separated. To indicate custom field and its value use the pattern [custom_field_name]:[value]. For example: age:30,occupation:developer etc. ",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteRecipients",
+      "description": "Deletes one or more recipients.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "recipient_id",
+          "type": "String",
+          "info": "The comma-separated recipient IDs.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getRecipientList",
+      "description": "Get a list of recipients.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "page",
+          "type": "String",
+          "info": "Page index of first recipients to return (must be a positive integer). Default: 1.",
+          "required": false
+        },
+        {
+          "name": "page_size",
+          "type": "String",
+          "info": "Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getRecipient",
+      "description": "Get details about a specific recipient.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "recipient_id",
+          "type": "String",
+          "info": "The ID of the recipient.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteRecipient",
+      "description": "Delete one recipient.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "recipient_id",
+          "type": "String",
+          "info": "The recipient ID.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getRecipientListSubscription",
+      "description": "Get the lists the recipient is on.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "recipient_id",
+          "type": "String",
+          "info": "The ID of the recipient.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getBillableRecipientsCount",
+      "description": "Get a count of billable recipients.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getRecipientsCount",
+      "description": "Get a count of recipients.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "conditionalSearch",
+      "description": "Search using segment conditions.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "the valid list ID for a list to limit the search.",
+          "required": false
+        },
+        {
+          "name": "conditions",
+          "type": "String",
+          "info": "The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getMatchingCriteria",
+      "description": "Get a recipients' matching search criteria.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "field_name",
+          "type": "String",
+          "info": "The name of the field you're looking for.",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "String",
+          "info": "The value of the field you're looking for.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createSegment",
+      "description": "Create segment.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "The name of the segment.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The valid list ID.",
+          "required": true
+        },
+        {
+          "name": "conditions",
+          "type": "String",
+          "info": "The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getSegmentList",
+      "description": "Get a list of all segments.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getSegment",
+      "description": "Get details about a specific segment.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "segment_id",
+          "type": "String",
+          "info": "The ID of the segment.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "updateSegment",
+      "description": "Update fields in a specific segment.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "segment_id",
+          "type": "String",
+          "info": "The ID of the segment.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "The name of the segment.",
+          "required": true
+        },
+        {
+          "name": "list_id",
+          "type": "String",
+          "info": "The ID of the list.",
+          "required": false
+        },
+        {
+          "name": "conditions",
+          "type": "String",
+          "info": "The conditions of the segment. Value must be according with pattern 'field':value,'value':value,'operator':value.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteSegment",
+      "description": "Delete a segment.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "segment_id",
+          "type": "String",
+          "info": "The ID of the segment.",
+          "required": true
+        },
+        {
+          "name": "delete_contacts",
+          "type": "String",
+          "info": "true or false. True to delete all contacts matching the segment in addition to deleting the segment. Default: true.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getSegmentRecipientsList",
+      "description": "Get a list of recipients on a segment.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "segment_id",
+          "type": "String",
+          "info": "The ID of the segment.",
+          "required": true
+        },
+        {
+          "name": "page_size",
+          "type": "String",
+          "info": "Number of recipients to return at a time (must be a positive integer from 1 to 1000). Default: 100.",
+          "required": false
+        },
+        {
+          "name": "page",
+          "type": "String",
+          "info": "Page index of recipients to return (must be a positive integer). Default: 1.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createSenderIdentity",
+      "description": "This endpoint allows you to create a sender identity.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "nickname",
+          "type": "String",
+          "info": "The nickname of the sender.",
+          "required": true
+        },
+        {
+          "name": "from",
+          "type": "String",
+          "info": "Name and email to indicate 'from' field. Pattern to fill email:value,name:value.",
+          "required": true
+        },
+        {
+          "name": "reply_to",
+          "type": "String",
+          "info": "Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.",
+          "required": true
+        },
+        {
+          "name": "address",
+          "type": "String",
+          "info": "The address of the sender.",
+          "required": true
+        },
+        {
+          "name": "address_2",
+          "type": "String",
+          "info": "The second address of the sender.",
+          "required": false
+        },
+        {
+          "name": "city",
+          "type": "String",
+          "info": "The city of the sender."
+        },
+        {
+          "name": "country",
+          "type": "String",
+          "info": "The country of the sender.",
+          "required": true
+        },
+        {
+          "name": "state",
+          "type": "String",
+          "info": "The state of the sender.",
+          "required": false
+        },
+        {
+          "name": "zip",
+          "type": "String",
+          "info": "The zip of the sender.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getAllSenderIdentities",
+      "description": "This endpoint allows you to retrieve a list of all of your sender identities.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "updateSenderIdentity",
+      "description": "Updates to from.email require re-verification. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the from.email.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "sender_id",
+          "type": "String",
+          "info": "The ID of the sender.",
+          "required": true
+        },
+        {
+          "name": "nickname",
+          "type": "String",
+          "info": "The nickname of the sender.",
+          "required": true
+        },
+        {
+          "name": "from",
+          "type": "String",
+          "info": "Name and email to indicate 'from' field. Pattern to fill email:value,name:value.",
+          "required": true
+        },
+        {
+          "name": "reply_to",
+          "type": "String",
+          "info": "Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.",
+          "required": true
+        },
+        {
+          "name": "address",
+          "type": "String",
+          "info": "The address of the sender.",
+          "required": true
+        },
+        {
+          "name": "address_2",
+          "type": "String",
+          "info": "The second address of the sender.",
+          "required": false
+        },
+        {
+          "name": "city",
+          "type": "String",
+          "info": "The city of the sender.",
+          "required": true
+        },
+        {
+          "name": "state",
+          "type": "String",
+          "info": "The state of the sender.",
+          "required": false
+        },
+        {
+          "name": "zip",
+          "type": "String",
+          "info": "The zip of the sender.",
+          "required": false
+        },
+        {
+          "name": "country",
+          "type": "String",
+          "info": "The country of the sender.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteSenderIdentity",
+      "description": "This endpoint allows you to delete one of your sender identities.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "sender_id",
+          "type": "String",
+          "info": "The ID of the sender.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "resendSenderVerification",
+      "description": "This endpoint allows you to resend the sender identity verification email.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "sender_id",
+          "type": "String",
+          "info": "The ID of the sender.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getSenderIdentity",
+      "description": "This endoint allows you to retrieve a specific sender identity.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "sender_id",
+          "type": "String",
+          "info": "The ID of the sender.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getCategoriesList",
+      "description": "Retrieve a list of your categories.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "category",
+          "type": "String",
+          "info": "Performs a prefix search on this value.",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "String",
+          "info": "Optional field to limit the number of results returned. Defaults to 50.",
+          "required": false
+        },
+        {
+          "name": "offset",
+          "type": "String",
+          "info": "Optional beginning point in the list to retrieve from. Defaults to 0.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "sendMail",
+      "description": "This endpoint allows you to send email.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "personalizations",
+          "type": "JSON",
+          "info": "An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. Parameters in personalizations will override the parameters of the same name from the message level. Example: [{\"bcc\": [{\"email\": \"sam.doe@example.com\",\"name\": \"Sam Doe\"}], \"cc\": [{\"email\": \"jane.doe@example.com\",\"name\": \"Jane Doe\"}], \"custom_args\": {\"New Argument 1\": \"New Value 1\",\"activationAttempt\": \"1\",\"customerAccountNumber\": \"123\"},\"headers\": {\"X-Accept-Language\": \"en\",\"X-Mailer\": \"MyApp\"},\"send_at\": 1409348513,\"subject\": \"Hello, World!\",\"substitutions\": {\"id\": \"substitutions\",\"type\": \"object\"},\"to\": [ {\"email\": \"john.doe@example.com\",\"name\": \"John Doe\"}]}]",
+          "required": true
+        },
+        {
+          "name": "from_email",
+          "type": "String",
+          "info": "The email address of the sender.",
+          "required": true
+        },
+        {
+          "name": "from_name",
+          "type": "String",
+          "info": "The name of the sender.",
+          "required": false
+        },
+        {
+          "name": "reply_to_email",
+          "type": "String",
+          "info": "The email address to which responses will be sent.",
+          "required": false
+        },
+        {
+          "name": "reply_to_name",
+          "type": "String",
+          "info": "The name of the individual who will receive responses to the email.",
+          "required": false
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "The subject of your email. This may be overridden by personalizations[x].subject.",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "JSON",
+          "info": "An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters. If included, text\/plain and text\/html must be the first indices of the array in this order. If you choose to include the text\/plain or text\/html mime types, they must be the first indices of the content array in the order text\/plain, text\/html. Example: [{\"type\": \"text\/html\",\"value\": \"Hello, world!<\/p><\/img><\/html>\"}]",
+          "required": true
+        },
+        {
+          "name": "attachments",
+          "type": "JSON",
+          "info": "An array of objects in which you can specify any attachments you want to include.",
+          "required": false
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The id of a template that you would like to use. If you use a template that contains content and a subject (either text or html), you do not need to specify those in the respective personalizations or message level parameters.",
+          "required": false
+        },
+        {
+          "name": "sections",
+          "type": "JSON",
+          "info": "An object of key\/value pairs that define large blocks of content that can be inserted into your emails using substitution tags. Example: {\"section\": {\":sectionName1\": \"section 1 text\", \":sectionName2\": \"section 2 text\"}}",
+          "required": false
+        },
+        {
+          "name": "headers",
+          "type": "JSON",
+          "info": "An object containing key\/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be any of the following reserved headers: x-sg-id, x-sg-eid, received, dkim-signature, Content-Type, Content-Transfer-Encoding, To, From, Subject, Reply-To, CC, BCC.",
+          "required": false
+        },
+        {
+          "name": "categories",
+          "type": "String",
+          "info": "Category names for this message with comma-separate. Each category name may not exceed 255 characters. You cannot have more than 10 categories per request.",
+          "required": false
+        },
+        {
+          "name": "custom_args",
+          "type": "String",
+          "info": "Values according the pattern KEY:VALUE,KEY:VALUE etc., that are specific to the entire send that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This parameter is overridden by any conflicting personalizations[x].custom_args if that parameter has been defined.",
+          "required": false
+        },
+        {
+          "name": "send_at",
+          "type": "String",
+          "info": "A unix timestamp allowing you to specify when you want your email to be sent from SendGrid. This is not necessary if you want the email to be sent at the time of your API request.",
+          "required": false
+        },
+        {
+          "name": "batch_id",
+          "type": "String",
+          "info": "This ID represents a batch of emails (AKA multiple sends of the same email) to be associated to each other for scheduling. Including a batch_id in your request allows you to include this email in that batch, and also enables you to cancel or pause the delivery of that entire batch.",
+          "required": false
+        },
+        {
+          "name": "asm",
+          "type": "String",
+          "info": "An object allowing you to specify how to handle unsubscribes. Use pattern group_id:value;groups_to_display:value1,value2,... etc.",
+          "required": false
+        },
+        {
+          "name": "ip_pool_name",
+          "type": "String",
+          "info": "The IP Pool that you would like to send this email from. Min 2, Max 64.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_bcc_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_bcc_email",
+          "type": "String",
+          "info": "The email address that you would like to receive the BCC.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_bypass_list_management_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled. Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. Ex: outage emails, or forgot password emails.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_footer_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled. The default footer that you would like appended to the bottom of every email.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_footer_text",
+          "type": "String",
+          "info": "The plain text content of your footer.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_footer_html",
+          "type": "String",
+          "info": "The HTML content of your footer.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_sandbox_mode_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled. This allows you to send a test email to ensure that your request body is valid and formatted correctly.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_spam_check_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled. This allows you to test the content of your email for spam.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_spam_check_threshold",
+          "type": "String",
+          "info": "The threshold used to determine if your content qualifies as spam on a scale from 1 to 10, with 10 being most strict, or most likely to be considered as spam.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_spam_check_post_to_url",
+          "type": "String",
+          "info": "An Inbound Parse URL that you would like a copy of your email along with the spam report to be sent to. The post_to_url parameter must start with http or https.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_click_tracking_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled. Allows you to track whether a recipient clicked a link in your email.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_click_tracking_enable_text",
+          "type": "String",
+          "info": "true or false. Indicates if this setting should be included in the text\/plain portion of your email.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_open_tracking_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled. Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_open_tracking_substitution_tag",
+          "type": "String",
+          "info": "Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_subscription_tracking_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_subscription_tracking_text",
+          "type": "String",
+          "info": "Text to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_subscription_tracking_html",
+          "type": "String",
+          "info": "HTML to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_subscription_tracking_substitution_tag",
+          "type": "String",
+          "info": "A tag that will be replaced with the unsubscribe URL. for example: [unsubscribe_url]. If this parameter is used, it will override both the textand html parameters. The URL of the link will be placed at the substitution tag\u2019s location, with no additional formatting.",
+          "required": false
+        },
+        {
+          "name": "ganalytics_enable",
+          "type": "String",
+          "info": "true or false. Indicates if this setting is enabled. Allows you to enable tracking provided by Google Analytics.",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_source",
+          "type": "String",
+          "info": "Name of the referrer source. (e.g. Google, SomeDomain.com, or Marketing Email).",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_medium",
+          "type": "String",
+          "info": "Name of the marketing medium. (e.g. Email).",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_term",
+          "type": "String",
+          "info": "Used to identify any paid keywords.",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_content",
+          "type": "String",
+          "info": "Used to differentiate your campaign from advertisements.",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_campaign",
+          "type": "String",
+          "info": "The name of the campaign.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "sendPlainMail",
+      "description": "This endpoint allows you to send email with plain text.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "fromEmail",
+          "type": "String",
+          "info": "The email address of the sender.",
+          "required": true
+        },
+        {
+          "name": "fromName",
+          "type": "String",
+          "info": "The name of the sender.",
+          "required": false
+        },
+        {
+          "name": "toEmail",
+          "type": "String",
+          "info": "The email address of the recipient.",
+          "required": true
+        },
+        {
+          "name": "toName",
+          "type": "String",
+          "info": "The name of the recipient.",
+          "required": false
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "The subject of your email.",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "String",
+          "info": "The actual content of your email.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createTemplate",
+      "description": "Create a template.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "Name of the new template. Max 100 characters.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getTemplates",
+      "description": "Retrieve all templates.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getTemplate",
+      "description": "Retrieve a single template.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The ID of the template.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "editTemplate",
+      "description": "Edit a template.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The ID of the template.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "The new name of the template.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteTemplate",
+      "description": "Delete a template.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The ID of the template.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createVersion",
+      "description": "Create a new version for a template.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The ID of the template.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "Name of the new version. Max 100 characters.",
+          "required": true
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "Subject of the new version. <%subject%> tag must be present.",
+          "required": true
+        },
+        {
+          "name": "html_content",
+          "type": "String",
+          "info": "HTML content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for html content.",
+          "required": true
+        },
+        {
+          "name": "plain_content",
+          "type": "String",
+          "info": "Text\/plain content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for plain content.",
+          "required": true
+        },
+        {
+          "name": "active",
+          "type": "String",
+          "info": "0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "activateVersion",
+      "description": "Activate a version.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The ID of the template.",
+          "required": true
+        },
+        {
+          "name": "version_id",
+          "type": "String",
+          "info": "The ID of the version.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getVersion",
+      "description": "Retrieve a specific version of a template.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The ID of the template.",
+          "required": true
+        },
+        {
+          "name": "version_id",
+          "type": "String",
+          "info": "The ID of the version.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "editVersion",
+      "description": "Edit a version.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The ID of the template.",
+          "required": true
+        },
+        {
+          "name": "version_id",
+          "type": "String",
+          "info": "The ID of the version.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "info": "Name of the new version. Max 100 characters.",
+          "required": false
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "Subject of the new version. <%subject%> tag must be present.",
+          "required": false
+        },
+        {
+          "name": "html_content",
+          "type": "String",
+          "info": "HTML content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for html content.",
+          "required": false
+        },
+        {
+          "name": "plain_content",
+          "type": "String",
+          "info": "Text\/plain content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for plain content.",
+          "required": false
+        },
+        {
+          "name": "active",
+          "type": "String",
+          "info": "0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteVersion",
+      "description": "Delete a version.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The ID of the template.",
+          "required": true
+        },
+        {
+          "name": "version_id",
+          "type": "String",
+          "info": "The ID of the version.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    }
+  ]
 }
