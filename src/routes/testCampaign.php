@@ -47,7 +47,12 @@ $app->post('/api/SendGrid/testCampaign', function ($request, $response, $args) {
     
     $apiKey = $post_data['args']['api_key'];
     $campaign_id = $post_data['args']['campaign_id'];
-    $request_body['to'] = explode(',', $post_data['args']['to']);
+    if (is_array($post_data['args']['to'])) {
+        $request_body['to'] = $post_data['args']['to'];
+    }
+    else {
+        $request_body['to'] = explode(',', $post_data['args']['to']);
+    }
     
     $sg = new \SendGrid($apiKey);
     

@@ -592,9 +592,15 @@
         },
         {
           "name": "to",
-          "type": "String",
+          "type": "List",
           "info": "The addresses to send. Multiple addresses must be comma-separated.",
-          "required": true
+          "required": true,
+          "structure": {
+            "name": "email",
+            "type": "String",
+            "info": "Email",
+            "required": true
+          }
         }
       ],
       "callbacks": [

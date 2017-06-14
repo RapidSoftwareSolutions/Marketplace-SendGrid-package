@@ -31,9 +31,9 @@ Create a marketing campaign.
 | title                 | String| The title of your camapign.
 | subject               | String| The Email subject of your camapign.
 | sender_id             | String| The sender ID obtained from Sender Management.
-| list_ids              | String| Optional: The list IDs,  which will receive your email. You can indicate more than one list with comma-separated.
-| segment_ids           | String| Optional: The segment IDs,  which will receive your email. You can indicate more than one segment with comma-separated.
-| categories            | String| Optional: This is a category that you can set for your emails. You can create up to 10 different categories with comma-separated.
+| list_ids              | List  | Optional: The list IDs,  which will receive your email.
+| segment_ids           | List  | Optional: The segment IDs,  which will receive your email.
+| categories            | List  | Optional: This is a category that you can set for your emails.
 | suppression_group_id  | String| Optional: The suppression group ID.
 | custom_unsubscribe_url| String| Optional: The custom unsubscribe URL.
 | ip_pool               | String| Optional: The name of pool IP.
@@ -48,6 +48,8 @@ Returns campaigns in reverse order they were created (newest first). Returns an 
 | Field  | Type  | Description
 |--------|-------|----------
 | api_key| credentials| The API key obtained from SendGrid.
+| limit  | Number     | Limit
+| offset | Number     | Offset
 
 
 ## SendGrid.getCampaign
@@ -66,8 +68,8 @@ List all spam reports.
 | Field     | Type  | Description
 |-----------|-------|----------
 | api_key   | credentials| The API key obtained from SendGrid.
-| start_time| String| Optional: Refers start of the time range in unix timestamp when a spam report was created (inclusive).
-| end_time  | String| Optional: Refers end of the time range in unix timestamp when a spam report was created (inclusive).
+| start_time| DatePicker| Optional: Refers start of the time range in unix timestamp when a spam report was created (inclusive).
+| end_time  | DatePicker| Optional: Refers end of the time range in unix timestamp when a spam report was created (inclusive).
 | limit     | String| Optional: Limit the number of results to be displayed per page.
 | offset    | String| Optional: Paging offset. The point in the list to begin displaying results.
 
@@ -80,7 +82,7 @@ You can delete all spam reports by setting "delete_all" to true in the request b
 |-----------|-------|----------
 | api_key   | credentials| The API key obtained from SendGrid.
 | delete_all| String| Optional: delete all spam reports by setting to 'true'. Default 'false'.
-| emails    | String| Optional: delete some spam reports by specifying the comma-separated email addresses.
+| emails    | List  | Optional: delete some spam reports by specifying email addresses.
 
 
 
@@ -123,9 +125,9 @@ Update a campaign.
 | title                 | String| Optional: The title of your camapign.
 | subject               | String| Optional: The Email subject of your camapign.
 | sender_id             | String| Optional: The sender ID obtained from Sender Management.
-| list_ids              | String| Optional: The list IDs,  which will receive your email. You can indicate more than one list with comma-separated.
-| segment_ids           | String| Optional: The segment IDs,  which will receive your email. You can indicate more than one segment with comma-separated.
-| categories            | String| Optional: This is a category that you can set for your emails. You can create up to 10 different categories with comma-separated.
+| list_ids              | String| Optional: The list IDs,  which will receive your email.
+| segment_ids           | String| Optional: The segment IDs,  which will receive your email.
+| categories            | List  | Optional: This is a category that you can set for your emails.
 | suppression_group_id  | String| Optional: The suppression group ID.
 | custom_unsubscribe_url| String| Optional: The custom unsubscribe URL.
 | ip_pool               | String| Optional: The name of pool IP.
@@ -149,7 +151,7 @@ Schedule a campaign.
 |------------|-------|----------
 | api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
-| send_at    | String| The unix timestamp of the campaign schedule (in future).
+| send_at    | DatePicker| The teme of the campaign schedule (in future).
 
 
 ## SendGrid.updateScheduledCampaign
@@ -159,7 +161,7 @@ Changes the send_at time for the specified campaign.
 |------------|-------|----------
 | api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
-| send_at    | String| The unix timestamp of the campaign schedule (in future).
+| send_at    | DatePicker | The time of the campaign schedule (in future).
 
 
 
@@ -188,7 +190,7 @@ Send a test campaign.
 |------------|-------|----------
 | api_key    | credentials| The API key obtained from SendGrid.
 | campaign_id| String| The id of the campaign.
-| to         | String| The addresses to send. Multiple addresses must be comma-separated.
+| to         | List  | The addresses to send.
 
 
 ## SendGrid.createCustomField
@@ -258,7 +260,7 @@ Delete multiple lists.
 | Field  | Type  | Description
 |--------|-------|----------
 | api_key| credentials| The API key obtained from SendGrid.
-| id     | String| The list ID to delete. Multiple list ID must be comma-separated
+| id     | List  | The list ID to delete.
 
 
 ## SendGrid.getList
@@ -287,7 +289,7 @@ Delete a list.
 |----------------|-------|----------
 | api_key        | credentials| The API key obtained from SendGrid.
 | list_id        | String| The ID of the list.
-| delete_contacts| String| Optional: True or False. True to delete all contacts on the list in addition to deleting the list. Default: true.
+| delete_contacts| Boolean| Optional: True or False. True to delete all contacts on the list in addition to deleting the list. Default: true.
 
 
 ## SendGrid.getListRecipientsList
@@ -296,9 +298,9 @@ Get a list of the recipients on a specific list.
 | Field    | Type  | Description
 |----------|-------|----------
 | api_key  | credentials| The API key obtained from SendGrid.
-| list_id  | String| The ID of the list.
-| page     | String| Optional: Page index of first recipient to return (must be a positive integer). Default: 1.
-| page_size| String| Optional: Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.
+| list_id  | Number| The ID of the list.
+| page     | Number| Optional: Page index of first recipient to return (must be a positive integer). Default: 1.
+| page_size| Number| Optional: Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.
 
 
 ## SendGrid.addListRecipient
@@ -307,7 +309,7 @@ Individual recipients may be added to a list one at a time with a limit of 1000 
 | Field       | Type  | Description
 |-------------|-------|----------
 | api_key     | credentials| The API key obtained from SendGrid.
-| list_id     | String| The ID of the list.
+| list_id     | Number| The ID of the list.
 | recipient_id| String| The ID of your existing recipient.
 
 
@@ -317,7 +319,7 @@ Delete a single recipient from a single list.
 | Field       | Type  | Description
 |-------------|-------|----------
 | api_key     | credentials| The API key obtained from SendGrid.
-| list_id     | String| The ID of the list.
+| list_id     | Number| The ID of the list.
 | recipient_id| String| The ID of your existing recipient.
 
 
@@ -328,8 +330,8 @@ Note: The rate at which recipients may be added to a list is limited to 1 reques
 | Field       | Type  | Description
 |-------------|-------|----------
 | api_key     | credentials| The API key obtained from SendGrid.
-| list_id     | String| The ID of the list.
-| recipient_id| String| The IDs of your existing comma-separated recipients.
+| list_id     | Number| The ID of the list.
+| recipient_id| List  | The IDs of your existing recipients.
 
 
 ## SendGrid.addRecipient
@@ -342,7 +344,7 @@ The rate at which recipients may be uploaded is limited to 3 requests every 2 se
 | email       | String| The email of the recipient.
 | first_name  | String| Optional: The First Name of the recipient.
 | last_name   | String| Optional: The Last Name of the recipient.
-| custom_field| String| Optional: The created custom fields with comma-separated. To indicate custom field and its value use the pattern [custom_field_name]:[value]. For example: age:30,occupation:developer etc. 
+| custom_field| JSON  | String like [custom_field_name]:[value]. For example: age:30,occupation:developer etc. or JSON with key=>value structure 
 
 
 ## SendGrid.addRecipients
@@ -351,7 +353,7 @@ Add multiple recipients.
 | Field     | Type  | Description
 |-----------|-------|----------
 | api_key   | credentials| The API key obtained from SendGrid.
-| recipients| String| separated values with | according with pattern 'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value|'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value etc. To indicate custom_fields use the pattern [custom_field_name]:[value], for example: age:30,occupation:developer etc.
+| recipients| Array | separated values with vertical `/` according with pattern 'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value|'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value etc. To indicate custom_fields use the pattern [custom_field_name]:[value], for example: age:30,occupation:developer etc.
 
 
 ## SendGrid.updateRecipient
@@ -363,7 +365,7 @@ Updates one or more recipients.
 | email       | String| The email of the recipient.
 | first_name  | String| Optional: The First Name of the recipient.
 | last_name   | String| Optional: The Last Name of the recipient.
-| custom_field| String| Optional: The created custom fields with comma-separated. To indicate custom field and its value use the pattern [custom_field_name]:[value]. For example: age:30,occupation:developer etc. 
+| custom_field| Array| Key -> exist custom_field name, and value  
 
 
 ## SendGrid.deleteRecipients
@@ -372,7 +374,7 @@ Deletes one or more recipients.
 | Field       | Type  | Description
 |-------------|-------|----------
 | api_key     | credentials| The API key obtained from SendGrid.
-| recipient_id| String| The comma-separated recipient IDs.
+| recipient_id| List | List of recipient IDs.
 
 
 ## SendGrid.getRecipientList
@@ -381,8 +383,8 @@ Get a list of recipients.
 | Field    | Type  | Description
 |----------|-------|----------
 | api_key  | credentials| The API key obtained from SendGrid.
-| page     | String| Optional: Page index of first recipients to return (must be a positive integer). Default: 1.
-| page_size| String| Optional: Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.
+| page     | Number| Optional: Page index of first recipients to return (must be a positive integer). Default: 1.
+| page_size| Number| Optional: Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.
 
 
 ## SendGrid.getRecipient
@@ -469,7 +471,7 @@ Segment conditions using "eq" or "ne" for email clicks and opens should provide 
 | api_key   | credentials| The API key obtained from SendGrid.
 | name      | String| The name of the segment.
 | list_id   | String| The valid list ID.
-| conditions| String| The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.
+| conditions| Array| The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.
 
 
 ## SendGrid.getSegmentList
@@ -498,7 +500,7 @@ Update fields in a specific segment.
 | segment_id| String| The ID of the segment.
 | name      | String| The name of the segment.
 | list_id   | String| Optional: The ID of the list.
-| conditions| String| The conditions of the segment. Value must be according with pattern 'field':value,'value':value,'operator':value.
+| conditions| Array| The conditions of the segment. Value must be according with pattern 'field':value,'value':value,'operator':value.
 
 
 ## SendGrid.deleteSegment
@@ -508,7 +510,7 @@ Delete a segment.
 |----------------|-------|----------
 | api_key        | credentials| The API key obtained from SendGrid.
 | segment_id     | String| The ID of the segment.
-| delete_contacts| String| Optional: true or false. True to delete all contacts matching the segment in addition to deleting the segment. Default: true.
+| delete_contacts| Boolean| Optional: true or false. True to delete all contacts matching the segment in addition to deleting the segment. Default: true.
 
 
 ## SendGrid.getSegmentRecipientsList
@@ -518,8 +520,8 @@ Get a list of recipients on a segment.
 |-----------|-------|----------
 | api_key   | credentials| The API key obtained from SendGrid.
 | segment_id| String| The ID of the segment.
-| page_size | String| Optional: Number of recipients to return at a time (must be a positive integer from 1 to 1000). Default: 100.
-| page      | String| Optional: Page index of recipients to return (must be a positive integer). Default: 1.
+| page_size | Number| Optional: Number of recipients to return at a time (must be a positive integer from 1 to 1000). Default: 100.
+| page      | Number| Optional: Page index of recipients to return (must be a positive integer). Default: 1.
 
 
 ## SendGrid.createSenderIdentity
@@ -600,8 +602,8 @@ Retrieve a list of your categories.
 |---------|-------|----------
 | api_key | credentials| The API key obtained from SendGrid.
 | category| String| Optional: Performs a prefix search on this value.
-| limit   | String| Optional: Optional field to limit the number of results returned. Defaults to 50.
-| offset  | String| Optional: Optional beginning point in the list to retrieve from. Defaults to 0.
+| limit   | Number| Optional: Optional field to limit the number of results returned. Defaults to 50.
+| offset  | Number| Optional: Optional beginning point in the list to retrieve from. Defaults to 0.
 
 
 ## SendGrid.sendPlainMail
@@ -621,44 +623,44 @@ This endpoint allows you to send email.
 This endpoint allows you to send email.
 
 | Field           | Type  | Description
-|---------        |-------|----------
+|-----------------|-------|----------
 | api_key         | credentials| The API key obtained from SendGrid.
 | personalizations| JSON  | An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. Parameters in personalizations will override the parameters of the same name from the message level. Example: [{"bcc": [{"email": "sam.doe@example.com","name": "Sam Doe"}], "cc": [{"email": "jane.doe@example.com","name": "Jane Doe"}], "custom_args": {"New Argument 1": "New Value 1","activationAttempt": "1","customerAccountNumber": "123"},"headers": {"X-Accept-Language": "en","X-Mailer": "MyApp"},"send_at": 1409348513,"subject": "Hello, World!","substitutions": {"id": "substitutions","type": "object"},"to": [ {"email": "john.doe@example.com","name": "John Doe"}]}]
 | from_email      | String| The email address of the sender.
 | from_name       | String| Optional: The name of the sender.
-| reply_to_email       | String| Optional: The email address to which responses will be sent.
-| reply_to_name       | String| Optional: The name of the individual who will receive responses to the email.
-| subject       | String| The subject of your email. This may be overridden by personalizations[x].subject.
-| content       | JSON| An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters. If included, text/plain and text/html must be the first indices of the array in this order. If you choose to include the text/plain or text/html mime types, they must be the first indices of the content array in the order text/plain, text/html. Example: [{"type": "text/html","value": "<html><p>Hello, world!</p><img src=cid: werwer111></img></html>"}]
-| attachments       | JSON| Optional: An array of objects in which you can specify any attachments you want to include. Content - The Base64 encoded content of the attachment; type (optional) - The mime type of the content you are attaching. For example, application/pdf or image/jpeg; filename - The filename of the attachment; disposition (optional) - Defaults to "attachment". Can be either "attachment" or "inline"; content_id (optional) - A unique id that you specify for the attachment, ex: <img src="cid:ii_139db99fdb5c3704"></img>. Example: [{"content": "[BASE64 encoded content block here]","content_id": "ii_139db99fdb5c3704","disposition": "inline","filename": "file1.jpg","name": "file1","type": "jpg"}]
-| template_id       | String| Optional: The id of a template that you would like to use. If you use a template that contains content and a subject (either text or html), you do not need to specify those in the respective personalizations or message level parameters.
-| sections      | JSON| Optional: An object of key/value pairs that define large blocks of content that can be inserted into your emails using substitution tags. Example: {"section": {":sectionName1": "section 1 text", ":sectionName2": "section 2 text"}}
-| headers      | JSON| Optional: An object containing key/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be any of the following reserved headers: x-sg-id, x-sg-eid, received, dkim-signature, Content-Type, Content-Transfer-Encoding, To, From, Subject, Reply-To, CC, BCC.
-| categories      | String| Optional: Category names for this message with comma-separate. Each category name may not exceed 255 characters. You cannot have more than 10 categories per request.
-| custom_args      | String| Optional: Values according the pattern KEY:VALUE,KEY:VALUE etc., that are specific to the entire send that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This parameter is overridden by any conflicting personalizations[x].custom_args if that parameter has been defined.
-| send_at      | String| Optional: A unix timestamp allowing you to specify when you want your email to be sent from SendGrid. This is not necessary if you want the email to be sent at the time of your API request.
-| batch_id      | String| Optional: This ID represents a batch of emails (AKA multiple sends of the same email) to be associated to each other for scheduling. Including a batch_id in your request allows you to include this email in that batch, and also enables you to cancel or pause the delivery of that entire batch.
-| asm      | String| Optional: An object allowing you to specify how to handle unsubscribes. Use pattern group_id:value;groups_to_display:value1,value2,... etc.
-| ip_pool_name      | String| Optional: The IP Pool that you would like to send this email from. Min 2, Max 64.
-| mail_settings_bcc_enable      | String| Optional: true or false. Indicates if this setting is enabled.
+| reply_to_email  | String| Optional: The email address to which responses will be sent.
+| reply_to_name   | String| Optional: The name of the individual who will receive responses to the email.
+| subject         | String| The subject of your email. This may be overridden by personalizations[x].subject.
+| content         | JSON  | An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters. If included, text/plain and text/html must be the first indices of the array in this order. If you choose to include the text/plain or text/html mime types, they must be the first indices of the content array in the order text/plain, text/html. Example: [{"type": "text/html","value": "<html><p>Hello, world!</p><img src=cid: werwer111></img></html>"}]
+| attachments     | JSON  | Optional: An array of objects in which you can specify any attachments you want to include. Content - The Base64 encoded content of the attachment; type (optional) - The mime type of the content you are attaching. For example, application/pdf or image/jpeg; filename - The filename of the attachment; disposition (optional) - Defaults to "attachment". Can be either "attachment" or "inline"; content_id (optional) - A unique id that you specify for the attachment, ex: <img src="cid:ii_139db99fdb5c3704"></img>. Example: [{"content": "[BASE64 encoded content block here]","content_id": "ii_139db99fdb5c3704","disposition": "inline","filename": "file1.jpg","name": "file1","type": "jpg"}]
+| template_id     | String| Optional: The id of a template that you would like to use. If you use a template that contains content and a subject (either text or html), you do not need to specify those in the respective personalizations or message level parameters.
+| sections        | JSON  | Optional: An object of key/value pairs that define large blocks of content that can be inserted into your emails using substitution tags. Example: {"section": {":sectionName1": "section 1 text", ":sectionName2": "section 2 text"}}
+| headers         | JSON  | Optional: An object containing key/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be any of the following reserved headers: x-sg-id, x-sg-eid, received, dkim-signature, Content-Type, Content-Transfer-Encoding, To, From, Subject, Reply-To, CC, BCC.
+| categories      | List  | Optional: Each category name may not exceed 255 characters. You cannot have more than 10 categories per request.
+| custom_args     | String| Optional: Values according the pattern KEY:VALUE,KEY:VALUE etc., that are specific to the entire send that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This parameter is overridden by any conflicting personalizations[x].custom_args if that parameter has been defined.
+| send_at         | DatePicker| Optional: A time allowing you to specify when you want your email to be sent from SendGrid. This is not necessary if you want the email to be sent at the time of your API request.
+| batch_id        | String| Optional: This ID represents a batch of emails (AKA multiple sends of the same email) to be associated to each other for scheduling. Including a batch_id in your request allows you to include this email in that batch, and also enables you to cancel or pause the delivery of that entire batch.
+| asm             | String| Optional: An object allowing you to specify how to handle unsubscribes. Use pattern group_id:value;groups_to_display:value1,value2,... etc.
+| ip_pool_name    | String| Optional: The IP Pool that you would like to send this email from. Min 2, Max 64.
+| mail_settings_bcc_enable      | Boolean| Optional: true or false. Indicates if this setting is enabled.
 | mail_settings_bcc_email      | String| Optional: The email address that you would like to receive the BCC.
-| mail_settings_bypass_list_management_enable      | String| Optional: true or false. Indicates if this setting is enabled. Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. Ex: outage emails, or forgot password emails.
-| mail_settings_footer_enable      | String| Optional: true or false. Indicates if this setting is enabled. The default footer that you would like appended to the bottom of every email.
+| mail_settings_bypass_list_management_enable      | Boolean| Optional: true or false. Indicates if this setting is enabled. Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. Ex: outage emails, or forgot password emails.
+| mail_settings_footer_enable      | Boolean| Optional: true or false. Indicates if this setting is enabled. The default footer that you would like appended to the bottom of every email.
 | mail_settings_footer_text      | String| Optional: The plain text content of your footer.
 | mail_settings_footer_html      | String| Optional: The HTML content of your footer.
-| mail_settings_sandbox_mode_enable      | String| Optional: true or false. Indicates if this setting is enabled. This allows you to send a test email to ensure that your request body is valid and formatted correctly.
-| mail_settings_spam_check_enable      | String| Optional: true or false. Indicates if this setting is enabled. This allows you to test the content of your email for spam.
+| mail_settings_sandbox_mode_enable      | Boolean| Optional: true or false. Indicates if this setting is enabled. This allows you to send a test email to ensure that your request body is valid and formatted correctly.
+| mail_settings_spam_check_enable      | Boolean| Optional: true or false. Indicates if this setting is enabled. This allows you to test the content of your email for spam.
 | mail_settings_spam_check_threshold      | String| The threshold used to determine if your content qualifies as spam on a scale from 1 to 10, with 10 being most strict, or most likely to be considered as spam.
 | mail_settings_spam_check_post_to_url      | String| Optional: An Inbound Parse URL that you would like a copy of your email along with the spam report to be sent to. The post_to_url parameter must start with http or https.
-| tracking_settings_click_tracking_enable      | String| Optional: true or false. Indicates if this setting is enabled. Allows you to track whether a recipient clicked a link in your email.
-| tracking_settings_click_tracking_enable_text      | String| Optional: true or false. Indicates if this setting should be included in the text/plain portion of your email.
-| tracking_settings_open_tracking_enable      | String| Optional: true or false. Indicates if this setting is enabled. Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.
+| tracking_settings_click_tracking_enable      | Boolean| Optional: true or false. Indicates if this setting is enabled. Allows you to track whether a recipient clicked a link in your email.
+| tracking_settings_click_tracking_enable_text      | Boolean| Optional: true or false. Indicates if this setting should be included in the text/plain portion of your email.
+| tracking_settings_open_tracking_enable      | Boolean| Optional: true or false. Indicates if this setting is enabled. Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.
 | tracking_settings_open_tracking_substitution_tag      | String| Optional: Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel.
-| tracking_settings_subscription_tracking_enable      | String| Optional: true or false. Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.
+| tracking_settings_subscription_tracking_enable      | Boolean| Optional: true or false. Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.
 | tracking_settings_subscription_tracking_text     | String| Optional: Text to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>.
 | tracking_settings_subscription_tracking_html     | String| Optional: HTML to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>.
 | tracking_settings_subscription_tracking_substitution_tag     | String| Optional: A tag that will be replaced with the unsubscribe URL. for example: [unsubscribe_url]. If this parameter is used, it will override both the textand html parameters. The URL of the link will be placed at the substitution tag’s location, with no additional formatting.
-| ganalytics_enable     | String| Optional: true or false. Indicates if this setting is enabled. Allows you to enable tracking provided by Google Analytics.
+| ganalytics_enable     | Boolean| Optional: true or false. Indicates if this setting is enabled. Allows you to enable tracking provided by Google Analytics.
 | ganalytics_utm_source     | String| Optional: Name of the referrer source. (e.g. Google, SomeDomain.com, or Marketing Email).
 | ganalytics_utm_medium     | String| Optional: Name of the marketing medium. (e.g. Email).
 | ganalytics_utm_term     | String| Optional: Used to identify any paid keywords.
@@ -800,7 +802,7 @@ Create a new version for a template.
 | subject      | String| Subject of the new version. <%subject%> tag must be present.
 | html_content | String| HTML content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for html content.
 | plain_content| String| Text/plain content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for plain content.
-| active       | String| Optional: 0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.
+| active       | Select| Optional: 0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.
 
 
 ## SendGrid.activateVersion
@@ -835,7 +837,7 @@ Edit a version.
 | subject      | String| Optional: Subject of the new version. <%subject%> tag must be present.
 | html_content | String| Optional: HTML content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for html content.
 | plain_content| String| Optional: Text/plain content of the new version. <%body%> tag must be inside the content. Maximum of 1048576 bytes allowed for plain content.
-| active       | String| Optional: 0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.
+| active       | Select| Optional: 0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.
 
 
 ## SendGrid.deleteVersion
