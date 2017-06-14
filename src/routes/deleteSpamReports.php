@@ -42,10 +42,15 @@ $app->post('/api/SendGrid/deleteSpamReports', function ($request, $response, $ar
     $apiKey = $post_data['args']['api_key'];
     $query = [];
     if(!empty($post_data['args']['delete_all'])) {
-        $query['delete_all'] = (bool) $post_data['args']['delete_all'];
+        $query['delete_all'] = filter_var($post_data['args']['delete_all'], FILTER_VALIDATE_BOOLEAN);
     }
     if(!empty($post_data['args']['emails'])) {
-        $query['emails'] = explode(',', $post_data['args']['emails']);
+        if (is_array($post_data['args']['emails'])) {
+            $query['emails'] = $post_data['args']['emails'];
+        }
+        else {
+            $query['emails'] = explode(',', $post_data['args']['emails']);
+        }
     }
     
     $sg = new \SendGrid($apiKey);

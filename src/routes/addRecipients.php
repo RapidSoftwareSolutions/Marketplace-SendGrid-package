@@ -44,32 +44,39 @@ $app->post('/api/SendGrid/addRecipients', function ($request, $response, $args) 
     $apiKey = $post_data['args']['api_key'];
     
     $query_params_cond = [];
-    $recipietns = explode('|', $post_data['args']['recipients']);
-    foreach($recipietns as $recipient) {
-        $items = explode(';', $recipient);
-        foreach($items as $item) {
-            $cond = explode('=', $item);
-            if($cond[0] != 'custom_fields') {
-                $request_body[$cond[0]] = $cond[1];
-            } else {
-                $fields = explode(',', $cond[1]);
-                foreach($fields as $field) {
-                    $item = explode(':', $field);
-                    $request_body[$item[0]] = (string) $item[1];
+    if (is_array($post_data['args']['recipients'])) {
+        foreach ($post_data['args']['recipients'] as &$recipient) {
+            if (!empty($recipient['custom_fields'])) {
+                $recipient = array_merge($recipient, $recipient['custom_fields']);
+                unset($recipient['custom_fields']);
+            }
+            array_push($query_params_cond, $recipient);
+        }
+    }
+    else {
+        $recipietns = explode('|', $post_data['args']['recipients']);
+        foreach ($recipietns as $recipient) {
+            $items = explode(';', $recipient);
+            foreach ($items as $item) {
+                $cond = explode('=', $item);
+                if ($cond[0] != 'custom_fields') {
+                    $request_body[$cond[0]] = $cond[1];
+                } else {
+                    $fields = explode(',', $cond[1]);
+                    foreach ($fields as $field) {
+                        $item = explode(':', $field);
+                        $request_body[$item[0]] = (string) $item[1];
+                    }
                 }
             }
+            array_push($query_params_cond, $request_body);
         }
-        array_push($query_params_cond, $request_body);
     }
-    $_body = $query_params_cond;
-    $res_body = json_encode($_body);
-    
-    $request_body = '['.json_encode($request_body).']';
         
     $sg = new \SendGrid($apiKey);
     
     try {
-        $resp = $sg->client->contactdb()->recipients()->post(json_decode($res_body));
+        $resp = $sg->client->contactdb()->recipients()->post($query_params_cond);
         $body = $resp->body();
 
         if(!empty($body) && $resp->statusCode() == '201') {

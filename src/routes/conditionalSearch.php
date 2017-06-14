@@ -62,7 +62,6 @@ $app->post('/api/SendGrid/conditionalSearch', function ($request, $response, $ar
         $query_params_cond[0]['and_or'] = '';
     }
     $query_params['conditions'] = $query_params_cond;
-    $res_body = json_encode($query_params);
 
         
     $query_str = 'https://api.sendgrid.com/v3/contactdb/recipients/search';

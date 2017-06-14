@@ -53,13 +53,28 @@ $app->post('/api/SendGrid/createCampaign', function ($request, $response, $args)
     $args['subject'] = $post_data['args']['subject'];
     $args['sender_id'] = $post_data['args']['sender_id'];
     if(!empty($post_data['args']['list_ids'])) {
-        $args['list_ids'] =explode(',', $post_data['args']['list_ids']);
+        if (is_array($post_data['args']['list_ids'])) {
+            $args['list_ids'] = $post_data['args']['list_ids'];
+        }
+        else {
+            $args['list_ids'] = explode(',', $post_data['args']['list_ids']);
+        }
     }
     if(!empty($post_data['args']['segment_ids'])) {
-        $args['segment_ids'] =explode(',', $post_data['args']['segment_ids']);
+        if (is_array($post_data['args']['segment_ids'])) {
+            $args['segment_ids'] = $post_data['args']['segment_ids'];
+        }
+        else {
+            $args['segment_ids'] = explode(',', $post_data['args']['segment_ids']);
+        }
     }
     if(!empty($post_data['args']['categories'])) {
-        $args['categories'] =explode(',', $post_data['args']['categories']);
+        if (is_array($post_data['args']['categories'])) {
+            $args['categories'] = $post_data['args']['categories'];
+        }
+        else {
+            $args['categories'] = explode(',', $post_data['args']['categories']);
+        }
     }
     if(!empty($post_data['args']['suppression_group_id'])) {
         $args['suppression_group_id'] = $post_data['args']['suppression_group_id'];

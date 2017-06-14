@@ -47,10 +47,8 @@ $app->post('/api/SendGrid/deleteList', function ($request, $response, $args) {
     
     $apiKey = $post_data['args']['api_key'];
     $list_id = $post_data['args']['list_id'];
-    if(!empty($post_data['args']['delete_contacts'])) {
-        $query_params['delete_contacts'] = (bool) $post_data['args']['delete_contacts'];
-    } else {
-        $query_params['delete_contacts'] = true;
+    if (isset($post_data['args']['delete_contacts'])) {
+        $query_params['delete_contacts'] = filter_var($post_data['args']['delete_contacts'], FILTER_VALIDATE_BOOLEAN);
     }
     
     $sg = new \SendGrid($apiKey);

@@ -50,21 +50,39 @@
         },
         {
           "name": "list_ids",
-          "type": "String",
+          "type": "List",
           "info": "The list IDs, which will receive your email. You can indicate more than one list with comma-separated.",
-          "required": false
+          "required": false,
+          "structure": {
+            "name": "id",
+            "type": "Number",
+            "info": "ID",
+            "required": false
+          }
         },
         {
           "name": "segment_ids",
-          "type": "String",
+          "type": "List",
           "info": "The segment IDs, which will receive your email. You can indicate more than one segment with comma-separated.",
-          "required": false
+          "required": false,
+          "structure": {
+            "name": "id",
+            "type": "Number",
+            "info": "ID",
+            "required": false
+          }
         },
         {
           "name": "categories",
-          "type": "String",
+          "type": "List",
           "info": "This is a category that you can set for your emails. You can create up to 10 different categories with comma-separated.",
-          "required": false
+          "required": false,
+          "structure": {
+            "name": "category",
+            "type": "String",
+            "info": "Category ID",
+            "required": false
+          }
         },
         {
           "name": "suppression_group_id",
@@ -117,6 +135,18 @@
           "type": "credentials",
           "info": "The API key obtained from SendGrid.",
           "required": true
+        },
+        {
+          "name": "limit",
+          "type": "Number",
+          "info": "The number of results you would like to receive at a time. Default: 10",
+          "required": false
+        },
+        {
+          "name": "offset",
+          "type": "Number",
+          "info": "The index of the first campaign to return, where 0 is the first campaign. Default 0",
+          "required": false
         }
       ],
       "callbacks": [
@@ -170,13 +200,13 @@
         },
         {
           "name": "start_time",
-          "type": "String",
+          "type": "DatePicker",
           "info": "Refers start of the time range in unix timestamp when a spam report was created (inclusive).",
           "required": false
         },
         {
           "name": "end_time",
-          "type": "String",
+          "type": "DatePicker",
           "info": "Refers end of the time range in unix timestamp when a spam report was created (inclusive).",
           "required": false
         },
@@ -222,9 +252,15 @@
         },
         {
           "name": "emails",
-          "type": "String",
+          "type": "List",
           "info": "delete some spam reports by specifying the comma-separated email addresses.",
-          "required": false
+          "required": false,
+          "structure": {
+            "name": "email",
+            "type": "String",
+            "info": "Email",
+            "required": false
+          }
         }
       ],
       "callbacks": [
@@ -351,46 +387,16 @@
           "required": false
         },
         {
-          "name": "sender_id",
-          "type": "String",
-          "info": "The sender ID obtained from Sender Management.",
-          "required": false
-        },
-        {
-          "name": "list_ids",
-          "type": "String",
-          "info": "The list IDs, which will receive your email. You can indicate more than one list with comma-separated.",
-          "required": false
-        },
-        {
-          "name": "segment_ids",
-          "type": "String",
-          "info": "The segment IDs, which will receive your email. You can indicate more than one segment with comma-separated.",
-          "required": false
-        },
-        {
           "name": "categories",
-          "type": "String",
-          "info": "This is a category that you can set for your emails. You can create up to 10 different categories with comma-separated.",
-          "required": false
-        },
-        {
-          "name": "suppression_group_id",
-          "type": "String",
-          "info": "The suppression group ID.",
-          "required": false
-        },
-        {
-          "name": "custom_unsubscribe_url",
-          "type": "String",
-          "info": "The custom unsubscribe URL.",
-          "required": false
-        },
-        {
-          "name": "ip_pool",
-          "type": "String",
-          "info": "The name of pool IP.",
-          "required": false
+          "type": "List",
+          "info": "This is a category that you can set for your emails. You can create up to 10 different categories",
+          "required": false,
+          "structure": {
+            "name": "category",
+            "type": "String",
+            "info": "Category",
+            "required": false
+          }
         },
         {
           "name": "html_content",
@@ -445,7 +451,7 @@
       ]
     },
     {
-      "name": "scheduleCampaign",
+        "name": "scheduleCampaign",
       "description": "Schedule a campaign.",
       "args": [
         {
@@ -462,7 +468,7 @@
         },
         {
           "name": "send_at",
-          "type": "String",
+          "type": "DatePicker",
           "info": "The unix timestamp of the campaign schedule (in future).",
           "required": true
         }
@@ -496,7 +502,7 @@
         },
         {
           "name": "send_at",
-          "type": "String",
+          "type": "DatePicker",
           "info": "The unix timestamp of the campaign schedule (in future).",
           "required": true
         }
@@ -798,9 +804,15 @@
         },
         {
           "name": "id",
-          "type": "String",
-          "info": "The list ID to delete. Multiple list ID must be comma-separated",
-          "required": true
+          "type": "List",
+          "info": "The list ID to delete.",
+          "required": true,
+          "structure": {
+            "name": "id",
+            "type": "Number",
+            "info": "ID",
+            "required": true
+          }
         }
       ],
       "callbacks": [
@@ -894,8 +906,8 @@
         },
         {
           "name": "delete_contacts",
-          "type": "String",
-          "info": "True or False. True to delete all contacts on the list in addition to deleting the list. Default: true.",
+          "type": "Boolean",
+          "info": "True to delete all contacts on the list in addition to deleting the list. Default: true.",
           "required": false
         }
       ],
@@ -922,19 +934,19 @@
         },
         {
           "name": "list_id",
-          "type": "String",
+          "type": "Number",
           "info": "The ID of the list.",
           "required": true
         },
         {
           "name": "page",
-          "type": "String",
+          "type": "Number",
           "info": "Page index of first recipient to return (must be a positive integer). Default: 1.",
           "required": false
         },
         {
           "name": "page_size",
-          "type": "String",
+          "type": "Number",
           "info": "Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.",
           "required": false
         }
@@ -962,7 +974,7 @@
         },
         {
           "name": "list_id",
-          "type": "String",
+          "type": "Number",
           "info": "The ID of the list.",
           "required": true
         },
@@ -996,7 +1008,7 @@
         },
         {
           "name": "list_id",
-          "type": "String",
+          "type": "Number",
           "info": "The ID of the list.",
           "required": true
         },
@@ -1030,15 +1042,21 @@
         },
         {
           "name": "list_id",
-          "type": "String",
+          "type": "Number",
           "info": "The ID of the list.",
           "required": true
         },
         {
           "name": "recipient_id",
-          "type": "String",
-          "info": "The IDs of your existing comma-separated recipients.",
-          "required": true
+          "type": "List",
+          "info": "List of recipient IDs",
+          "required": true,
+          "structure": {
+            "name": "recipientId",
+            "type": "String",
+            "info": "Recipient ID",
+            "required": true
+          }
         }
       ],
       "callbacks": [
@@ -1082,8 +1100,8 @@
         },
         {
           "name": "custom_field",
-          "type": "String",
-          "info": "The created custom fields with comma-separated. To indicate custom field and its value use the pattern [custom_field_name]:[value]. For example: age:30,occupation:developer etc. ",
+          "type": "JSON",
+          "info": "Array key=>value with existing custom field names as key.",
           "required": false
         }
       ],
@@ -1110,9 +1128,35 @@
         },
         {
           "name": "recipients",
-          "type": "String",
-          "info": "separated values with '|' according with pattern 'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value|'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value etc. To indicate custom_fields use the pattern [custom_field_name]:[value], for example: age:30,occupation:developer etc.",
-          "required": true
+          "type": "Array",
+          "info": "List of objects",
+          "required": true,
+          "structure": [
+            {
+              "name": "email",
+              "type": "String",
+              "info": "Email",
+              "required": true
+            },
+            {
+              "name": "first_name",
+              "type": "String",
+              "info": "First name",
+              "required": false
+            },
+            {
+              "name": "last_name",
+              "type": "String",
+              "info": "Last name",
+              "required": false
+            },
+            {
+              "name": "custom_fields",
+              "type": "JSON",
+              "info": "Custom fields",
+              "required": false
+            }
+          ]
         }
       ],
       "callbacks": [
@@ -1156,8 +1200,8 @@
         },
         {
           "name": "custom_field",
-          "type": "String",
-          "info": "The created custom fields with comma-separated. To indicate custom field and its value use the pattern [custom_field_name]:[value]. For example: age:30,occupation:developer etc. ",
+          "type": "JSON",
+          "info": "Array key=>value with custom field names as key",
           "required": false
         }
       ],
@@ -1184,9 +1228,15 @@
         },
         {
           "name": "recipient_id",
-          "type": "String",
-          "info": "The comma-separated recipient IDs.",
-          "required": true
+          "type": "List",
+          "info": "List of  recipient IDs.",
+          "required": true,
+          "structure": {
+            "name": "id",
+            "type": "String",
+            "info": "Recipient ID",
+            "required": true
+          }
         }
       ],
       "callbacks": [
@@ -1212,13 +1262,13 @@
         },
         {
           "name": "page",
-          "type": "String",
+          "type": "Number",
           "info": "Page index of first recipients to return (must be a positive integer). Default: 1.",
           "required": false
         },
         {
           "name": "page_size",
-          "type": "String",
+          "type": "Number",
           "info": "Number of recipients to return at a time (must be a positive integer between 1 and 1000). Default: 100.",
           "required": false
         }
@@ -1454,9 +1504,37 @@
         },
         {
           "name": "conditions",
-          "type": "String",
-          "info": "The list of conditions separated with semicolon values according with pattern 'field':value,'value':value,'operator':value,'and_or':value;'field':value,'value':value,'operator':value,'and_or':value etc.",
-          "required": true
+          "type": "Array",
+          "info": "List of objects. Field, value, operator, and_or. Example:  {field: last_name, value: Miller, operator: eq, and_or: ''}",
+          "required": true,
+          "structure": [
+            {
+              "name": "field",
+              "type": "String",
+              "info": "Field",
+              "required": true
+            },
+            {
+              "name": "value",
+              "type": "String",
+              "info": "Value",
+              "required": true
+            },
+            {
+              "name": "operator",
+              "type": "Select",
+              "options": ["eq", "ne", "lt", "gt", "contains"],
+              "info": "Allowed values: eq, ne, lt, gt, contains",
+              "required": true
+            },
+            {
+              "name": "and_or",
+              "type": "Select",
+              "options": ["and", "or"],
+              "info": "Allowed values: and, or",
+              "required": false
+            }
+          ]
         }
       ],
       "callbacks": [
@@ -1550,9 +1628,37 @@
         },
         {
           "name": "conditions",
-          "type": "String",
-          "info": "The conditions of the segment. Value must be according with pattern 'field':value,'value':value,'operator':value.",
-          "required": true
+          "type": "Array",
+          "info": "List of objects. Field, value, operator, and_or. Example:  {field: last_name, value: Miller, operator: eq, and_or: ''}",
+          "required": true,
+          "structure": [
+            {
+              "name": "field",
+              "type": "String",
+              "info": "Field",
+              "required": true
+            },
+            {
+              "name": "value",
+              "type": "String",
+              "info": "Value",
+              "required": true
+            },
+            {
+              "name": "operator",
+              "type": "Select",
+              "options": ["eq", "ne", "lt", "gt", "contains"],
+              "info": "Allowed values: eq, ne, lt, gt, contains",
+              "required": true
+            },
+            {
+              "name": "and_or",
+              "type": "Select",
+              "options": ["and", "or"],
+              "info": "Allowed values: and, or",
+              "required": false
+            }
+          ]
         }
       ],
       "callbacks": [
@@ -1584,8 +1690,8 @@
         },
         {
           "name": "delete_contacts",
-          "type": "String",
-          "info": "true or false. True to delete all contacts matching the segment in addition to deleting the segment. Default: true.",
+          "type": "Boolean",
+          "info": "True to delete all contacts matching the segment in addition to deleting the segment. Default: true.",
           "required": false
         }
       ],
@@ -1618,13 +1724,13 @@
         },
         {
           "name": "page_size",
-          "type": "String",
+          "type": "Number",
           "info": "Number of recipients to return at a time (must be a positive integer from 1 to 1000). Default: 100.",
           "required": false
         },
         {
           "name": "page",
-          "type": "String",
+          "type": "Number",
           "info": "Page index of recipients to return (must be a positive integer). Default: 1.",
           "required": false
         }
@@ -1657,16 +1763,28 @@
           "required": true
         },
         {
-          "name": "from",
+          "name": "from_email",
           "type": "String",
-          "info": "Name and email to indicate 'from' field. Pattern to fill email:value,name:value.",
+          "info": "Email to indicate",
           "required": true
         },
         {
-          "name": "reply_to",
+          "name": "from_name",
           "type": "String",
-          "info": "Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.",
+          "info": "Name to indicate",
+          "required": false
+        },
+        {
+          "name": "reply_to_email",
+          "type": "String",
+          "info": "Reply email",
           "required": true
+        },
+        {
+          "name": "reply_to_name",
+          "type": "String",
+          "info": "Reply name",
+          "required": false
         },
         {
           "name": "address",
@@ -1760,16 +1878,28 @@
           "required": true
         },
         {
-          "name": "from",
+          "name": "from_email",
           "type": "String",
-          "info": "Name and email to indicate 'from' field. Pattern to fill email:value,name:value.",
+          "info": "Email to indicate",
           "required": true
         },
         {
-          "name": "reply_to",
+          "name": "from_name",
           "type": "String",
-          "info": "Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.",
+          "info": "Name to indicate",
+          "required": false
+        },
+        {
+          "name": "reply_to_email",
+          "type": "String",
+          "info": "Reply email",
           "required": true
+        },
+        {
+          "name": "reply_to_name",
+          "type": "String",
+          "info": "Reply name",
+          "required": false
         },
         {
           "name": "address",
@@ -1921,13 +2051,13 @@
         },
         {
           "name": "limit",
-          "type": "String",
+          "type": "Number",
           "info": "Optional field to limit the number of results returned. Defaults to 50.",
           "required": false
         },
         {
           "name": "offset",
-          "type": "String",
+          "type": "Number",
           "info": "Optional beginning point in the list to retrieve from. Defaults to 0.",
           "required": false
         }
@@ -2021,9 +2151,15 @@
         },
         {
           "name": "categories",
-          "type": "String",
-          "info": "Category names for this message with comma-separate. Each category name may not exceed 255 characters. You cannot have more than 10 categories per request.",
-          "required": false
+          "type": "List",
+          "info": "Each category name may not exceed 255 characters. You cannot have more than 10 categories per request.",
+          "required": false,
+          "structure":{
+            "name": "category",
+            "type": "String",
+            "info": "Category",
+            "required": false
+          }
         },
         {
           "name": "custom_args",
@@ -2033,7 +2169,7 @@
         },
         {
           "name": "send_at",
-          "type": "String",
+          "type": "DatePicker",
           "info": "A unix timestamp allowing you to specify when you want your email to be sent from SendGrid. This is not necessary if you want the email to be sent at the time of your API request.",
           "required": false
         },
@@ -2057,8 +2193,8 @@
         },
         {
           "name": "mail_settings_bcc_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled.",
           "required": false
         },
         {
@@ -2069,14 +2205,14 @@
         },
         {
           "name": "mail_settings_bypass_list_management_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled. Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. Ex: outage emails, or forgot password emails.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled. Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. Ex: outage emails, or forgot password emails.",
           "required": false
         },
         {
           "name": "mail_settings_footer_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled. The default footer that you would like appended to the bottom of every email.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled. The default footer that you would like appended to the bottom of every email.",
           "required": false
         },
         {
@@ -2093,14 +2229,14 @@
         },
         {
           "name": "mail_settings_sandbox_mode_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled. This allows you to send a test email to ensure that your request body is valid and formatted correctly.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled. This allows you to send a test email to ensure that your request body is valid and formatted correctly.",
           "required": false
         },
         {
           "name": "mail_settings_spam_check_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled. This allows you to test the content of your email for spam.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled. This allows you to test the content of your email for spam.",
           "required": false
         },
         {
@@ -2117,20 +2253,20 @@
         },
         {
           "name": "tracking_settings_click_tracking_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled. Allows you to track whether a recipient clicked a link in your email.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled. Allows you to track whether a recipient clicked a link in your email.",
           "required": false
         },
         {
           "name": "tracking_settings_click_tracking_enable_text",
-          "type": "String",
-          "info": "true or false. Indicates if this setting should be included in the text\/plain portion of your email.",
+          "type": "Boolean",
+          "info": "Indicates if this setting should be included in the text\/plain portion of your email.",
           "required": false
         },
         {
           "name": "tracking_settings_open_tracking_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled. Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled. Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.",
           "required": false
         },
         {
@@ -2141,8 +2277,8 @@
         },
         {
           "name": "tracking_settings_subscription_tracking_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.",
           "required": false
         },
         {
@@ -2165,8 +2301,8 @@
         },
         {
           "name": "ganalytics_enable",
-          "type": "String",
-          "info": "true or false. Indicates if this setting is enabled. Allows you to enable tracking provided by Google Analytics.",
+          "type": "Boolean",
+          "info": "Indicates if this setting is enabled. Allows you to enable tracking provided by Google Analytics.",
           "required": false
         },
         {
@@ -2451,7 +2587,8 @@
         },
         {
           "name": "active",
-          "type": "String",
+          "type": "Select",
+          "options": ["0", "1"],
           "info": "0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
           "required": false
         }
@@ -2583,7 +2720,8 @@
         },
         {
           "name": "active",
-          "type": "String",
+          "type": "Select",
+          "options": ["0", "1"],
           "info": "0 - Inactive, 1 - Active. Set the new version as the active version associated with the template. Only one version of a template can be active. The first version created for a template will automatically be set to Active.",
           "required": false
         }

@@ -47,7 +47,13 @@ $app->post('/api/SendGrid/scheduleCampaign', function ($request, $response, $arg
     
     $apiKey = $post_data['args']['api_key'];
     $campaign_id = $post_data['args']['campaign_id'];
-    $request_body['send_at'] = $post_data['args']['send_at'];
+    $date = DateTime::createFromFormat('Y-m-d H:i:s', $post_data['args']['send_at']);
+    if ($date instanceof DateTime) {
+        $request_body['send_at'] = $date->getTimestamp();
+    }
+    else {
+        $request_body['send_at'] = $post_data['args']['send_at'];
+    }
     
     $sg = new \SendGrid($apiKey);
     

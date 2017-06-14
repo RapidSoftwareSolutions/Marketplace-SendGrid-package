@@ -55,20 +55,24 @@ $app->post('/api/SendGrid/updateSegment', function ($request, $response, $args) 
     if(!empty($post_data['args']['list_id'])) {
         $request_body['list_id'] = $post_data['args']['list_id'];
     }
-    $conditions = explode(',', $post_data['args']['conditions']);
-    foreach($conditions as $condition) {
-        $item = explode(':', $condition);
-        $cond[$item[0]] = $item[1];
+
+    if (is_array($post_data['args']['conditions'])) {
+        $request_body['conditions'][] = $post_data['args']['conditions'];
     }
-    $cond['and_or'] = '';
-    
-    $request_body['conditions'][] = (object) $cond;
-    $request_body = json_encode($request_body);
+    else {
+        $conditions = explode(',', $post_data['args']['conditions']);
+        foreach ($conditions as $condition) {
+            $item = explode(':', $condition);
+            $cond[$item[0]] = $item[1];
+        }
+        $cond['and_or'] = '';
+    }
+    $request_body['conditions'][] = $cond;
         
     $sg = new \SendGrid($apiKey);
     
     try {
-        $resp = $sg->client->contactdb()->segments()->_($segment_id)->patch(json_decode($request_body), $query_params);
+        $resp = $sg->client->contactdb()->segments()->_($segment_id)->patch($request_body, $query_params);
         $body = $resp->body();
 
         if(!empty($body) && $resp->statusCode() == '200') {

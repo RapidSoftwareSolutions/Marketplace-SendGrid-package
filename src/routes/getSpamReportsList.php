@@ -42,10 +42,22 @@ $app->post('/api/SendGrid/getSpamReportsList', function ($request, $response, $a
     $apiKey = $post_data['args']['api_key'];
     $query = [];
     if(!empty($post_data['args']['start_time'])) {
-        $query['start_time'] =$post_data['args']['start_time'];
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $post_data['args']['start_time']);
+        if ($date instanceof DateTime) {
+            $query['start_time'] = $date->getTimestamp();
+        }
+        else {
+            $query['start_time'] = $post_data['args']['start_time'];
+        }
     }
     if(!empty($post_data['args']['end_time'])) {
-        $query['end_time'] =$post_data['args']['end_time'];
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $post_data['args']['end_time']);
+        if ($date instanceof DateTime) {
+            $query['end_time'] = $date->getTimestamp();
+        }
+        else {
+            $query['end_time'] = $post_data['args']['end_time'];
+        }
     }
     if(!empty($post_data['args']['limit'])) {
         $query['limit'] =$post_data['args']['limit'];

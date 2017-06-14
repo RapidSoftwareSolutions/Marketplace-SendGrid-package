@@ -96,7 +96,12 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         $request_body['headers'] = $post_data['args']['headers'];
     }
     if(!empty($post_data['args']['categories'])) {
-        $request_body['categories'] = explode(',', $post_data['args']['categories']);
+        if (is_array($post_data['args']['categories'])) {
+            $request_body['categories'] = $post_data['args']['categories'];
+        }
+        else {
+            $request_body['categories'] = explode(',', $post_data['args']['categories']);
+        }
     }
     if(!empty($post_data['args']['custom_args'])) {
         $custom = explode(',', $post_data['args']['custom_args']);
@@ -106,7 +111,13 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         }
     }
     if(!empty($post_data['args']['send_at'])) {
-        $request_body['send_at'] = $post_data['args']['send_at'];
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $post_data['args']['send_at']);
+        if ($date instanceof DateTime) {
+            $request_body['send_at'] = $date->getTimestamp();
+        }
+        else {
+            $request_body['send_at'] = $post_data['args']['send_at'];
+        }
     }
     if(!empty($post_data['args']['batch_id'])) {
         $request_body['batch_id'] = $post_data['args']['batch_id'];
@@ -126,17 +137,17 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(!empty($post_data['args']['ip_pool_name'])) {
         $request_body['ip_pool_name'] = $post_data['args']['ip_pool_name'];
     }
-    if(!empty($post_data['args']['mail_settings_bcc_enable'])) {
-        $request_body['mail_settings']['bcc']['enable'] = (bool) $post_data['args']['mail_settings_bcc_enable'];
+    if(isset($post_data['args']['mail_settings_bcc_enable'])) {
+        $request_body['mail_settings']['bcc']['enable'] = filter_var($post_data['args']['mail_settings_bcc_enable'], FILTER_VALIDATE_BOOLEAN);
     }
     if(!empty($post_data['args']['mail_settings_bcc_email'])) {
         $request_body['mail_settings']['bcc']['email'] = $post_data['args']['mail_settings_bcc_email'];
     }
-    if(!empty($post_data['args']['mail_settings_bypass_list_management_enable'])) {
-        $request_body['mail_settings']['bypass_list_management']['enable'] = (bool) $post_data['args']['mail_settings_bypass_list_management_enable'];
+    if(isset($post_data['args']['mail_settings_bypass_list_management_enable'])) {
+        $request_body['mail_settings']['bypass_list_management']['enable'] = filter_var($post_data['args']['mail_settings_bypass_list_management_enable'], FILTER_VALIDATE_BOOLEAN);
     }
-    if(!empty($post_data['args']['mail_settings_footer_enable'])) {
-        $request_body['mail_settings']['footer']['enable'] = (bool) $post_data['args']['mail_settings_footer_enable'];
+    if(isset($post_data['args']['mail_settings_footer_enable'])) {
+        $request_body['mail_settings']['footer']['enable'] = filter_var($post_data['args']['mail_settings_footer_enable'], FILTER_VALIDATE_BOOLEAN);
     }
     if(!empty($post_data['args']['mail_settings_footer_text'])) {
         $request_body['mail_settings']['footer']['text'] = $post_data['args']['mail_settings_footer_text'];
@@ -144,11 +155,11 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(!empty($post_data['args']['mail_settings_footer_html'])) {
         $request_body['mail_settings']['footer']['html'] = $post_data['args']['mail_settings_footer_html'];
     }
-    if(!empty($post_data['args']['mail_settings_sandbox_mode_enable'])) {
-        $request_body['mail_settings']['sandbox_mode']['enable'] = (bool) $post_data['args']['mail_settings_sandbox_mode_enable'];
+    if(isset($post_data['args']['mail_settings_sandbox_mode_enable'])) {
+        $request_body['mail_settings']['sandbox_mode']['enable'] = filter_var($post_data['args']['mail_settings_sandbox_mode_enable'], FILTER_VALIDATE_BOOLEAN);
     }
-    if(!empty($post_data['args']['mail_settings_spam_check_enable'])) {
-        $request_body['mail_settings']['spam_check']['enable'] = (bool) $post_data['args']['mail_settings_spam_check_enable'];
+    if(isset($post_data['args']['mail_settings_spam_check_enable'])) {
+        $request_body['mail_settings']['spam_check']['enable'] = filter_var($post_data['args']['mail_settings_spam_check_enable'], FILTER_VALIDATE_BOOLEAN);
     }
     if(!empty($post_data['args']['mail_settings_spam_check_threshold'])) {
         $request_body['mail_settings']['spam_check']['threshold'] = $post_data['args']['mail_settings_spam_check_threshold'];
@@ -156,20 +167,20 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(!empty($post_data['args']['mail_settings_spam_check_post_to_url'])) {
         $request_body['mail_settings']['spam_check']['post_to_url'] = $post_data['args']['mail_settings_spam_check_post_to_url'];
     }
-    if(!empty($post_data['args']['tracking_settings_click_tracking_enable'])) {
-        $request_body['tracking_settings']['click_tracking']['enable'] = (bool) $post_data['args']['tracking_settings_click_tracking_enable'];
+    if(isset($post_data['args']['tracking_settings_click_tracking_enable'])) {
+        $request_body['tracking_settings']['click_tracking']['enable'] = filter_var($post_data['args']['tracking_settings_click_tracking_enable'], FILTER_VALIDATE_BOOLEAN);
     }
-    if(!empty($post_data['args']['tracking_settings_click_tracking_enable_text'])) {
-        $request_body['tracking_settings']['click_tracking']['enable_text'] = (bool) $post_data['args']['tracking_settings_click_tracking_enable_text'];
+    if(isset($post_data['args']['tracking_settings_click_tracking_enable_text'])) {
+        $request_body['tracking_settings']['click_tracking']['enable_text'] = filter_var($post_data['args']['tracking_settings_click_tracking_enable_text'], FILTER_VALIDATE_BOOLEAN);
     }
-    if(!empty($post_data['args']['tracking_settings_open_tracking_enable'])) {
-        $request_body['tracking_settings']['open_tracking']['enable'] = (bool) $post_data['args']['tracking_settings_open_tracking_enable'];
+    if(isset($post_data['args']['tracking_settings_open_tracking_enable'])) {
+        $request_body['tracking_settings']['open_tracking']['enable'] = filter_var($post_data['args']['tracking_settings_open_tracking_enable'], FILTER_VALIDATE_BOOLEAN);
     }
     if(!empty($post_data['args']['tracking_settings_open_tracking_substitution_tag'])) {
         $request_body['tracking_settings']['open_tracking']['substitution_tag'] = $post_data['args']['tracking_settings_open_tracking_substitution_tag'];
     }
-    if(!empty($post_data['args']['tracking_settings_subscription_tracking_enable'])) {
-        $request_body['tracking_settings']['subscription_tracking']['enable'] = (bool) $post_data['args']['tracking_settings_subscription_tracking_enable'];
+    if(isset($post_data['args']['tracking_settings_subscription_tracking_enable'])) {
+        $request_body['tracking_settings']['subscription_tracking']['enable'] = filter_var($post_data['args']['tracking_settings_subscription_tracking_enable'], FILTER_VALIDATE_BOOLEAN);
     }
     if(!empty($post_data['args']['tracking_settings_subscription_tracking_text'])) {
         $request_body['tracking_settings']['subscription_tracking']['text'] = $post_data['args']['tracking_settings_subscription_tracking_text'];
@@ -180,8 +191,8 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(!empty($post_data['args']['tracking_settings_subscription_tracking_substitution_tag'])) {
         $request_body['tracking_settings']['subscription_tracking']['substitution_tag'] = $post_data['args']['tracking_settings_subscription_tracking_substitution_tag'];
     }
-    if(!empty($post_data['args']['ganalytics_enable'])) {
-        $request_body['tracking_settings']['ganalytics']['enable'] = (bool) $post_data['args']['ganalytics_enable'];
+    if(isset($post_data['args']['ganalytics_enable'])) {
+        $request_body['tracking_settings']['ganalytics']['enable'] = filter_var($post_data['args']['ganalytics_enable'], FILTER_VALIDATE_BOOLEAN);
     }
     if(!empty($post_data['args']['ganalytics_utm_source'])) {
         $request_body['tracking_settings']['ganalytics']['utm_source'] = $post_data['args']['ganalytics_utm_source'];

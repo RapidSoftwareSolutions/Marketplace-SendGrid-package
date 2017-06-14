@@ -42,7 +42,12 @@ $app->post('/api/SendGrid/deleteRecipients', function ($request, $response, $arg
     }
     
     $apiKey = $post_data['args']['api_key'];
-    $request_body = explode(',', $post_data['args']['recipient_id']);
+    if (is_array($post_data['args']['recipient_id'])) {
+        $request_body = $post_data['args']['recipient_id'];
+    }
+    else {
+        $request_body = explode(',', $post_data['args']['recipient_id']);
+    }
         
     $sg = new \SendGrid($apiKey);
     

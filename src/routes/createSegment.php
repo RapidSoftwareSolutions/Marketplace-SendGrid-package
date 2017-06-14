@@ -53,16 +53,21 @@ $app->post('/api/SendGrid/createSegment', function ($request, $response, $args) 
     $query_params['list_id'] = $post_data['args']['list_id'];
     
     $query_params_cond = [];
-    $conditions = explode(';', $post_data['args']['conditions']);
-    foreach($conditions as $condition) {
-        $items = explode(',', $condition);
-        if(count($items) == 4) {
-            foreach($items as $item) {
-                $cond = explode(":", $item);
-                $parsed_data[$cond[0]] = $cond[1];
+    if (is_array($post_data['args']['conditions'])) {
+        $query_params_cond = $post_data['args']['conditions'];
+    }
+    else {
+        $conditions = explode(';', $post_data['args']['conditions']);
+        foreach ($conditions as $condition) {
+            $items = explode(',', $condition);
+            if (count($items) == 4) {
+                foreach ($items as $item) {
+                    $cond = explode(":", $item);
+                    $parsed_data[$cond[0]] = $cond[1];
+                }
             }
+            array_push($query_params_cond, $parsed_data);
         }
-        array_push($query_params_cond, $parsed_data);
     }
     if(isset($query_params_cond[0]['and_or'])) {
         $query_params_cond[0]['and_or'] = '';

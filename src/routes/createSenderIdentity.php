@@ -41,11 +41,11 @@ $app->post('/api/SendGrid/createSenderIdentity', function ($request, $response, 
     if(empty($post_data['args']['country'])) {
         $error[] = 'country';
     }
-    if(empty($post_data['args']['from'])) {
-        $error[] = 'from';
+    if(empty($post_data['args']['from']) && empty($post_data['args']['from_email'])) {
+        $error[] = 'from or from_email';
     }
-    if(empty($post_data['args']['reply_to'])) {
-        $error[] = 'reply_to';
+    if(empty($post_data['args']['reply_to']) && empty($post_data['args']['reply_to_email'])) {
+        $error[] = 'reply_to or reply_to_email';
     }
     
     if(!empty($error)) {
@@ -73,19 +73,35 @@ $app->post('/api/SendGrid/createSenderIdentity', function ($request, $response, 
         $request_body['zip'] = $post_data['args']['zip'];
     }
 
-    $from = explode(',', $post_data['args']['from']);
-    if(count($from) == 2) {
-        foreach($from as $item) {
-            $cond = explode(':', $item);
-            $request_body['from'][$cond[0]] = $cond[1];
+    if (!empty($post_data['args']['from'])) {
+        $from = explode(',', $post_data['args']['from']);
+        if (count($from) == 2) {
+            foreach ($from as $item) {
+                $cond = explode(':', $item);
+                $request_body['from'][$cond[0]] = $cond[1];
+            }
+        }
+    }
+    else {
+        $request_body['from']['email'] = $post_data['args']['from_email'];
+        if (!empty($post_data['args']['from_name'])) {
+            $request_body['from']['name'] = $post_data['args']['from_name'];
         }
     }
 
-    $reply = explode(',', $post_data['args']['reply_to']);
-    if(count($reply) == 2) {
-        foreach($reply as $item) {
-            $cond = explode(':', $item);
-            $request_body['reply_to'][$cond[0]] = $cond[1];
+    if (!empty($post_data['args']['reply_to'])) {
+        $reply = explode(',', $post_data['args']['reply_to']);
+        if (count($reply) == 2) {
+            foreach ($reply as $item) {
+                $cond = explode(':', $item);
+                $request_body['reply_to'][$cond[0]] = $cond[1];
+            }
+        }
+    }
+    else {
+        $request_body['reply_to']['email'] = $post_data['args']['reply_to_email'];
+        if (!empty($post_data['args']['reply_to_name'])) {
+            $request_body['reply_to']['name'] = $post_data['args']['reply_to_name'];
         }
     }
         

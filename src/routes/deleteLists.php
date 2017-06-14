@@ -43,7 +43,12 @@ $app->post('/api/SendGrid/deleteLists', function ($request, $response, $args) {
     
     
     $apiKey = $post_data['args']['api_key'];
-    $request_body = explode(',', $post_data['args']['id']);
+    if (is_array($post_data['args']['id'])) {
+        $request_body = $post_data['args']['id'];
+    }
+    else {
+        $request_body = explode(',', $post_data['args']['id']);
+    }
     
     $sg = new \SendGrid($apiKey);
     
