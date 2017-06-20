@@ -1,13 +1,17 @@
 <?php
 $app->post('/api/SendGrid/webhookEvent', function ($request, $response, $args) {
-    $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, []);
-    if (!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback'] == 'error') {
-        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
-    } else {
-        $post_data = $validateRes;
-    }
+    $settings =  $this->settings;
 
+    $data = $request->getBody();
+
+    if($data=='') {
+        $post_data = $request->getParsedBody();
+    } else {
+        $toJson = $this->toJson;
+        $data = $toJson->normalizeJson($data);
+        $data = str_replace('\"', '"', $data);
+        $post_data = json_decode($data, true);
+    }
     $client = new GuzzleHttp\Client();
     $resp = $client->request('POST', 'http://f03d4bd5.ngrok.io', [
         'json' => $post_data
