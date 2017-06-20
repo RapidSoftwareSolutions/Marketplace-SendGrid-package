@@ -19,8 +19,8 @@ $app->post('/api/SendGrid/webhookEvent', function ($request, $response, $args) {
 
     $reply = [
         "http_resp" => '',
-        "client_msg" => $post_data['body'],
-        "params" => $post_data['params']
+        "client_msg" => $post_data['args']['body'],
+        "params" => $post_data['args']['params']
     ];
 
     $result['callback'] = 'success';
