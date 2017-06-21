@@ -48,10 +48,11 @@ $app->post('/api/SendGrid/addListRecipients', function ($request, $response, $ar
     $apiKey = $post_data['args']['api_key'];
     $list_id = $post_data['args']['list_id'];
     if (is_array($post_data['args']['recipient_id'])) {
-        $request_body = $post_data['args']['recipient_id'];
+        $request_body = explode(',', $post_data['args']['recipient_id']);
     }
     else {
-        $request_body = explode(',', $post_data['args']['recipient_id']);
+        $request_body = $post_data['args']['recipient_id'];
+
     }
     
     $sg = new \SendGrid($apiKey);

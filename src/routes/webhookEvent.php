@@ -12,7 +12,7 @@ $app->post('/api/SendGrid/webhookEvent', function ($request, $response, $args) {
         $data = str_replace('\"', '"', $data);
         $post_data = json_decode($data, true);
     }
-   
+
     $reply = [
         "http_resp" => '',
         "client_msg" => $post_data['args']['body']['_json'],

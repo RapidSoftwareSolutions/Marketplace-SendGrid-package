@@ -40,10 +40,11 @@ $app->post('/api/SendGrid/getCampaigns', function ($request, $response, $args) {
     
     
     $apiKey = $post_data['args']['api_key'];
-    $query['limit'] = 10;
 
     if (!empty($post_data['args']['limit'])) {
         $query['limit'] = $post_data['args']['limit'];
+    } else {
+        $query['limit'] = 10;
     }
     if (!empty($post_data['args']['offset'])) {
         $query['offset'] = $post_data['args']['offset'];
