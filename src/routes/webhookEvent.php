@@ -12,14 +12,10 @@ $app->post('/api/SendGrid/webhookEvent', function ($request, $response, $args) {
         $data = str_replace('\"', '"', $data);
         $post_data = json_decode($data, true);
     }
-    $client = new GuzzleHttp\Client();
-    $resp = $client->request('POST', 'https://f03d4bd5.ngrok.io', [
-        'json' => $post_data
-    ]);
-
+   
     $reply = [
         "http_resp" => '',
-        "client_msg" => $post_data['args']['body'],
+        "client_msg" => $post_data['args']['body']['_json'],
         "params" => $post_data['args']['params']
     ];
 
