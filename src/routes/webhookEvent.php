@@ -17,14 +17,14 @@ $app->post('/api/SendGrid/webhookEvent', function ($request, $response, $args) {
         'json' => $post_data
     ]);
 
-    $reply = [
-        "http_resp" => '',
-        "client_msg" => $post_data['args']['body'],
-        "params" => $post_data['args']['params']
-    ];
+//    $reply = [
+//        "http_resp" => '',
+//        "client_msg" => $post_data['args']['body'],
+//        "params" => $post_data['args']['params']
+//    ];
 
     $result['callback'] = 'success';
-    $result['contextWrites']['to'] = $reply;
+    $result['contextWrites']['to'] = 'ok';//$reply;
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 
 });
