@@ -19,6 +19,33 @@
       "api_key"
     ]
   },
+  "events": [
+    {
+      "name": "webhookEvent",
+      "description": "This method is called every time when webhook event happens",
+      "payload": {
+        "email": "example@test.com",
+        "timestamp": 1498031178,
+        "smtp-id": "<14c5d75ce93.dfd.64b469@ismtpd-555>",
+        "event": "processed",
+        "category": "cat facts",
+        "sg_event_id": "tz2CYKvr4UK37D_V_sc5GQ==",
+        "sg_message_id": "14c5d75ce93.dfd.64b469.filter0001.16648.5515E0B88.0"
+      },
+      "steps": [
+        "Go to account settings",
+        "Set webhookUrl to __WEBHOOK_URL__"
+      ],
+      "args": [
+        {
+          "name": "token",
+          "type": "string",
+          "info": "Token sent on each message",
+          "required": true
+        }
+      ]
+    }
+  ],
   "blocks": [
     {
       "name": "createCampaign",
@@ -2112,7 +2139,7 @@
           "type": "List",
           "info": "An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. Parameters in personalizations will override the parameters of the same name from the message level. Example: [{\"bcc\": [{\"email\": \"sam.doe@example.com\",\"name\": \"Sam Doe\"}], \"cc\": [{\"email\": \"jane.doe@example.com\",\"name\": \"Jane Doe\"}], \"custom_args\": {\"New Argument 1\": \"New Value 1\",\"activationAttempt\": \"1\",\"customerAccountNumber\": \"123\"},\"headers\": {\"X-Accept-Language\": \"en\",\"X-Mailer\": \"MyApp\"},\"send_at\": 1409348513,\"subject\": \"Hello, World!\",\"substitutions\": {\"id\": \"substitutions\",\"type\": \"object\"},\"to\": [ {\"email\": \"john.doe@example.com\",\"name\": \"John Doe\"}]}]",
           "required": true,
-          "structure":{
+          "structure": {
             "name": "personalization",
             "type": "JSON",
             "info": "Single personalization"
@@ -2153,7 +2180,7 @@
           "type": "List",
           "info": "An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters. If included, text\/plain and text\/html must be the first indices of the array in this order. If you choose to include the text\/plain or text\/html mime types, they must be the first indices of the content array in the order text\/plain, text\/html. Example: [{\"type\": \"text\/html\",\"value\": \"Hello, world!<\/p><\/img><\/html>\"}]",
           "required": true,
-          "structure":{
+          "structure": {
             "name": "content",
             "type": "JSON",
             "info": "Single content"
@@ -2164,7 +2191,7 @@
           "type": "List",
           "info": "An array of objects in which you can specify any attachments you want to include.",
           "required": false,
-          "structure":{
+          "structure": {
             "name": "attachment",
             "type": "JSON",
             "info": "Single attachment"
