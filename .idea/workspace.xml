@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83f2379f-9022-42ff-a1f4-d88c027db334" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Marketplace-SendGrid-package.iml" afterPath="$PROJECT_DIR$/.idea/Marketplace-SendGrid-package.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/metadata/metadata.json" afterPath="$PROJECT_DIR$/src/metadata/metadata.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,12 +48,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="metadata.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="metadata.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/metadata/metadata.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+            <state relative-caret-position="270">
+              <caret line="18" column="15" lean-forward="true" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="435">
+                <caret line="29" column="4" lean-forward="false" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+                <folding>
+                  <marker date="1498211617827" expanded="true" signature="34593:35356" ph="[...]" />
+                  <marker date="1498211617827" expanded="true" signature="34601:35354" ph="{&quot;send_at&quot;: 1409348513...}" />
+                  <marker date="1498211617827" expanded="true" signature="34619:34742" ph="[...]" />
+                  <marker date="1498211617827" expanded="true" signature="34635:34732" ph="{&quot;name&quot;: &quot;Sam Doe&quot;...}" />
+                  <marker date="1498211617827" expanded="true" signature="34757:34882" ph="[...]" />
+                  <marker date="1498211617827" expanded="true" signature="34773:34872" ph="{&quot;name&quot;: &quot;Jane Doe&quot;...}" />
+                  <marker date="1498211617827" expanded="true" signature="34906:35042" ph="{&quot;New Argument 1&quot;: &quot;New Value 1&quot;...}" />
+                  <marker date="1498211617827" expanded="true" signature="35133:35208" ph="{&quot;id&quot;: &quot;substitutions&quot;...}" />
+                  <marker date="1498211617827" expanded="true" signature="35223:35348" ph="[...]" />
+                  <marker date="1498211617827" expanded="true" signature="35239:35338" ph="{&quot;name&quot;: &quot;John Doe&quot;...}" />
+                  <marker date="1498211617827" expanded="true" signature="35389:35518" ph="[...]" />
+                  <marker date="1498211617827" expanded="true" signature="35397:35516" ph="{&quot;type&quot;: &quot;text/html&quot;...}" />
+                  <marker date="1498211617827" expanded="true" signature="35555:35784" ph="[...]" />
+                  <marker date="1498211617827" expanded="true" signature="35563:35782" ph="{&quot;name&quot;: &quot;file1&quot;...}" />
+                  <marker date="1498211617827" expanded="true" signature="35818:35930" ph="{...}" />
+                  <marker date="1498211617827" expanded="true" signature="35836:35928" ph="{&quot;:sectionName1&quot;: &quot;section 1 text&quot;...}" />
+                  <marker date="1498211617827" expanded="true" signature="35963:36037" ph="{...}" />
+                  <marker date="1498211617827" expanded="true" signature="35981:36035" ph="{&quot;X-Test1&quot;: &quot;1&quot;...}" />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -92,6 +123,7 @@
         <option value="$PROJECT_DIR$/src/routes/getCampaigns.php" />
         <option value="$PROJECT_DIR$/src/routes/addListRecipients.php" />
         <option value="$PROJECT_DIR$/src/metadata/metadata.json" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -103,7 +135,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="1985" />
+    <option name="x" value="65" />
     <option name="y" value="24" />
     <option name="width" value="1855" />
     <option name="height" value="1056" />
@@ -127,7 +159,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -192,6 +223,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -270,15 +302,16 @@
       <option name="presentableId" value="Default" />
       <updated>1497957348059</updated>
       <workItem from="1497957349651" duration="13754000" />
-      <workItem from="1498114356205" duration="178000" />
+      <workItem from="1498114356205" duration="230000" />
+      <workItem from="1498211405175" duration="215000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13932000" />
+    <option name="totallyTimeSpent" value="14199000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1985" y="24" width="1855" height="1056" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959569" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -311,6 +344,54 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/webhookEvent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="3" lean-forward="false" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/addListRecipients.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/metadata/metadata.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/getCampaigns.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="44" lean-forward="false" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/getRecipientList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -425,9 +506,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/metadata/metadata.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+        <state relative-caret-position="270">
+          <caret line="18" column="15" lean-forward="true" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="435">
+            <caret line="29" column="4" lean-forward="false" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+            <folding>
+              <marker date="1498211617827" expanded="true" signature="34593:35356" ph="[...]" />
+              <marker date="1498211617827" expanded="true" signature="34601:35354" ph="{&quot;send_at&quot;: 1409348513...}" />
+              <marker date="1498211617827" expanded="true" signature="34619:34742" ph="[...]" />
+              <marker date="1498211617827" expanded="true" signature="34635:34732" ph="{&quot;name&quot;: &quot;Sam Doe&quot;...}" />
+              <marker date="1498211617827" expanded="true" signature="34757:34882" ph="[...]" />
+              <marker date="1498211617827" expanded="true" signature="34773:34872" ph="{&quot;name&quot;: &quot;Jane Doe&quot;...}" />
+              <marker date="1498211617827" expanded="true" signature="34906:35042" ph="{&quot;New Argument 1&quot;: &quot;New Value 1&quot;...}" />
+              <marker date="1498211617827" expanded="true" signature="35133:35208" ph="{&quot;id&quot;: &quot;substitutions&quot;...}" />
+              <marker date="1498211617827" expanded="true" signature="35223:35348" ph="[...]" />
+              <marker date="1498211617827" expanded="true" signature="35239:35338" ph="{&quot;name&quot;: &quot;John Doe&quot;...}" />
+              <marker date="1498211617827" expanded="true" signature="35389:35518" ph="[...]" />
+              <marker date="1498211617827" expanded="true" signature="35397:35516" ph="{&quot;type&quot;: &quot;text/html&quot;...}" />
+              <marker date="1498211617827" expanded="true" signature="35555:35784" ph="[...]" />
+              <marker date="1498211617827" expanded="true" signature="35563:35782" ph="{&quot;name&quot;: &quot;file1&quot;...}" />
+              <marker date="1498211617827" expanded="true" signature="35818:35930" ph="{...}" />
+              <marker date="1498211617827" expanded="true" signature="35836:35928" ph="{&quot;:sectionName1&quot;: &quot;section 1 text&quot;...}" />
+              <marker date="1498211617827" expanded="true" signature="35963:36037" ph="{...}" />
+              <marker date="1498211617827" expanded="true" signature="35981:36035" ph="{&quot;X-Test1&quot;: &quot;1&quot;...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
