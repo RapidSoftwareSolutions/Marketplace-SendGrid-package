@@ -22,7 +22,7 @@
   "events": [
     {
       "name": "webhookEvent",
-      "description": "This method is called every time when webhook event happens",
+      "description": "This method is called every time an email event occurs in SendGrid",
       "payload": {
         "email": "example@test.com",
         "timestamp": 1498031178,
@@ -33,8 +33,8 @@
         "sg_message_id": "14c5d75ce93.dfd.64b469.filter0001.16648.5515E0B88.0"
       },
       "steps": [
-        "Go to account settings",
-        "Set webhookUrl to __WEBHOOK_URL__"
+        "Navigate to https://app.sendgrid.com/settings/mail_settings in your sendgrid account and find the 'Event Notification' section",
+        "Under the Event notification section, change the HTTP POST URL to the following URL: __WEBHOOK_URL__"
       ],
       "args": [
         {
