@@ -19,6 +19,12 @@
       "api_key"
     ]
   },
+  "steps": [
+    "Go to SendGrid(https://sendgrid.com/) to sign up or login",
+    "Visit API keys page(https://app.sendgrid.com/settings/api_keys)",
+    "Generate API key",
+    "Please store API key somewhere safe because as soon as you navigate away from page, service will not be able to retrieve or restore this generated token"
+  ],
   "events": [
     {
       "name": "webhookEvent",
