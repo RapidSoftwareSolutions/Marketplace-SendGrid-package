@@ -1,80 +1,65 @@
 <?php
-
 $app->post('/api/SendGrid/deleteListRecipient', function ($request, $response, $args) {
-    $settings =  $this->settings;
-    
-    $data = $request->getBody();
+    $settings = $this->settings;
 
-    if($data=='') {
-        $post_data = $request->getParsedBody();
+    //checking properly formed json
+    $checkRequest = $this->validation;
+    $validateRes = $checkRequest->validate($request, ['api_key', 'list_id', 'recipient_id']);
+    if (!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback'] == 'error') {
+        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
     } else {
-        $toJson = $this->toJson;
-        $data = $toJson->normalizeJson($data); 
-        $data = str_replace('\"', '"', $data);
-        $post_data = json_decode($data, true);
+        $post_data = $validateRes;
     }
-    
-    if(json_last_error() != 0) {
-        $error[] = json_last_error_msg() . '. Incorrect input JSON. Please, check fields with JSON input.';
-    }
-    
-    if(!empty($error)) {
-        $result['callback'] = 'error';
-        $result['contextWrites']['to']['status_code'] = 'JSON_VALIDATION';
-        $result['contextWrites']['to']['status_msg'] = implode(',', $error);
-        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
-    }
-    
-    $error = [];
-    if(empty($post_data['args']['api_key'])) {
-        $error[] = 'api_key';
-    }
-    if(empty($post_data['args']['list_id'])) {
-        $error[] = 'list_id';
-    }
-    if(empty($post_data['args']['recipient_id'])) {
-        $error[] = 'recipient_id';
-    }
-    
-    if(!empty($error)) {
-        $result['callback'] = 'error';
-        $result['contextWrites']['to']['status_code'] = "REQUIRED_FIELDS";
-        $result['contextWrites']['to']['status_msg'] = "Please, check and fill in required fields.";
-        $result['contextWrites']['to']['fields'] = $error;
-        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
-    }
-    
-    
-    $apiKey = $post_data['args']['api_key'];
-    $list_id = $post_data['args']['list_id'];
-    $recipient_id = $post_data['args']['recipient_id'];
-    $query_params['recipient_id'] = $post_data['args']['recipient_id'];
-    
-    $sg = new \SendGrid($apiKey);
-    
+    //forming request to vendor API
+    $query_str = "https://api.sendgrid.com/v3/contactdb/lists/{$post_data['args']['list_id']}/recipients/{$post_data['args']['recipient_id']}";
+    $body = array();
+
+    //requesting remote API
+    $client = new GuzzleHttp\Client();
+
     try {
-        $resp = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->delete(null, $query_params);
-        $body = $resp->body();
 
-        if($resp->statusCode() == '204') {
+        $resp = $client->request('DELETE', $query_str, [
+            'headers'=>[
+                "Authorization" => "Bearer ". $post_data['args']['api_key']
+            ],
+            'query' => $body
+        ]);
 
+        $responseBody = $resp->getBody()->getContents();
+        $rawBody = json_decode($resp->getBody());
+
+        $all_data[] = $rawBody;
+        if ($response->getStatusCode() == '200') {
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = "deleted";
-
+            $result['contextWrites']['to'] = ['result' => 'Recipient deleted'];
         } else {
-                $result['callback'] = 'error';
-                $result['contextWrites']['to']['status_code'] = 'API_ERROR';
-                $result['contextWrites']['to']['status_msg'] = !is_string($body) ? $body : json_decode($body);
+            $result['callback'] = 'error';
+            $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+            $result['contextWrites']['to']['status_msg'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
         }
-    } catch (Exception $exception) {
 
-        $responseBody = $exception->getMessage();
+    } catch (\GuzzleHttp\Exception\ClientException $exception) {
+        $responseBody = $exception->getResponse()->getReasonPhrase();
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = 'API_ERROR';
-        $result['contextWrites']['to']['status_msg'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
+        $result['contextWrites']['to']['status_msg'] = $responseBody;
+
+    } catch (GuzzleHttp\Exception\ServerException $exception) {
+
+        $responseBody = $exception->getResponse()->getBody(true);
+        $result['callback'] = 'error';
+        $result['contextWrites']['to'] = json_decode($responseBody);
+
+    } catch (GuzzleHttp\Exception\BadResponseException $exception) {
+
+        $responseBody = $exception->getResponse()->getBody(true);
+        $result['callback'] = 'error';
+        $result['contextWrites']['to'] = json_decode($responseBody);
 
     }
 
-    return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
-});
 
+    return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
+
+});

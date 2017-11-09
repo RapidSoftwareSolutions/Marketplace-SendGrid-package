@@ -52,7 +52,7 @@ $app->post('/api/SendGrid/getListRecipientsList', function ($request, $response,
     if(!empty($post_data['args']['page_size'])) {
         $query_params['page_size'] = $post_data['args']['page_size'];
     } else {
-        $query_params['page'] = 100;
+        $query_params['page_size'] = 100;
     }
     
     $sg = new \SendGrid($apiKey);

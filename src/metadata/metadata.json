@@ -204,8 +204,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         }
@@ -244,14 +244,14 @@
           "required": false
         },
         {
-          "name": "limit",
-          "type": "String",
+         "name": "limit",
+          "type": "Number",
           "info": "Limit the number of results to be displayed per page.",
           "required": false
         },
         {
-          "name": "offset",
-          "type": "String",
+         "name": "offset",
+          "type": "Number",
           "info": "Paging offset. The point in the list to begin displaying results.",
           "required": false
         }
@@ -279,7 +279,8 @@
         },
         {
           "name": "delete_all",
-          "type": "String",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "delete all spam reports by setting to 'true'. Default 'false'.",
           "required": false
         },
@@ -374,8 +375,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         }
@@ -402,8 +403,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         },
@@ -466,8 +467,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         }
@@ -494,8 +495,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         },
@@ -528,8 +529,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         },
@@ -562,8 +563,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         }
@@ -590,8 +591,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         }
@@ -618,8 +619,8 @@
           "required": true
         },
         {
-          "name": "campaign_id",
-          "type": "String",
+         "name": "campaign_id",
+          "type": "Number",
           "info": "The id of the campaign.",
           "required": true
         },
@@ -715,7 +716,7 @@
         },
         {
           "name": "custom_field_id",
-          "type": "String",
+          "type": "Number",
           "info": "The id of the custom field.",
           "required": true
         }
@@ -743,7 +744,7 @@
         },
         {
           "name": "custom_field_id",
-          "type": "String",
+          "type": "Number",
           "info": "The id of the custom field.",
           "required": true
         }
@@ -876,8 +877,8 @@
           "required": true
         },
         {
-          "name": "list_id",
-          "type": "String",
+         "name": "list_id",
+          "type": "Number",
           "info": "The ID of the list.",
           "required": true
         }
@@ -904,8 +905,8 @@
           "required": true
         },
         {
-          "name": "list_id",
-          "type": "String",
+         "name": "list_id",
+          "type": "Number",
           "info": "The ID of the list.",
           "required": true
         },
@@ -938,14 +939,15 @@
           "required": true
         },
         {
-          "name": "list_id",
-          "type": "String",
+         "name": "list_id",
+          "type": "Number",
           "info": "The ID of the list.",
           "required": true
         },
         {
           "name": "delete_contacts",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "True to delete all contacts on the list in addition to deleting the list. Default: true.",
           "required": false
         }
@@ -1462,8 +1464,8 @@
           "required": true
         },
         {
-          "name": "list_id",
-          "type": "String",
+         "name": "list_id",
+          "type": "Number",
           "info": "the valid list ID for a list to limit the search.",
           "required": false
         },
@@ -1536,8 +1538,8 @@
           "required": true
         },
         {
-          "name": "list_id",
-          "type": "String",
+         "name": "list_id",
+          "type": "Number",
           "info": "The valid list ID.",
           "required": true
         },
@@ -1630,7 +1632,7 @@
         },
         {
           "name": "segment_id",
-          "type": "String",
+          "type": "Number",
           "info": "The ID of the segment.",
           "required": true
         }
@@ -1658,7 +1660,7 @@
         },
         {
           "name": "segment_id",
-          "type": "String",
+          "type": "Number",
           "info": "The ID of the segment.",
           "required": true
         },
@@ -1668,12 +1670,7 @@
           "info": "The name of the segment.",
           "required": true
         },
-        {
-          "name": "list_id",
-          "type": "String",
-          "info": "The ID of the list.",
-          "required": false
-        },
+
         {
           "name": "conditions",
           "type": "Array",
@@ -1741,13 +1738,14 @@
         },
         {
           "name": "segment_id",
-          "type": "String",
+          "type": "Number",
           "info": "The ID of the segment.",
           "required": true
         },
         {
           "name": "delete_contacts",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "True to delete all contacts matching the segment in addition to deleting the segment. Default: true.",
           "required": false
         }
@@ -1775,7 +1773,7 @@
         },
         {
           "name": "segment_id",
-          "type": "String",
+          "type": "Number",
           "info": "The ID of the segment.",
           "required": true
         },
@@ -1829,7 +1827,7 @@
           "name": "from_name",
           "type": "String",
           "info": "Name to indicate",
-          "required": false
+          "required": true
         },
         {
           "name": "reply_to_email",
@@ -2265,7 +2263,8 @@
         },
         {
           "name": "mail_settings_bcc_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled.",
           "required": false
         },
@@ -2277,13 +2276,15 @@
         },
         {
           "name": "mail_settings_bypass_list_management_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled. Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. Ex: outage emails, or forgot password emails.",
           "required": false
         },
         {
           "name": "mail_settings_footer_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled. The default footer that you would like appended to the bottom of every email.",
           "required": false
         },
@@ -2301,19 +2302,21 @@
         },
         {
           "name": "mail_settings_sandbox_mode_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled. This allows you to send a test email to ensure that your request body is valid and formatted correctly.",
           "required": false
         },
         {
           "name": "mail_settings_spam_check_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled. This allows you to test the content of your email for spam.",
           "required": false
         },
         {
           "name": "mail_settings_spam_check_threshold",
-          "type": "String",
+          "type": "Number",
           "info": "The threshold used to determine if your content qualifies as spam on a scale from 1 to 10, with 10 being most strict, or most likely to be considered as spam.",
           "required": false
         },
@@ -2325,19 +2328,22 @@
         },
         {
           "name": "tracking_settings_click_tracking_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled. Allows you to track whether a recipient clicked a link in your email.",
           "required": false
         },
         {
           "name": "tracking_settings_click_tracking_enable_text",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting should be included in the text\/plain portion of your email.",
           "required": false
         },
         {
           "name": "tracking_settings_open_tracking_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled. Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.",
           "required": false
         },
@@ -2349,7 +2355,8 @@
         },
         {
           "name": "tracking_settings_subscription_tracking_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.",
           "required": false
         },
@@ -2373,7 +2380,8 @@
         },
         {
           "name": "ganalytics_enable",
-          "type": "Boolean",
+          "type": "Select",
+          "options":["true", "false"],
           "info": "Indicates if this setting is enabled. Allows you to enable tracking provided by Google Analytics.",
           "required": false
         },

@@ -2,7 +2,7 @@
 
 # SendGrid Package
 Manage email campaigns, subscribers and design templates.
-* Domain: sendgrid.com
+* Domain: [SendGrid](http://sendgrid.com)
 * Credentials: api_key
 
 ## How to get credentials: 
@@ -26,7 +26,7 @@ Manage email campaigns, subscribers and design templates.
  
  You can use our service as url: 
  ```
- https://webhooks.rapidapi.com/api/message/Intercom/webhookEvent/{projectName}/{projectKey} * see credentials description above
+ https://webhooks.rapidapi.com/api/message/SendGrid/webhookEvent/{projectName}/{projectKey} * see credentials description above
  ```
  
  Please use SDK to test this feature.
@@ -140,11 +140,8 @@ Update a campaign.
 |-----------------------|-------|----------
 | api_key               | credentials| The API key obtained from SendGrid.
 | campaign_id           | String| The id of the campaign.
-| title                 | String| Optional: The title of your camapign.
-| subject               | String| Optional: The Email subject of your camapign.
-| sender_id             | String| Optional: The sender ID obtained from Sender Management.
-| list_ids              | String| Optional: The list IDs,  which will receive your email.
-| segment_ids           | String| Optional: The segment IDs,  which will receive your email.
+| title                 | String| Optional: The title of your campaign.
+| subject               | String| Optional: The Email subject of your campaign.
 | categories            | List  | Optional: This is a category that you can set for your emails.
 | suppression_group_id  | String| Optional: The suppression group ID.
 | custom_unsubscribe_url| String| Optional: The custom unsubscribe URL.
@@ -517,7 +514,6 @@ Update fields in a specific segment.
 | api_key   | credentials| The API key obtained from SendGrid.
 | segment_id| String| The ID of the segment.
 | name      | String| The name of the segment.
-| list_id   | String| Optional: The ID of the list.
 | conditions| Array| The conditions of the segment. Value must be according with pattern 'field':value,'value':value,'operator':value.
 
 
@@ -550,8 +546,10 @@ Sender Identities are required to be verified before use. If your domain has bee
 |----------|-------|----------
 | api_key  | credentials| The API key obtained from SendGrid.
 | nickname | String| The nickname of the sender.
-| from     | String| Name and email to indicate 'from' field. Pattern to fill email:value,name:value.
-| reply_to | String| Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.
+| from_email     | String| Email to indicate 'from' field. 
+| from_name     | String| Name to indicate 'from' field. 
+| reply_to_email     | String| Email to indicate 'reply to' field. 
+| reply_to_name     | String| Name to indicate 'reply to' field. 
 | address  | String| The address of the sender.
 | address_2| String| Optional: The second address of the sender.
 | city     | String| The city of the sender.
@@ -625,7 +623,7 @@ Retrieve a list of your categories.
 
 
 ## SendGrid.sendPlainMail
-This endpoint allows you to send email.
+This endpoint allows you to send email with plain text..
 
 | Field           | Type  | Description
 |---------        |-------|----------

@@ -58,7 +58,7 @@ $app->post('/api/SendGrid/addListRecipient', function ($request, $response, $arg
         if($resp->statusCode() == '201') {
 
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
+            $result['contextWrites']['to'] = ["result"=> "Recipient added"];
 
         } else {
                 $result['callback'] = 'error';

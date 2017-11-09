@@ -58,7 +58,7 @@ $app->post('/api/SendGrid/deleteVersion', function ($request, $response, $args) 
         if($resp->statusCode() == '204') {
 
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);
+            $result['contextWrites']['to'] = ["result"=> "Version deleted"];
 
         } else {
                 $result['callback'] = 'error';

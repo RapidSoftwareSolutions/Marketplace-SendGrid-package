@@ -31,6 +31,8 @@ $app->post('/api/SendGrid/createSenderIdentity', function ($request, $response, 
     }
     if(empty($post_data['args']['nickname'])) {
         $error[] = 'nickname';
+    }if(empty($post_data['args']['from_name'])) {
+        $error[] = 'from_name';
     }
     if(empty($post_data['args']['address'])) {
         $error[] = 'address';
@@ -111,7 +113,7 @@ $app->post('/api/SendGrid/createSenderIdentity', function ($request, $response, 
         $resp = $sg->client->senders()->post($request_body);
         $body = $resp->body();
 
-        if(!empty($body) && $resp->statusCode() == '200') {
+        if(!empty($body) && $resp->statusCode() == '201') {
 
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = !is_string($body) ? $body : json_decode($body);

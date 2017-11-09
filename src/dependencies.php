@@ -35,3 +35,8 @@ $container['toJson'] = function() {
     $toJson = new Models\normilizeJson();
     return $toJson;
 };
+//validate request
+$container['validation'] = function() {
+    $validate = new Models\checkRequest();
+    return $validate;
+};
