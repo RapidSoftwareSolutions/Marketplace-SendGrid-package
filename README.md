@@ -143,9 +143,6 @@ Update a campaign.
 | title                 | String| Optional: The title of your campaign.
 | subject               | String| Optional: The Email subject of your campaign.
 | categories            | List  | Optional: This is a category that you can set for your emails.
-| suppression_group_id  | String| Optional: The suppression group ID.
-| custom_unsubscribe_url| String| Optional: The custom unsubscribe URL.
-| ip_pool               | String| Optional: The name of pool IP.
 | html_content          | String| Optional: The HTML content of campaign.
 | plain_content         | String| Optional: The plain text of campaign.
 
@@ -574,8 +571,10 @@ Updates to from.email require re-verification. If your domain has been whitelabe
 | api_key  | credentials| The API key obtained from SendGrid.
 | sender_id| String| The ID of the sender.
 | nickname | String| The nickname of the sender.
-| from     | String| Name and email to indicate 'from' field. Pattern to fill email:value,name:value.
-| reply_to | String| Name and email to indicate 'reply_to' field. Pattern to fill email:value,name:value.
+| from_email     | String| Email to indicate 'from' field. 
+| from_name     | String| Name to indicate 'from' field. 
+| reply_to_email     | String| Email to indicate 'reply to' field. 
+| reply_to_name     | String| Name to indicate 'reply to' field. 
 | address  | String| The address of the sender.
 | address_2| String| Optional: The second address of the sender.
 | city     | String| The city of the sender.

@@ -54,22 +54,31 @@ $app->post('/api/SendGrid/updateSegment', function ($request, $response, $args) 
     $request_body['name'] = $post_data['args']['name'];
 
     if (is_array($post_data['args']['conditions'])) {
-        $request_body['conditions'][] = $post_data['args']['conditions'];
+        $query_params_cond = $post_data['args']['conditions'];
     }
     else {
-        $conditions = explode(',', $post_data['args']['conditions']);
+        $conditions = explode(';', $post_data['args']['conditions']);
         foreach ($conditions as $condition) {
-            $item = explode(':', $condition);
-            $cond[$item[0]] = $item[1];
+            $items = explode(',', $condition);
+            if (count($items) == 4) {
+                foreach ($items as $item) {
+                    $cond = explode(":", $item);
+                    $parsed_data[$cond[0]] = $cond[1];
+                }
+            }
+            array_push($query_params_cond, $parsed_data);
         }
-        $cond['and_or'] = '';
     }
-    $request_body['conditions'][] = $cond;
+    if(isset($query_params_cond[0]['and_or'])) {
+        $query_params_cond[0]['and_or'] = '';
+    }
+    $query_params['conditions'] = $query_params_cond;
+    $res_body = $query_params;
+
         
     $sg = new \SendGrid($apiKey);
-    
     try {
-        $resp = $sg->client->contactdb()->segments()->_($segment_id)->patch($request_body, $query_params);
+        $resp = $sg->client->contactdb()->segments()->_($segment_id)->patch($res_body, $query_params);
         $body = $resp->body();
 
         if(!empty($body) && $resp->statusCode() == '200') {
