@@ -1,6 +1,5 @@
 <?php
 $routes = [
-'webhookEvent',
     'createCampaign',
     'getCampaigns',
     'getCampaign',

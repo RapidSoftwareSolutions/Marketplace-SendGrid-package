@@ -21,24 +21,7 @@ Manage email campaigns, subscribers and design templates.
  |List|Simple array|```["123", "sample"]``` 
  |Select|String with predefined values|```sample```
  |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
-
- ## Webhook credentials
  
- You can use our service as url: 
- ```
- https://webhooks.rapidapi.com/api/message/SendGrid/webhookEvent/{projectName}/{projectKey} * see credentials description above
- ```
- 
- Please use SDK to test this feature.
- 0. Go to [RapidAPI](http://rapidapi.com)
- 1. Log in or create an account
- 2. Go to [My apps](https://dashboard.rapidapi.com/projects)
- 3. Add new project with projectName to get your project Key
- 
- | Field      | Type       | Description
- |------------|------------|----------
- | projectName     | credentials| Your RapidAPI project name
- | projectKey | credentials     | Your RapidAPI project key
 
 ## SendGrid.createCampaign
 Create a marketing campaign.
