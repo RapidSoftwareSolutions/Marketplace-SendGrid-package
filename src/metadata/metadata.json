@@ -25,7 +25,7 @@
     "Generate API key",
     "Please store API key somewhere safe because as soon as you navigate away from page, service will not be able to retrieve or restore this generated token"
   ],
-  
+
   "blocks": [
     {
       "name": "createCampaign",

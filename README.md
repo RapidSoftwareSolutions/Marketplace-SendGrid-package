@@ -348,7 +348,7 @@ Add multiple recipients.
 | Field     | Type  | Description
 |-----------|-------|----------
 | api_key   | credentials| The API key obtained from SendGrid.
-| recipients| Array | separated values with vertical `/` according with pattern 'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value|'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value etc. To indicate custom_fields use the pattern [custom_field_name]:[value], for example: age:30,occupation:developer etc.
+| recipients| Array | separated values with vertical `/` according with pattern 'email'=value;'first_name'=value;'last_name'=value;'custom_fields'=value' To indicate custom_fields use the pattern [custom_field_name]:[value], for example: age:30,occupation:developer etc.
 
 
 ## SendGrid.updateRecipient
