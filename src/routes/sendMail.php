@@ -125,15 +125,20 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(!empty($post_data['args']['asm'])) {
         $item = explode(';', $post_data['args']['asm']);
         $grp_id = explode(':', $item[0]);
-        $request_body['asm']['group_id'] = $grp_id[1];
+        $request_body['asm']['group_id'] = (int) $grp_id[1];
         
         $disp = explode(':', $item[1]);
         $to_display = [];
+
         foreach(explode(',', $disp[1]) as $key) {
-            $to_display = array_push($to_display, $key);
+
+            $to_display[] =  $key;
         }
+
         $request_body['asm']['groups_to_display'] = $to_display;
     }
+
+
     if(!empty($post_data['args']['ip_pool_name'])) {
         $request_body['ip_pool_name'] = $post_data['args']['ip_pool_name'];
     }
@@ -156,12 +161,15 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         $request_body['mail_settings']['footer']['html'] = $post_data['args']['mail_settings_footer_html'];
     }
     if(isset($post_data['args']['mail_settings_sandbox_mode_enable'])) {
+        $post_data['args']['mail_settings_sandbox_mode_enable'] = (bool) $post_data['args']['mail_settings_sandbox_mode_enable'];
         $request_body['mail_settings']['sandbox_mode']['enable'] = filter_var($post_data['args']['mail_settings_sandbox_mode_enable'], FILTER_VALIDATE_BOOLEAN);
+
     }
     if(isset($post_data['args']['mail_settings_spam_check_enable'])) {
         $request_body['mail_settings']['spam_check']['enable'] = filter_var($post_data['args']['mail_settings_spam_check_enable'], FILTER_VALIDATE_BOOLEAN);
     }
     if(!empty($post_data['args']['mail_settings_spam_check_threshold'])) {
+        $post_data['args']['mail_settings_spam_check_threshold'] = (int) $post_data['args']['mail_settings_spam_check_threshold'];
         $request_body['mail_settings']['spam_check']['threshold'] = $post_data['args']['mail_settings_spam_check_threshold'];
     }
     if(!empty($post_data['args']['mail_settings_spam_check_post_to_url'])) {
