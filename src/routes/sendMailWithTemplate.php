@@ -50,9 +50,6 @@ $app->post('/api/SendGrid/sendMailWithTemplate', function ($request, $response, 
     if(empty($post_data['args']['from_email'])) {
         $error[] = 'from_email';
     }
-    if(empty($post_data['args']['subject'])) {
-        $error[] = 'subject';
-    }
     if(empty($post_data['args']['template_id'])) {
         $error[] = 'template_id';
     }
@@ -81,8 +78,12 @@ $app->post('/api/SendGrid/sendMailWithTemplate', function ($request, $response, 
         $request_body['reply_to']['name'] = $post_data['args']['reply_to_name'];
     }
 
-    $request_body['subject'] = $post_data['args']['subject'];
-    if(!empty($request_body['content']))
+    if(!empty( $post_data['args']['subject']))
+    {
+        $request_body['subject'] = $post_data['args']['subject'];
+    }
+
+    if(!empty( $post_data['args']['content']))
     {
         $request_body['content'] = $post_data['args']['content'];
     }

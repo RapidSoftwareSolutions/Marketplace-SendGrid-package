@@ -2151,7 +2151,7 @@
           "name": "subject",
           "type": "String",
           "info": "The subject of your email. This may be overridden by personalizations[x].subject.",
-          "required": true
+          "required": false
         },
         {
           "name": "content",
@@ -2450,7 +2450,7 @@
           "name": "subject",
           "type": "String",
           "info": "The subject of your email. This may be overridden by personalizations[x].subject.",
-          "required": true
+          "required": false
         },
         {
           "name": "content",

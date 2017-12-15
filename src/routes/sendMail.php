@@ -50,9 +50,6 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(empty($post_data['args']['from_email'])) {
         $error[] = 'from_email';
     }
-    if(empty($post_data['args']['subject'])) {
-        $error[] = 'subject';
-    }
     if(empty($post_data['args']['content'])) {
         $error[] = 'content';
     }
@@ -80,8 +77,11 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(!empty($post_data['args']['reply_to_name'])) {
         $request_body['reply_to']['name'] = $post_data['args']['reply_to_name'];
     }
-    
-    $request_body['subject'] = $post_data['args']['subject'];
+
+    if(!empty( $post_data['args']['subject']))
+    {
+        $request_body['subject'] = $post_data['args']['subject'];
+    }
     $request_body['content'] = $post_data['args']['content']; 
     if(!empty($post_data['args']['attachments'])) {
         $request_body['attachments'] = $post_data['args']['attachments'];
