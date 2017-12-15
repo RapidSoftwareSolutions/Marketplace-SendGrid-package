@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
+$app->post('/api/SendGrid/sendMailWithTemplate', function ($request, $response, $args) {
     $settings =  $this->settings;
 
     $data = $request->getBody();
@@ -9,15 +9,15 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         $post_data = $request->getParsedBody();
     } else {
         $toJson = $this->toJson;
-        $data = $toJson->normalizeJson($data); 
+        $data = $toJson->normalizeJson($data);
         $data = str_replace('\"', '"', $data);
         $post_data = json_decode($data, true);
     }
-    
+
     if(json_last_error() != 0) {
         $error[] = json_last_error_msg() . '. Incorrect input JSON. Please, check fields with JSON input.';
     }
-    
+
     if(!empty($error)) {
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = 'JSON_VALIDATION';
@@ -39,7 +39,7 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         }
     }
 
-    
+
     $error = [];
     if(empty($post_data['args']['api_key'])) {
         $error[] = 'api_key';
@@ -53,10 +53,10 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
     if(empty($post_data['args']['subject'])) {
         $error[] = 'subject';
     }
-    if(empty($post_data['args']['content'])) {
-        $error[] = 'content';
+    if(empty($post_data['args']['template_id'])) {
+        $error[] = 'template_id';
     }
-    
+
     if(!empty($error)) {
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = "REQUIRED_FIELDS";
@@ -64,25 +64,25 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         $result['contextWrites']['to']['fields'] = $error;
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
     }
-    
-    
+
+
     $apiKey = $post_data['args']['api_key'];
     $request_body['personalizations'] = $post_data['args']['personalizations'];
-    
+
     $request_body['from']['email'] = $post_data['args']['from_email'];
     if(!empty($post_data['args']['from_name'])) {
         $request_body['from']['name'] = $post_data['args']['from_name'];
     }
-    
+
     if(!empty($post_data['args']['reply_to_email'])) {
         $request_body['reply_to']['email'] = $post_data['args']['reply_to_email'];
     }
     if(!empty($post_data['args']['reply_to_name'])) {
         $request_body['reply_to']['name'] = $post_data['args']['reply_to_name'];
     }
-    
+
     $request_body['subject'] = $post_data['args']['subject'];
-    $request_body['content'] = $post_data['args']['content']; 
+    $request_body['content'] = $post_data['args']['content'];
     if(!empty($post_data['args']['attachments'])) {
         $request_body['attachments'] = $post_data['args']['attachments'];
     }
@@ -126,7 +126,7 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
         $item = explode(';', $post_data['args']['asm']);
         $grp_id = explode(':', $item[0]);
         $request_body['asm']['group_id'] = (int) $grp_id[1];
-        
+
         $disp = explode(':', $item[1]);
         $to_display = [];
 
@@ -221,7 +221,7 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
 
     $sg = new SendGrid($apiKey);
 
-    
+
     try {
         $resp = $sg->client->mail()->send()->post($request_body);
         $body = $resp->body();
@@ -232,9 +232,9 @@ $app->post('/api/SendGrid/sendMail', function ($request, $response, $args) {
             $result['contextWrites']['to'] = "send";
 
         } else {
-                $result['callback'] = 'error';
-                $result['contextWrites']['to']['status_code'] = 'API_ERROR';
-                $result['contextWrites']['to']['status_msg'] = !is_string($body) ? $body : json_decode($body);
+            $result['callback'] = 'error';
+            $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+            $result['contextWrites']['to']['status_msg'] = !is_string($body) ? $body : json_decode($body);
         }
     } catch (Exception $exception) {
 

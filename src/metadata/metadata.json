@@ -2103,8 +2103,8 @@
       ]
     },
     {
-      "name": "sendMail",
-      "description": "This endpoint allows you to send email.",
+      "name": "sendMailWithTemplate",
+      "description": "This endpoint allows you to send email with template.",
       "args": [
         {
           "name": "api_key",
@@ -2115,7 +2115,7 @@
         {
           "name": "personalizations",
           "type": "List",
-          "info": "An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. Parameters in personalizations will override the parameters of the same name from the message level. Example: [{\"bcc\": [{\"email\": \"sam.doe@example.com\",\"name\": \"Sam Doe\"}], \"cc\": [{\"email\": \"jane.doe@example.com\",\"name\": \"Jane Doe\"}], \"custom_args\": {\"New Argument 1\": \"New Value 1\",\"activationAttempt\": \"1\",\"customerAccountNumber\": \"123\"},\"headers\": {\"X-Accept-Language\": \"en\",\"X-Mailer\": \"MyApp\"},\"send_at\": 1409348513,\"subject\": \"Hello, World!\",\"substitutions\": {\"id\": \"substitutions\",\"type\": \"object\"},\"to\": [ {\"email\": \"john.doe@example.com\",\"name\": \"John Doe\"}]}]",
+          "info": "An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. Parameters in personalizations will override the parameters of the same name from the message level.See example in readme.",
           "required": true,
           "structure": {
             "name": "personalization",
@@ -2156,7 +2156,306 @@
         {
           "name": "content",
           "type": "List",
-          "info": "An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters. If included, text\/plain and text\/html must be the first indices of the array in this order. If you choose to include the text\/plain or text\/html mime types, they must be the first indices of the content array in the order text\/plain, text\/html. Example: [{\"type\": \"text\/html\",\"value\": \"Hello, world!<\/p><\/img><\/html>\"}]",
+          "info": "An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters.See more in readme.",
+          "required": false,
+          "structure": {
+            "name": "content",
+            "type": "JSON",
+            "info": "Single content"
+          }
+        },
+        {
+          "name": "attachments",
+          "type": "List",
+          "info": "An array of objects in which you can specify any attachments you want to include.",
+          "required": false,
+          "structure": {
+            "name": "attachment",
+            "type": "JSON",
+            "info": "Single attachment"
+          }
+        },
+        {
+          "name": "template_id",
+          "type": "String",
+          "info": "The id of a template that you would like to use. If you use a template that contains content and a subject (either text or html), you do not need to specify those in the respective personalizations or message level parameters.",
+          "required": true
+        },
+        {
+          "name": "sections",
+          "type": "JSON",
+          "info": "An object of key\/value pairs that define large blocks of content that can be inserted into your emails using substitution tags. Example: {\"section\": {\":sectionName1\": \"section 1 text\", \":sectionName2\": \"section 2 text\"}}",
+          "required": false
+        },
+        {
+          "name": "headers",
+          "type": "JSON",
+          "info": "An object containing key\/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be any of the following reserved headers: x-sg-id, x-sg-eid, received, dkim-signature, Content-Type, Content-Transfer-Encoding, To, From, Subject, Reply-To, CC, BCC.",
+          "required": false
+        },
+        {
+          "name": "categories",
+          "type": "List",
+          "info": "Each category name may not exceed 255 characters. You cannot have more than 10 categories per request.",
+          "required": false,
+          "structure": {
+            "name": "category",
+            "type": "String",
+            "info": "Category",
+            "required": false
+          }
+        },
+        {
+          "name": "custom_args",
+          "type": "String",
+          "info": "Values according the pattern KEY:VALUE,KEY:VALUE etc., that are specific to the entire send that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This parameter is overridden by any conflicting personalizations[x].custom_args if that parameter has been defined.",
+          "required": false
+        },
+        {
+          "name": "send_at",
+          "type": "DatePicker",
+          "info": "A unix timestamp allowing you to specify when you want your email to be sent from SendGrid. This is not necessary if you want the email to be sent at the time of your API request.",
+          "required": false
+        },
+        {
+          "name": "batch_id",
+          "type": "String",
+          "info": "This ID represents a batch of emails (AKA multiple sends of the same email) to be associated to each other for scheduling. Including a batch_id in your request allows you to include this email in that batch, and also enables you to cancel or pause the delivery of that entire batch.",
+          "required": false
+        },
+        {
+          "name": "asm",
+          "type": "String",
+          "info": "An object allowing you to specify how to handle unsubscribes. Use pattern group_id:value;groups_to_display:value1,value2,... etc.",
+          "required": false
+        },
+        {
+          "name": "ip_pool_name",
+          "type": "String",
+          "info": "The IP Pool that you would like to send this email from. Min 2, Max 64.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_bcc_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_bcc_email",
+          "type": "String",
+          "info": "The email address that you would like to receive the BCC.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_bypass_list_management_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled. Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email. Ex: outage emails, or forgot password emails.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_footer_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled. The default footer that you would like appended to the bottom of every email.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_footer_text",
+          "type": "String",
+          "info": "The plain text content of your footer.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_footer_html",
+          "type": "String",
+          "info": "The HTML content of your footer.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_sandbox_mode_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled. This allows you to send a test email to ensure that your request body is valid and formatted correctly.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_spam_check_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled. This allows you to test the content of your email for spam.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_spam_check_threshold",
+          "type": "Number",
+          "info": "The threshold used to determine if your content qualifies as spam on a scale from 1 to 10, with 10 being most strict, or most likely to be considered as spam.",
+          "required": false
+        },
+        {
+          "name": "mail_settings_spam_check_post_to_url",
+          "type": "String",
+          "info": "An Inbound Parse URL that you would like a copy of your email along with the spam report to be sent to. The post_to_url parameter must start with http or https.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_click_tracking_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled. Allows you to track whether a recipient clicked a link in your email.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_click_tracking_enable_text",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting should be included in the text\/plain portion of your email.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_open_tracking_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled. Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_open_tracking_substitution_tag",
+          "type": "String",
+          "info": "Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_subscription_tracking_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled. Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_subscription_tracking_text",
+          "type": "String",
+          "info": "Text to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_subscription_tracking_html",
+          "type": "String",
+          "info": "HTML to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>.",
+          "required": false
+        },
+        {
+          "name": "tracking_settings_subscription_tracking_substitution_tag",
+          "type": "String",
+          "info": "A tag that will be replaced with the unsubscribe URL. for example: [unsubscribe_url]. If this parameter is used, it will override both the textand html parameters. The URL of the link will be placed at the substitution tag\u2019s location, with no additional formatting.",
+          "required": false
+        },
+        {
+          "name": "ganalytics_enable",
+          "type": "Select",
+          "options":["true", "false"],
+          "info": "Indicates if this setting is enabled. Allows you to enable tracking provided by Google Analytics.",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_source",
+          "type": "String",
+          "info": "Name of the referrer source. (e.g. Google, SomeDomain.com, or Marketing Email).",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_medium",
+          "type": "String",
+          "info": "Name of the marketing medium. (e.g. Email).",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_term",
+          "type": "String",
+          "info": "Used to identify any paid keywords.",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_content",
+          "type": "String",
+          "info": "Used to differentiate your campaign from advertisements.",
+          "required": false
+        },
+        {
+          "name": "ganalytics_utm_campaign",
+          "type": "String",
+          "info": "The name of the campaign.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "sendMail",
+      "description": "This endpoint allows you to send email.",
+      "args": [
+        {
+          "name": "api_key",
+          "type": "credentials",
+          "info": "The API key obtained from SendGrid.",
+          "required": true
+        },
+        {
+          "name": "personalizations",
+          "type": "List",
+          "info": "An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. Parameters in personalizations will override the parameters of the same name from the message level.See example in readme.",
+          "required": true,
+          "structure": {
+            "name": "personalization",
+            "type": "JSON",
+            "info": "Single personalization"
+          }
+        },
+        {
+          "name": "from_email",
+          "type": "String",
+          "info": "The email address of the sender.",
+          "required": true
+        },
+        {
+          "name": "from_name",
+          "type": "String",
+          "info": "The name of the sender.",
+          "required": false
+        },
+        {
+          "name": "reply_to_email",
+          "type": "String",
+          "info": "The email address to which responses will be sent.",
+          "required": false
+        },
+        {
+          "name": "reply_to_name",
+          "type": "String",
+          "info": "The name of the individual who will receive responses to the email.",
+          "required": false
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "The subject of your email. This may be overridden by personalizations[x].subject.",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "List",
+          "info": "An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one. To include more than one mime type, simply add another object to the array containing the type and value parameters.See more in readme.",
           "required": true,
           "structure": {
             "name": "content",

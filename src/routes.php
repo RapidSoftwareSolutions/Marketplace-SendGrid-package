@@ -57,6 +57,7 @@ $routes = [
     'getCategoriesList',
     'sendPlainMail',
     'sendMail',
+    'sendMailWithTemplate',
     'createTemplate',
     'getTemplates',
     'getTemplate',
