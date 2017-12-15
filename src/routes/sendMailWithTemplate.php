@@ -82,7 +82,11 @@ $app->post('/api/SendGrid/sendMailWithTemplate', function ($request, $response, 
     }
 
     $request_body['subject'] = $post_data['args']['subject'];
-    $request_body['content'] = $post_data['args']['content'];
+    if(!empty($request_body['content']))
+    {
+        $request_body['content'] = $post_data['args']['content'];
+    }
+
     if(!empty($post_data['args']['attachments'])) {
         $request_body['attachments'] = $post_data['args']['attachments'];
     }
@@ -244,7 +248,6 @@ $app->post('/api/SendGrid/sendMailWithTemplate', function ($request, $response, 
         $result['contextWrites']['to']['status_msg'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
 
     }
-
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 });
 
